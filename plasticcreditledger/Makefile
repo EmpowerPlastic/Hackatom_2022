@@ -139,11 +139,15 @@ start:
 	./network/start.sh
 
 start-rly:
+	@echo "Build and deploy test contract"
 	./network/hermes/start.sh
+
+contract:
+	@echo "Build and deploy fund contract"
+	./network/build_deploy_fundcontract.sh
 
 deploy-binding:
 	./network/build_deploy_bindingcontract.sh
-
 
 kill-dev:
 	@echo "Killing plasticcreditledgerd and removing previous data"

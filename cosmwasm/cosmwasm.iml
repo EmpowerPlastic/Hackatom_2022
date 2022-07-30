@@ -3,7 +3,14 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/contracts/bindingcontract/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/contracts/bindingcontract/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/contracts/fundcollectors/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/contracts/fundcollectors/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/packages/bindings/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
+      <excludeFolder url="file://$MODULE_DIR$/contracts/bindingcontract/target" />
+      <excludeFolder url="file://$MODULE_DIR$/contracts/fundcollectors/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
