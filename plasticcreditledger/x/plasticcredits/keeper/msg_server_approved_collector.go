@@ -23,6 +23,7 @@ func (k msgServer) CreateApprovedCollector(goCtx context.Context, msg *types.Msg
 
 	var approvedCollector = types.ApprovedCollector{
 		Creator: msg.Creator,
+		Name:    msg.Name,
 		Addr:    msg.Addr,
 		Issuer:  msg.Issuer,
 	}
@@ -55,6 +56,7 @@ func (k msgServer) UpdateApprovedCollector(goCtx context.Context, msg *types.Msg
 	var approvedCollector = types.ApprovedCollector{
 		Creator: msg.Creator,
 		Addr:    msg.Addr,
+		Name:    msg.Name,
 		Issuer:  msg.Issuer,
 	}
 

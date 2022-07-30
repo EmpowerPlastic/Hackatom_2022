@@ -7,6 +7,7 @@ import {
   PageResponse,
 } from "../cosmos/base/query/v1beta1/pagination";
 import { ApprovedCollector } from "../plasticcredits/approved_collector";
+import { Credit } from "../plasticcredits/credit";
 
 export const protobufPackage = "plasticcreditledger.plasticcredits";
 
@@ -51,6 +52,23 @@ export interface QueryAllApprovedCollectorRequest {
 
 export interface QueryAllApprovedCollectorResponse {
   approvedCollector: ApprovedCollector[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetCreditRequest {
+  index: string;
+}
+
+export interface QueryGetCreditResponse {
+  credit: Credit | undefined;
+}
+
+export interface QueryAllCreditRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllCreditResponse {
+  credit: Credit[];
   pagination: PageResponse | undefined;
 }
 
@@ -782,6 +800,282 @@ export const QueryAllApprovedCollectorResponse = {
   },
 };
 
+const baseQueryGetCreditRequest: object = { index: "" };
+
+export const QueryGetCreditRequest = {
+  encode(
+    message: QueryGetCreditRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.index !== "") {
+      writer.uint32(10).string(message.index);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): QueryGetCreditRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseQueryGetCreditRequest } as QueryGetCreditRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.index = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetCreditRequest {
+    const message = { ...baseQueryGetCreditRequest } as QueryGetCreditRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = String(object.index);
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetCreditRequest): unknown {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = message.index);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetCreditRequest>
+  ): QueryGetCreditRequest {
+    const message = { ...baseQueryGetCreditRequest } as QueryGetCreditRequest;
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    } else {
+      message.index = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetCreditResponse: object = {};
+
+export const QueryGetCreditResponse = {
+  encode(
+    message: QueryGetCreditResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.credit !== undefined) {
+      Credit.encode(message.credit, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): QueryGetCreditResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseQueryGetCreditResponse } as QueryGetCreditResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.credit = Credit.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetCreditResponse {
+    const message = { ...baseQueryGetCreditResponse } as QueryGetCreditResponse;
+    if (object.credit !== undefined && object.credit !== null) {
+      message.credit = Credit.fromJSON(object.credit);
+    } else {
+      message.credit = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetCreditResponse): unknown {
+    const obj: any = {};
+    message.credit !== undefined &&
+      (obj.credit = message.credit ? Credit.toJSON(message.credit) : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetCreditResponse>
+  ): QueryGetCreditResponse {
+    const message = { ...baseQueryGetCreditResponse } as QueryGetCreditResponse;
+    if (object.credit !== undefined && object.credit !== null) {
+      message.credit = Credit.fromPartial(object.credit);
+    } else {
+      message.credit = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllCreditRequest: object = {};
+
+export const QueryAllCreditRequest = {
+  encode(
+    message: QueryAllCreditRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): QueryAllCreditRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseQueryAllCreditRequest } as QueryAllCreditRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllCreditRequest {
+    const message = { ...baseQueryAllCreditRequest } as QueryAllCreditRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllCreditRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllCreditRequest>
+  ): QueryAllCreditRequest {
+    const message = { ...baseQueryAllCreditRequest } as QueryAllCreditRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllCreditResponse: object = {};
+
+export const QueryAllCreditResponse = {
+  encode(
+    message: QueryAllCreditResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.credit) {
+      Credit.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): QueryAllCreditResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseQueryAllCreditResponse } as QueryAllCreditResponse;
+    message.credit = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.credit.push(Credit.decode(reader, reader.uint32()));
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllCreditResponse {
+    const message = { ...baseQueryAllCreditResponse } as QueryAllCreditResponse;
+    message.credit = [];
+    if (object.credit !== undefined && object.credit !== null) {
+      for (const e of object.credit) {
+        message.credit.push(Credit.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllCreditResponse): unknown {
+    const obj: any = {};
+    if (message.credit) {
+      obj.credit = message.credit.map((e) =>
+        e ? Credit.toJSON(e) : undefined
+      );
+    } else {
+      obj.credit = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllCreditResponse>
+  ): QueryAllCreditResponse {
+    const message = { ...baseQueryAllCreditResponse } as QueryAllCreditResponse;
+    message.credit = [];
+    if (object.credit !== undefined && object.credit !== null) {
+      for (const e of object.credit) {
+        message.credit.push(Credit.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -798,6 +1092,10 @@ export interface Query {
   ApprovedCollectorAll(
     request: QueryAllApprovedCollectorRequest
   ): Promise<QueryAllApprovedCollectorResponse>;
+  /** Queries a Credit by index. */
+  Credit(request: QueryGetCreditRequest): Promise<QueryGetCreditResponse>;
+  /** Queries a list of Credit items. */
+  CreditAll(request: QueryAllCreditRequest): Promise<QueryAllCreditResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -864,6 +1162,30 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllApprovedCollectorResponse.decode(new Reader(data))
+    );
+  }
+
+  Credit(request: QueryGetCreditRequest): Promise<QueryGetCreditResponse> {
+    const data = QueryGetCreditRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "plasticcreditledger.plasticcredits.Query",
+      "Credit",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetCreditResponse.decode(new Reader(data))
+    );
+  }
+
+  CreditAll(request: QueryAllCreditRequest): Promise<QueryAllCreditResponse> {
+    const data = QueryAllCreditRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "plasticcreditledger.plasticcredits.Query",
+      "CreditAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllCreditResponse.decode(new Reader(data))
     );
   }
 }

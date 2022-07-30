@@ -32,6 +32,14 @@ func TestGenesis(t *testing.T) {
 				Issuer: "1",
 			},
 		},
+		CreditList: []types.Credit{
+			{
+				Index: "0",
+			},
+			{
+				Index: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -47,5 +55,6 @@ func TestGenesis(t *testing.T) {
 
 	require.ElementsMatch(t, genesisState.IssuerList, got.IssuerList)
 	require.ElementsMatch(t, genesisState.ApprovedCollectorList, got.ApprovedCollectorList)
+	require.ElementsMatch(t, genesisState.CreditList, got.CreditList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

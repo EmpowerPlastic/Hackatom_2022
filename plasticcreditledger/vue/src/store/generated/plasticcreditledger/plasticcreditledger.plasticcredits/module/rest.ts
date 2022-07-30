@@ -15,6 +15,14 @@ export interface PlasticcreditsApprovedCollector {
   creator?: string;
 }
 
+export interface PlasticcreditsCredit {
+  index?: string;
+  owner?: string;
+  material?: string;
+  description?: string;
+  image?: string;
+}
+
 export interface PlasticcreditsIssuer {
   addr?: string;
   name?: string;
@@ -53,6 +61,21 @@ export interface PlasticcreditsQueryAllApprovedCollectorResponse {
   pagination?: V1Beta1PageResponse;
 }
 
+export interface PlasticcreditsQueryAllCreditResponse {
+  credit?: PlasticcreditsCredit[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
+
 export interface PlasticcreditsQueryAllIssuerResponse {
   issuer?: PlasticcreditsIssuer[];
 
@@ -70,6 +93,10 @@ export interface PlasticcreditsQueryAllIssuerResponse {
 
 export interface PlasticcreditsQueryGetApprovedCollectorResponse {
   approvedCollector?: PlasticcreditsApprovedCollector;
+}
+
+export interface PlasticcreditsQueryGetCreditResponse {
+  credit?: PlasticcreditsCredit;
 }
 
 export interface PlasticcreditsQueryGetIssuerResponse {
@@ -383,6 +410,47 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryApprovedCollector = (addr: string, issuer: string, params: RequestParams = {}) =>
     this.request<PlasticcreditsQueryGetApprovedCollectorResponse, RpcStatus>({
       path: `/plasticcreditledger/plasticcredits/approved_collector/${addr}/${issuer}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryCreditAll
+   * @summary Queries a list of Credit items.
+   * @request GET:/plasticcreditledger/plasticcredits/credit
+   */
+  queryCreditAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<PlasticcreditsQueryAllCreditResponse, RpcStatus>({
+      path: `/plasticcreditledger/plasticcredits/credit`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryCredit
+   * @summary Queries a Credit by index.
+   * @request GET:/plasticcreditledger/plasticcredits/credit/{index}
+   */
+  queryCredit = (index: string, params: RequestParams = {}) =>
+    this.request<PlasticcreditsQueryGetCreditResponse, RpcStatus>({
+      path: `/plasticcreditledger/plasticcredits/credit/${index}`,
       method: "GET",
       format: "json",
       ...params,

@@ -3,10 +3,12 @@ package plasticcreditledger.plasticcredits;
 
 option go_package = "plasticcreditledger/x/plasticcredits/types";
 
-message ApprovedCollector {
-  string addr = 1;
-  string name = 2;
-  string issuer = 3;
-  string creator = 4;
+message Credit {
+  string index = 1; 
+  string owner = 2; 
+  string material = 3; 
+  string description = 4; 
+  string image = 5; 
+  
 }
 

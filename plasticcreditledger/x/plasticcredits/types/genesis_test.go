@@ -40,6 +40,14 @@ func TestGenesisState_Validate(t *testing.T) {
 						Issuer: "1",
 					},
 				},
+				CreditList: []types.Credit{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -69,6 +77,20 @@ func TestGenesisState_Validate(t *testing.T) {
 					{
 						Addr:   "0",
 						Issuer: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated credit",
+			genState: &types.GenesisState{
+				CreditList: []types.Credit{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
 					},
 				},
 			},

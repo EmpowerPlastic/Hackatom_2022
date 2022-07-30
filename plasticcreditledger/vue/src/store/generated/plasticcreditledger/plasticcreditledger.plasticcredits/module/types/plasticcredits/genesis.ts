@@ -2,6 +2,7 @@
 import { Params } from "../plasticcredits/params";
 import { Issuer } from "../plasticcredits/issuer";
 import { ApprovedCollector } from "../plasticcredits/approved_collector";
+import { Credit } from "../plasticcredits/credit";
 import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "plasticcreditledger.plasticcredits";
@@ -11,8 +12,9 @@ export interface GenesisState {
   params: Params | undefined;
   port_id: string;
   issuerList: Issuer[];
-  /** this line is used by starport scaffolding # genesis/proto/state */
   approvedCollectorList: ApprovedCollector[];
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  creditList: Credit[];
 }
 
 const baseGenesisState: object = { port_id: "" };
@@ -31,6 +33,9 @@ export const GenesisState = {
     for (const v of message.approvedCollectorList) {
       ApprovedCollector.encode(v!, writer.uint32(34).fork()).ldelim();
     }
+    for (const v of message.creditList) {
+      Credit.encode(v!, writer.uint32(42).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -40,6 +45,7 @@ export const GenesisState = {
     const message = { ...baseGenesisState } as GenesisState;
     message.issuerList = [];
     message.approvedCollectorList = [];
+    message.creditList = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -57,6 +63,9 @@ export const GenesisState = {
             ApprovedCollector.decode(reader, reader.uint32())
           );
           break;
+        case 5:
+          message.creditList.push(Credit.decode(reader, reader.uint32()));
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -69,6 +78,7 @@ export const GenesisState = {
     const message = { ...baseGenesisState } as GenesisState;
     message.issuerList = [];
     message.approvedCollectorList = [];
+    message.creditList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromJSON(object.params);
     } else {
@@ -90,6 +100,11 @@ export const GenesisState = {
     ) {
       for (const e of object.approvedCollectorList) {
         message.approvedCollectorList.push(ApprovedCollector.fromJSON(e));
+      }
+    }
+    if (object.creditList !== undefined && object.creditList !== null) {
+      for (const e of object.creditList) {
+        message.creditList.push(Credit.fromJSON(e));
       }
     }
     return message;
@@ -114,6 +129,13 @@ export const GenesisState = {
     } else {
       obj.approvedCollectorList = [];
     }
+    if (message.creditList) {
+      obj.creditList = message.creditList.map((e) =>
+        e ? Credit.toJSON(e) : undefined
+      );
+    } else {
+      obj.creditList = [];
+    }
     return obj;
   },
 
@@ -121,6 +143,7 @@ export const GenesisState = {
     const message = { ...baseGenesisState } as GenesisState;
     message.issuerList = [];
     message.approvedCollectorList = [];
+    message.creditList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromPartial(object.params);
     } else {
@@ -142,6 +165,11 @@ export const GenesisState = {
     ) {
       for (const e of object.approvedCollectorList) {
         message.approvedCollectorList.push(ApprovedCollector.fromPartial(e));
+      }
+    }
+    if (object.creditList !== undefined && object.creditList !== null) {
+      for (const e of object.creditList) {
+        message.creditList.push(Credit.fromPartial(e));
       }
     }
     return message;

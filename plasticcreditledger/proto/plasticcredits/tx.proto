@@ -43,7 +43,8 @@ message MsgDeleteIssuerResponse {}
 message MsgCreateApprovedCollector {
   string creator = 1;
   string addr = 2;
-  string issuer = 3;
+  string name = 3;
+  string issuer = 4;
 
 }
 message MsgCreateApprovedCollectorResponse {}
@@ -51,7 +52,8 @@ message MsgCreateApprovedCollectorResponse {}
 message MsgUpdateApprovedCollector {
   string creator = 1;
   string addr = 2;
-  string issuer = 3;
+  string name = 3;
+  string issuer = 4;
 
 }
 message MsgUpdateApprovedCollectorResponse {}
