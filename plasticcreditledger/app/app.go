@@ -121,6 +121,9 @@ import (
 	onestringmodule "plasticcreditledger/x/onestring"
 	onestringmodulekeeper "plasticcreditledger/x/onestring/keeper"
 	onestringmoduletypes "plasticcreditledger/x/onestring/types"
+	plasticcreditsmodule "plasticcreditledger/x/plasticcredits"
+	plasticcreditsmodulekeeper "plasticcreditledger/x/plasticcredits/keeper"
+	plasticcreditsmoduletypes "plasticcreditledger/x/plasticcredits/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -219,6 +222,7 @@ var (
 		ica.AppModuleBasic{},
 		intertx.AppModuleBasic{},
 		onestringmodule.AppModuleBasic{},
+		plasticcreditsmodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -301,7 +305,9 @@ type App struct {
 	ScopedInterTxKeeper       capabilitykeeper.ScopedKeeper
 	ScopedWasmKeeper          capabilitykeeper.ScopedKeeper
 
-	OnestringKeeper onestringmodulekeeper.Keeper
+	OnestringKeeper            onestringmodulekeeper.Keeper
+	ScopedPlasticcreditsKeeper capabilitykeeper.ScopedKeeper
+	PlasticcreditsKeeper       plasticcreditsmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
@@ -342,6 +348,7 @@ func New(
 		evidencetypes.StoreKey, ibctransfertypes.StoreKey, capabilitytypes.StoreKey, monitoringptypes.StoreKey,
 		wasm.StoreKey, icahosttypes.StoreKey, icacontrollertypes.StoreKey, intertxtypes.StoreKey,
 		onestringmoduletypes.StoreKey,
+		plasticcreditsmoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -538,6 +545,19 @@ func New(
 	)
 	monitoringModule := monitoringp.NewAppModule(appCodec, app.MonitoringKeeper)
 
+	scopedPlasticcreditsKeeper := app.CapabilityKeeper.ScopeToModule(plasticcreditsmoduletypes.ModuleName)
+	app.ScopedPlasticcreditsKeeper = scopedPlasticcreditsKeeper
+	app.PlasticcreditsKeeper = *plasticcreditsmodulekeeper.NewKeeper(
+		appCodec,
+		keys[plasticcreditsmoduletypes.StoreKey],
+		keys[plasticcreditsmoduletypes.MemStoreKey],
+		app.GetSubspace(plasticcreditsmoduletypes.ModuleName),
+		app.IBCKeeper.ChannelKeeper,
+		&app.IBCKeeper.PortKeeper,
+		scopedPlasticcreditsKeeper,
+	)
+	plasticcreditsModule := plasticcreditsmodule.NewAppModule(appCodec, app.PlasticcreditsKeeper, app.AccountKeeper, app.BankKeeper)
+
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	// Create static IBC router, add transfer route, then set and seal it
@@ -552,6 +572,7 @@ func New(
 		AddRoute(icahosttypes.SubModuleName, icaHostIBCModule).
 		AddRoute(intertxtypes.ModuleName, icaControllerIBCModule).
 		AddRoute(monitoringptypes.ModuleName, monitoringModule)
+	ibcRouter.AddRoute(plasticcreditsmoduletypes.ModuleName, plasticcreditsModule)
 	// this line is used by starport scaffolding # ibc/app/router
 	app.IBCKeeper.SetRouter(ibcRouter)
 
@@ -591,6 +612,7 @@ func New(
 		icaModule,
 		interTxModule,
 		onestringModule,
+		plasticcreditsModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
@@ -622,6 +644,7 @@ func New(
 		intertxtypes.ModuleName,
 		wasm.ModuleName,
 		onestringmoduletypes.ModuleName,
+		plasticcreditsmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
@@ -649,6 +672,7 @@ func New(
 		intertxtypes.ModuleName,
 		wasm.ModuleName,
 		onestringmoduletypes.ModuleName,
+		plasticcreditsmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
@@ -682,6 +706,7 @@ func New(
 		// wasm after ibc transfer
 		wasm.ModuleName,
 		onestringmoduletypes.ModuleName,
+		plasticcreditsmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
@@ -708,6 +733,7 @@ func New(
 		transferModule,
 		monitoringModule,
 		onestringModule,
+		plasticcreditsModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 	app.sm.RegisterStoreDecoders()
@@ -929,6 +955,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(icacontrollertypes.SubModuleName)
 	paramsKeeper.Subspace(wasm.ModuleName)
 	paramsKeeper.Subspace(onestringmoduletypes.ModuleName)
+	paramsKeeper.Subspace(plasticcreditsmoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper

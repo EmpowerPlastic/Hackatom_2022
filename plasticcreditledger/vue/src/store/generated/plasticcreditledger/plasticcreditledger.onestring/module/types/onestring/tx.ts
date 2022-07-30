@@ -34,7 +34,7 @@ export const MsgCreateThestring = {
       writer.uint32(10).string(message.creator);
     }
     if (message.valueofthestring !== "") {
-      writer.uint32(26).string(message.valueofthestring);
+      writer.uint32(18).string(message.valueofthestring);
     }
     return writer;
   },
@@ -49,7 +49,7 @@ export const MsgCreateThestring = {
         case 1:
           message.creator = reader.string();
           break;
-        case 3:
+        case 2:
           message.valueofthestring = reader.string();
           break;
         default:
@@ -168,7 +168,7 @@ export const MsgUpdateThestring = {
       writer.uint32(10).string(message.creator);
     }
     if (message.valueofthestring !== "") {
-      writer.uint32(26).string(message.valueofthestring);
+      writer.uint32(18).string(message.valueofthestring);
     }
     return writer;
   },
@@ -183,7 +183,7 @@ export const MsgUpdateThestring = {
         case 1:
           message.creator = reader.string();
           break;
-        case 3:
+        case 2:
           message.valueofthestring = reader.string();
           break;
         default:
