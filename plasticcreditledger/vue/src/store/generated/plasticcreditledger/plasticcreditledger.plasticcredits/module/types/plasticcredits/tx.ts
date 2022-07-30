@@ -58,11 +58,19 @@ export interface MsgIssueCredits {
   material: string;
   description: string;
   image: string;
-  lat: string;
-  lng: string;
+  lat: number;
+  lng: number;
 }
 
 export interface MsgIssueCreditsResponse {}
+
+export interface MsgTransferCredit {
+  owner: string;
+  index: string;
+  newOwner: string;
+}
+
+export interface MsgTransferCreditResponse {}
 
 const baseMsgCreateIssuer: object = { creator: "", addr: "", name: "" };
 
@@ -971,8 +979,8 @@ const baseMsgIssueCredits: object = {
   material: "",
   description: "",
   image: "",
-  lat: "",
-  lng: "",
+  lat: 0,
+  lng: 0,
 };
 
 export const MsgIssueCredits = {
@@ -992,11 +1000,11 @@ export const MsgIssueCredits = {
     if (message.image !== "") {
       writer.uint32(42).string(message.image);
     }
-    if (message.lat !== "") {
-      writer.uint32(50).string(message.lat);
+    if (message.lat !== 0) {
+      writer.uint32(49).double(message.lat);
     }
-    if (message.lng !== "") {
-      writer.uint32(58).string(message.lng);
+    if (message.lng !== 0) {
+      writer.uint32(57).double(message.lng);
     }
     return writer;
   },
@@ -1024,10 +1032,10 @@ export const MsgIssueCredits = {
           message.image = reader.string();
           break;
         case 6:
-          message.lat = reader.string();
+          message.lat = reader.double();
           break;
         case 7:
-          message.lng = reader.string();
+          message.lng = reader.double();
           break;
         default:
           reader.skipType(tag & 7);
@@ -1065,14 +1073,14 @@ export const MsgIssueCredits = {
       message.image = "";
     }
     if (object.lat !== undefined && object.lat !== null) {
-      message.lat = String(object.lat);
+      message.lat = Number(object.lat);
     } else {
-      message.lat = "";
+      message.lat = 0;
     }
     if (object.lng !== undefined && object.lng !== null) {
-      message.lng = String(object.lng);
+      message.lng = Number(object.lng);
     } else {
-      message.lng = "";
+      message.lng = 0;
     }
     return message;
   },
@@ -1120,12 +1128,12 @@ export const MsgIssueCredits = {
     if (object.lat !== undefined && object.lat !== null) {
       message.lat = object.lat;
     } else {
-      message.lat = "";
+      message.lat = 0;
     }
     if (object.lng !== undefined && object.lng !== null) {
       message.lng = object.lng;
     } else {
-      message.lng = "";
+      message.lng = 0;
     }
     return message;
   },
@@ -1177,6 +1185,147 @@ export const MsgIssueCreditsResponse = {
   },
 };
 
+const baseMsgTransferCredit: object = { owner: "", index: "", newOwner: "" };
+
+export const MsgTransferCredit = {
+  encode(message: MsgTransferCredit, writer: Writer = Writer.create()): Writer {
+    if (message.owner !== "") {
+      writer.uint32(10).string(message.owner);
+    }
+    if (message.index !== "") {
+      writer.uint32(18).string(message.index);
+    }
+    if (message.newOwner !== "") {
+      writer.uint32(26).string(message.newOwner);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgTransferCredit {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgTransferCredit } as MsgTransferCredit;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.owner = reader.string();
+          break;
+        case 2:
+          message.index = reader.string();
+          break;
+        case 3:
+          message.newOwner = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgTransferCredit {
+    const message = { ...baseMsgTransferCredit } as MsgTransferCredit;
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = String(object.owner);
+    } else {
+      message.owner = "";
+    }
+    if (object.index !== undefined && object.index !== null) {
+      message.index = String(object.index);
+    } else {
+      message.index = "";
+    }
+    if (object.newOwner !== undefined && object.newOwner !== null) {
+      message.newOwner = String(object.newOwner);
+    } else {
+      message.newOwner = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgTransferCredit): unknown {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.index !== undefined && (obj.index = message.index);
+    message.newOwner !== undefined && (obj.newOwner = message.newOwner);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgTransferCredit>): MsgTransferCredit {
+    const message = { ...baseMsgTransferCredit } as MsgTransferCredit;
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    } else {
+      message.owner = "";
+    }
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    } else {
+      message.index = "";
+    }
+    if (object.newOwner !== undefined && object.newOwner !== null) {
+      message.newOwner = object.newOwner;
+    } else {
+      message.newOwner = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgTransferCreditResponse: object = {};
+
+export const MsgTransferCreditResponse = {
+  encode(
+    _: MsgTransferCreditResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): MsgTransferCreditResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgTransferCreditResponse,
+    } as MsgTransferCreditResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgTransferCreditResponse {
+    const message = {
+      ...baseMsgTransferCreditResponse,
+    } as MsgTransferCreditResponse;
+    return message;
+  },
+
+  toJSON(_: MsgTransferCreditResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<MsgTransferCreditResponse>
+  ): MsgTransferCreditResponse {
+    const message = {
+      ...baseMsgTransferCreditResponse,
+    } as MsgTransferCreditResponse;
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   CreateIssuer(request: MsgCreateIssuer): Promise<MsgCreateIssuerResponse>;
@@ -1191,8 +1340,11 @@ export interface Msg {
   DeleteApprovedCollector(
     request: MsgDeleteApprovedCollector
   ): Promise<MsgDeleteApprovedCollectorResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   IssueCredits(request: MsgIssueCredits): Promise<MsgIssueCreditsResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  TransferCredit(
+    request: MsgTransferCredit
+  ): Promise<MsgTransferCreditResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -1287,6 +1439,20 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgIssueCreditsResponse.decode(new Reader(data))
+    );
+  }
+
+  TransferCredit(
+    request: MsgTransferCredit
+  ): Promise<MsgTransferCreditResponse> {
+    const data = MsgTransferCredit.encode(request).finish();
+    const promise = this.rpc.request(
+      "plasticcreditledger.plasticcredits.Msg",
+      "TransferCredit",
+      data
+    );
+    return promise.then((data) =>
+      MsgTransferCreditResponse.decode(new Reader(data))
     );
   }
 }

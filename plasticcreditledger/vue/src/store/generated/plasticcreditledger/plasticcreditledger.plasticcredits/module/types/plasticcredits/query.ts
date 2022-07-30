@@ -72,6 +72,14 @@ export interface QueryAllCreditResponse {
   pagination: PageResponse | undefined;
 }
 
+export interface QueryIsApprovedRequest {
+  addr: string;
+}
+
+export interface QueryIsApprovedResponse {
+  approved: string;
+}
+
 const baseQueryParamsRequest: object = {};
 
 export const QueryParamsRequest = {
@@ -1076,6 +1084,132 @@ export const QueryAllCreditResponse = {
   },
 };
 
+const baseQueryIsApprovedRequest: object = { addr: "" };
+
+export const QueryIsApprovedRequest = {
+  encode(
+    message: QueryIsApprovedRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.addr !== "") {
+      writer.uint32(10).string(message.addr);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): QueryIsApprovedRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseQueryIsApprovedRequest } as QueryIsApprovedRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.addr = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryIsApprovedRequest {
+    const message = { ...baseQueryIsApprovedRequest } as QueryIsApprovedRequest;
+    if (object.addr !== undefined && object.addr !== null) {
+      message.addr = String(object.addr);
+    } else {
+      message.addr = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryIsApprovedRequest): unknown {
+    const obj: any = {};
+    message.addr !== undefined && (obj.addr = message.addr);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryIsApprovedRequest>
+  ): QueryIsApprovedRequest {
+    const message = { ...baseQueryIsApprovedRequest } as QueryIsApprovedRequest;
+    if (object.addr !== undefined && object.addr !== null) {
+      message.addr = object.addr;
+    } else {
+      message.addr = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryIsApprovedResponse: object = { approved: "" };
+
+export const QueryIsApprovedResponse = {
+  encode(
+    message: QueryIsApprovedResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.approved !== "") {
+      writer.uint32(10).string(message.approved);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): QueryIsApprovedResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryIsApprovedResponse,
+    } as QueryIsApprovedResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.approved = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryIsApprovedResponse {
+    const message = {
+      ...baseQueryIsApprovedResponse,
+    } as QueryIsApprovedResponse;
+    if (object.approved !== undefined && object.approved !== null) {
+      message.approved = String(object.approved);
+    } else {
+      message.approved = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryIsApprovedResponse): unknown {
+    const obj: any = {};
+    message.approved !== undefined && (obj.approved = message.approved);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryIsApprovedResponse>
+  ): QueryIsApprovedResponse {
+    const message = {
+      ...baseQueryIsApprovedResponse,
+    } as QueryIsApprovedResponse;
+    if (object.approved !== undefined && object.approved !== null) {
+      message.approved = object.approved;
+    } else {
+      message.approved = "";
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -1096,6 +1230,8 @@ export interface Query {
   Credit(request: QueryGetCreditRequest): Promise<QueryGetCreditResponse>;
   /** Queries a list of Credit items. */
   CreditAll(request: QueryAllCreditRequest): Promise<QueryAllCreditResponse>;
+  /** Queries a list of IsApproved items. */
+  IsApproved(request: QueryIsApprovedRequest): Promise<QueryIsApprovedResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -1186,6 +1322,20 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllCreditResponse.decode(new Reader(data))
+    );
+  }
+
+  IsApproved(
+    request: QueryIsApprovedRequest
+  ): Promise<QueryIsApprovedResponse> {
+    const data = QueryIsApprovedRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "plasticcreditledger.plasticcredits.Query",
+      "IsApproved",
+      data
+    );
+    return promise.then((data) =>
+      QueryIsApprovedResponse.decode(new Reader(data))
     );
   }
 }

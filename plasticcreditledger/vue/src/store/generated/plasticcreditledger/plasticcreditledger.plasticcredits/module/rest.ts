@@ -48,6 +48,8 @@ export type PlasticcreditsMsgDeleteIssuerResponse = object;
 
 export type PlasticcreditsMsgIssueCreditsResponse = object;
 
+export type PlasticcreditsMsgTransferCreditResponse = object;
+
 export type PlasticcreditsMsgUpdateApprovedCollectorResponse = object;
 
 export type PlasticcreditsMsgUpdateIssuerResponse = object;
@@ -112,6 +114,10 @@ export interface PlasticcreditsQueryGetCreditResponse {
 
 export interface PlasticcreditsQueryGetIssuerResponse {
   issuer?: PlasticcreditsIssuer;
+}
+
+export interface PlasticcreditsQueryIsApprovedResponse {
+  approved?: string;
 }
 
 /**
@@ -471,6 +477,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryCredit = (index: string, params: RequestParams = {}) =>
     this.request<PlasticcreditsQueryGetCreditResponse, RpcStatus>({
       path: `/plasticcreditledger/plasticcredits/credit/${index}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryIsApproved
+   * @summary Queries a list of IsApproved items.
+   * @request GET:/plasticcreditledger/plasticcredits/is_approved/{addr}
+   */
+  queryIsApproved = (addr: string, params: RequestParams = {}) =>
+    this.request<PlasticcreditsQueryIsApprovedResponse, RpcStatus>({
+      path: `/plasticcreditledger/plasticcredits/is_approved/${addr}`,
       method: "GET",
       format: "json",
       ...params,

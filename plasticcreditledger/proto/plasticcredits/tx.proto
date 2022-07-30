@@ -16,6 +16,7 @@ service Msg {
   rpc UpdateApprovedCollector(MsgUpdateApprovedCollector) returns (MsgUpdateApprovedCollectorResponse);
   rpc DeleteApprovedCollector(MsgDeleteApprovedCollector) returns (MsgDeleteApprovedCollectorResponse);
   rpc IssueCredits(MsgIssueCredits) returns (MsgIssueCreditsResponse);
+  rpc TransferCredit(MsgTransferCredit) returns (MsgTransferCreditResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -77,6 +78,15 @@ message MsgIssueCredits {
 }
 
 message MsgIssueCreditsResponse {
+}
+
+message MsgTransferCredit {
+  string owner = 1;
+  string index = 2;
+  string newOwner = 3;
+}
+
+message MsgTransferCreditResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message

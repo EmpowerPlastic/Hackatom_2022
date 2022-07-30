@@ -48,6 +48,11 @@ service Query {
 		option (google.api.http).get = "/plasticcreditledger/plasticcredits/credit";
 	}
 
+// Queries a list of IsApproved items.
+	rpc IsApproved(QueryIsApprovedRequest) returns (QueryIsApprovedResponse) {
+		option (google.api.http).get = "/plasticcreditledger/plasticcredits/is_approved/{addr}";
+	}
+
 // this line is used by starport scaffolding # 2
 }
 
@@ -113,6 +118,14 @@ message QueryAllCreditRequest {
 message QueryAllCreditResponse {
 	repeated Credit credit = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryIsApprovedRequest {
+  string addr = 1;
+}
+
+message QueryIsApprovedResponse {
+  string approved = 1;
 }
 
 // this line is used by starport scaffolding # 3
