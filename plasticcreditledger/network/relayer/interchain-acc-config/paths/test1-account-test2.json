@@ -4,7 +4,7 @@
     "client-id": "",
     "connection-id": "",
     "channel-id": "",
-    "port-id": "ibcaccount",
+    "port-id": "",
     "order": "ordered",
     "version": "ics27-1"
   },
@@ -13,7 +13,7 @@
     "client-id": "",
     "connection-id": "",
     "channel-id": "",
-    "port-id": "ibcaccount",
+    "port-id": "",
     "order": "ordered",
     "version": "ics27-1"
   },

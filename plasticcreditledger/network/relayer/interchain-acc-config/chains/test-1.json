@@ -1,12 +1,20 @@
 {
-  "key": "test-1",
-  "chain-id": "test-1",
-  "rpc-addr": "http://127.0.0.1:16657",
-  "account-prefix": "wasm",
-  "gas-prices": "0.0025stake",
-  "default-denom": "stake",
-  "gas-adjustment":1.5,
-  "gas":900000,
-  "trusting-period": "330h"
+  "type": "cosmos",
+  "value": {
+    "key": "test-1",
+    "chain-id": "test-1",
+    "rpc-addr": "http://127.0.0.1:16657",
+    "account-prefix": "wasm",
+    "gas-prices": "0.0025stake",
+    "default-denom": "stake",
+    "gas-adjustment": 1.5,
+    "gas": 900000,
+    "trusting-period": "330h",
+    "debug": true,
+    "timeout": "10s",
+    "output-format": "json",
+    "sign-mode": "direct",
+    "keyring-backend": "test"
+  }
 }
 

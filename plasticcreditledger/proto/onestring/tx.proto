@@ -8,7 +8,7 @@ option go_package = "plasticcreditledger/x/onestring/types";
 
 // Msg defines the Msg service.
 service Msg {
-      rpc CreateThestring(MsgCreateThestring) returns (MsgCreateThestringResponse);
+  rpc CreateThestring(MsgCreateThestring) returns (MsgCreateThestringResponse);
   rpc UpdateThestring(MsgUpdateThestring) returns (MsgUpdateThestringResponse);
   rpc DeleteThestring(MsgDeleteThestring) returns (MsgDeleteThestringResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
@@ -16,13 +16,13 @@ service Msg {
 
 message MsgCreateThestring {
   string creator = 1;
-  string valueofthestring = 3;
+  string valueofthestring = 2;
 }
 message MsgCreateThestringResponse {}
 
 message MsgUpdateThestring {
   string creator = 1;
-  string valueofthestring = 3;
+  string valueofthestring = 2;
 }
 message MsgUpdateThestringResponse {}
 

@@ -1,52 +1,32 @@
-# plasticcreditledger
-**plasticcreditledger** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite CLI](https://ignite.com/cli).
+# To run the example:
 
-## Get started
+1. `make install`
+2. `make init`
+3. `make deploy-binding` (A couple of manual prompts here still)
+4. `make start-rly`
 
-```
-ignite chain serve
-```
-
-`serve` command installs dependencies, builds, initializes, and starts your blockchain in development.
-
-### Configure
-
-Your blockchain in development can be configured with `config.yml`. To learn more, see the [Ignite CLI docs](https://docs.ignite.com).
-
-### Web Frontend
-
-Ignite CLI has scaffolded a Vue.js-based web app in the `vue` directory. Run the following commands to install dependencies and start the app:
-
-```
-cd vue
-npm install
-npm run serve
+After a little while (relaying some messages I guess), run:
+``` 
+$ plasticcreditledgerd q intertx interchainaccounts connection-0 wasm18hl5c9xn5dze2g50uaw0l2mr02ew57zkq4ekwt --node tcp://0.0.0.0:16657
 ```
 
-The frontend app is built using the `@starport/vue` and `@starport/vuex` packages. For details, see the [monorepo for Ignite front-end development](https://github.com/ignite/web).
-
-## Release
-To release a new version of your blockchain, create and push a new tag with `v` prefix. A new draft release with the configured targets will be created.
-
+It should output:
 ```
-git tag v0.1
-git push origin v0.1
+interchain_account_address: wasm1p7uzckyck0r7e7feqzry6yzmtelq0y95erey3qnjjlyw7q2ludas0850dc
 ```
 
-After a draft release is created, make your final changes from the release page and publish it.
-
-### Install
-To install the latest version of your blockchain node's binary, execute the following command on your machine:
-
+If you want to you can give the new ICA some moneys:
+``` 
+plasticcreditledgerd tx bank send wasm1qnk2n4nlkpw9xfqntladh74w6ujtulwn5wkh5w \
+    wasm1p7uzckyck0r7e7feqzry6yzmtelq0y95erey3qnjjlyw7q2ludas0850dc 10000stake \
+     --from val2 --home /home/gg/code/Hackatom_2022/plasticcreditledger/data/test-2 \
+     --keyring-backend test --gas auto --gas-adjustment 1.3 --chain-id test-2
 ```
-curl https://get.ignite.com/username/plasticcreditledger@latest! | sudo bash
+
+Now, the part that does not work:
 ```
-`username/plasticcreditledger` should match the `username` and `repo_name` of the Github repository to which the source code was pushed. Learn more about [the install process](https://github.com/allinbits/starport-installer).
-
-## Learn more
-
-- [Ignite CLI](https://ignite.com/cli)
-- [Tutorials](https://docs.ignite.com/guide)
-- [Ignite CLI docs](https://docs.ignite.com)
-- [Cosmos SDK docs](https://docs.cosmos.network)
-- [Developer Chat](https://discord.gg/ignite)
+plasticcreditledgerd tx intertx submit ./simplemsg.json --connection-id connection-0 \
+    --home /home/gg/code/Hackatom_2022/plasticcreditledger/data/test-1 \
+    --keyring-backend test --from val1 --chain-id test-1 --node tcp://0.0.0.0:16657 \
+    --gas auto --gas-adjustment 1.3 -b block
+```
