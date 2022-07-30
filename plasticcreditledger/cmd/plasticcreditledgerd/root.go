@@ -31,11 +31,11 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	dbm "github.com/tendermint/tm-db"
 
-	"github.com/CosmWasm/wasmd/app"
-	"github.com/CosmWasm/wasmd/app/params"
 	"github.com/CosmWasm/wasmd/x/wasm"
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	wasmtypes "github.com/CosmWasm/wasmd/x/wasm/types"
+	"plasticcreditledger/app"
+	"plasticcreditledger/app/params"
 )
 
 // NewRootCmd creates a new root command for wasmd. It is called once in the
@@ -216,7 +216,7 @@ func (ac appCreator) newApp(
 		wasmOpts = append(wasmOpts, wasmkeeper.WithVMCacheMetrics(prometheus.DefaultRegisterer))
 	}
 
-	return app.NewWasmApp(logger, db, traceStore, true, skipUpgradeHeights,
+	return app.New(logger, db, traceStore, true, skipUpgradeHeights,
 		cast.ToString(appOpts.Get(flags.FlagHome)),
 		cast.ToUint(appOpts.Get(server.FlagInvCheckPeriod)),
 		ac.encCfg,
@@ -246,27 +246,11 @@ func (ac appCreator) appExport(
 	jailAllowedAddrs []string,
 	appOpts servertypes.AppOptions,
 ) (servertypes.ExportedApp, error) {
-	var wasmApp *app.WasmApp
+	var wasmApp *app.App
 	homePath, ok := appOpts.Get(flags.FlagHome).(string)
 	if !ok || homePath == "" {
 		return servertypes.ExportedApp{}, errors.New("application home is not set")
 	}
-
-	loadLatest := height == -1
-	var emptyWasmOpts []wasm.Option
-	wasmApp = app.NewWasmApp(
-		logger,
-		db,
-		traceStore,
-		loadLatest,
-		map[int64]bool{},
-		homePath,
-		cast.ToUint(appOpts.Get(server.FlagInvCheckPeriod)),
-		ac.encCfg,
-		app.GetEnabledProposals(),
-		appOpts,
-		emptyWasmOpts,
-	)
 
 	if height != -1 {
 		if err := wasmApp.LoadHeight(height); err != nil {

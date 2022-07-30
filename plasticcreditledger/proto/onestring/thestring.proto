@@ -1,0 +1,9 @@
+syntax = "proto3";
+package plasticcreditledger.onestring;
+
+option go_package = "plasticcreditledger/x/onestring/types";
+
+message Thestring {
+  string valueofthestring = 1; 
+  string creator = 2;
+}

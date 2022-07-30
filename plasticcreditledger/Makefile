@@ -141,6 +141,10 @@ start:
 start-rly:
 	./network/hermes/start.sh
 
+deploy-binding:
+	./network/build_deploy_bindingcontract.sh
+
+
 kill-dev:
 	@echo "Killing plasticcreditledgerd and removing previous data"
 	-@rm -rf ./data
