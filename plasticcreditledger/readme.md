@@ -30,3 +30,17 @@ plasticcreditledgerd tx intertx submit ./simplemsg.json --connection-id connecti
     --keyring-backend test --from val1 --chain-id test-1 --node tcp://0.0.0.0:16657 \
     --gas auto --gas-adjustment 1.3 -b block
 ```
+
+
+plasticcreditledgerd tx intertx submit \
+'{
+"@type": "/plasticcreditledger.onestring.MsgCreateThestring",
+"creator": "wasm1p7uzckyck0r7e7feqzry6yzmtelq0y95erey3qnjjlyw7q2ludas0850dc",
+"valueofthestring": "zhoppla"
+}' --connection-id connection-0 --home /home/gg/code/Hackatom_2022/plasticcreditledger/data/test-1 \
+--keyring-backend test --from val1 --chain-id test-1 --node tcp://0.0.0.0:16657 \
+--gas auto --gas-adjustment 1.3 -b block
+
+
+icad q staking delegations-to wasmvaloper1qnk2n4nlkpw9xfqntladh74w6ujtulwnpjrt65 --home ./data/test-2 --node tcp://localhost:26657
+
