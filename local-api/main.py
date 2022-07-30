@@ -1,10 +1,6 @@
-from concurrent.futures import process
-from distutils.dep_util import newer_group
-from hashlib import new
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
 import subprocess
-import socket
 
 api = Flask(__name__)
 cors = CORS(api, resource={
