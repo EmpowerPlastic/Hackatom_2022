@@ -1,0 +1,11 @@
+syntax = "proto3";
+package plasticcreditledger.plasticcredits;
+
+option go_package = "plasticcreditledger/x/plasticcredits/types";
+
+message Issuer {
+  string addr = 1; 
+  string name = 2; 
+  string creator = 3;
+}
+

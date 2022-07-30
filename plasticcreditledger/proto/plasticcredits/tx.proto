@@ -1,13 +1,39 @@
 syntax = "proto3";
 package plasticcreditledger.plasticcredits;
 
+import "plasticcredits/issuer.proto";
 // this line is used by starport scaffolding # proto/tx/import
 
 option go_package = "plasticcreditledger/x/plasticcredits/types";
 
 // Msg defines the Msg service.
 service Msg {
-    // this line is used by starport scaffolding # proto/tx/rpc
+      rpc CreateIssuer(MsgCreateIssuer) returns (MsgCreateIssuerResponse);
+  rpc UpdateIssuer(MsgUpdateIssuer) returns (MsgUpdateIssuerResponse);
+  rpc DeleteIssuer(MsgDeleteIssuer) returns (MsgDeleteIssuerResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
 }
+
+message MsgCreateIssuer {
+  string creator = 1;
+  string addr = 2;
+
+  string name = 3;
+}
+message MsgCreateIssuerResponse {}
+
+message MsgUpdateIssuer {
+  string creator = 1;
+  string addr = 2;
+
+  string name = 3;
+}
+message MsgUpdateIssuerResponse {}
+
+message MsgDeleteIssuer {
+  string creator = 1;
+  string addr = 2;
+}
+message MsgDeleteIssuerResponse {}
 
 // this line is used by starport scaffolding # proto/tx/message

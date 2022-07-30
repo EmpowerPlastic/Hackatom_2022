@@ -4,9 +4,15 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
+import { MsgDeleteIssuer } from "./types/plasticcredits/tx";
+import { MsgCreateIssuer } from "./types/plasticcredits/tx";
+import { MsgUpdateIssuer } from "./types/plasticcredits/tx";
 
 
 const types = [
+  ["/plasticcreditledger.plasticcredits.MsgDeleteIssuer", MsgDeleteIssuer],
+  ["/plasticcreditledger.plasticcredits.MsgCreateIssuer", MsgCreateIssuer],
+  ["/plasticcreditledger.plasticcredits.MsgUpdateIssuer", MsgUpdateIssuer],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -39,6 +45,9 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
+    msgDeleteIssuer: (data: MsgDeleteIssuer): EncodeObject => ({ typeUrl: "/plasticcreditledger.plasticcredits.MsgDeleteIssuer", value: MsgDeleteIssuer.fromPartial( data ) }),
+    msgCreateIssuer: (data: MsgCreateIssuer): EncodeObject => ({ typeUrl: "/plasticcreditledger.plasticcredits.MsgCreateIssuer", value: MsgCreateIssuer.fromPartial( data ) }),
+    msgUpdateIssuer: (data: MsgUpdateIssuer): EncodeObject => ({ typeUrl: "/plasticcreditledger.plasticcredits.MsgUpdateIssuer", value: MsgUpdateIssuer.fromPartial( data ) }),
     
   };
 };

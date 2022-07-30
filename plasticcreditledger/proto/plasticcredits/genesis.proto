@@ -3,6 +3,7 @@ package plasticcreditledger.plasticcredits;
 
 import "gogoproto/gogo.proto";
 import "plasticcredits/params.proto";
+import "plasticcredits/issuer.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "plasticcreditledger/x/plasticcredits/types";
@@ -11,5 +12,6 @@ option go_package = "plasticcreditledger/x/plasticcredits/types";
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
   string port_id = 2;
+  repeated Issuer issuerList = 3 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }
