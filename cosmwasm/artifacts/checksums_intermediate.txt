@@ -1,1 +1,1 @@
-bc0a5f79b6381cf76ce67b0dc67eb41a826586d510ae543be1c1e3fd6e1e9339  target/wasm32-unknown-unknown/release/bindingcontract.wasm
+0fdac5e57bc6e9bfb37a44dedb7a26ae7d2b11f59f1eeef8d6dd1de8a5d0ee3b  target/wasm32-unknown-unknown/release/bindingcontract.wasm
