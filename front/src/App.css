@@ -1,0 +1,50 @@
+body{
+  background-color: black;
+}
+.App{
+  color: white;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;  
+  align-items: center;
+}
+
+.row-functions {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  margin: 5vh;
+}
+
+.call-button{
+  margin: 5vw;
+  background-color: blue;
+  color: white;
+  font-size: 3vh;
+  padding: 3vh;
+  border-radius: 15%;
+}
+
+.output{
+  text-align:start;
+  font-family: monospace, monospace;
+  width: 90vw;
+  height: 50vh;
+  font-size: 2vh;
+  background-color: aliceblue;
+  color: black;
+  overflow: scroll;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
