@@ -73,8 +73,8 @@ message MsgIssueCredits {
   string material = 3;
   string description = 4;
   string image = 5;
-  double lat = 6;
-  double lng = 7;
+  string lat = 6;
+  string lng = 7;
 }
 
 message MsgIssueCreditsResponse {

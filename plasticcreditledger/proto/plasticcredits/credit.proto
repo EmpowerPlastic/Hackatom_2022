@@ -11,7 +11,7 @@ message Credit {
   string material = 5;
   string description = 6;
   string image = 7;
-  double lat = 8;
-  double lng = 9;
+  string lat = 8;
+  string lng = 9;
 }
 

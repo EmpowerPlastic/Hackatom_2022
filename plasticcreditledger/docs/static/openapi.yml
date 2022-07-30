@@ -33599,11 +33599,9 @@ paths:
                     image:
                       type: string
                     lat:
-                      type: number
-                      format: double
+                      type: string
                     lng:
-                      type: number
-                      format: double
+                      type: string
               pagination:
                 type: object
                 properties:
@@ -33736,11 +33734,9 @@ paths:
                   image:
                     type: string
                   lat:
-                    type: number
-                    format: double
+                    type: string
                   lng:
-                    type: number
-                    format: double
+                    type: string
         default:
           description: An unexpected error response.
           schema:
@@ -56463,11 +56459,9 @@ definitions:
       image:
         type: string
       lat:
-        type: number
-        format: double
+        type: string
       lng:
-        type: number
-        format: double
+        type: string
   plasticcreditledger.plasticcredits.Issuer:
     type: object
     properties:
@@ -56560,11 +56554,9 @@ definitions:
             image:
               type: string
             lat:
-              type: number
-              format: double
+              type: string
             lng:
-              type: number
-              format: double
+              type: string
       pagination:
         type: object
         properties:
@@ -56664,11 +56656,9 @@ definitions:
           image:
             type: string
           lat:
-            type: number
-            format: double
+            type: string
           lng:
-            type: number
-            format: double
+            type: string
   plasticcreditledger.plasticcredits.QueryGetIssuerResponse:
     type: object
     properties:
