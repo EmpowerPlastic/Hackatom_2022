@@ -34,7 +34,36 @@ pub fn execute(
 ) -> Result<Response<PlasticMsg>, ContractError> {
     match msg {
         ExecuteMsg::SetTheString { the_string } => { set_the_string(info, the_string) }
+        ExecuteMsg::RegisterAccount {} => { register_account(info) }
+        ExecuteMsg::SubmitTx { msg } => { submit_tx(info, msg) }
     }
+}
+
+pub fn submit_tx(info: MessageInfo, msg: String) -> Result<Response<PlasticMsg>, ContractError> {
+    let submit_tx_message = PlasticMsg::SubmitTx {
+        msg,
+        owner: info.sender.to_string(),
+        connection_id: "connection-0".to_string(), // TODO: Maaaaaaybe not hardocde this? :)
+    };
+
+    let msgs: Vec<SubMsg<PlasticMsg>> = vec![SubMsg::new(submit_tx_message)];
+
+    Ok(Response::new()
+        .add_attribute("action", "submit_tx_message")
+        .add_submessages(msgs))
+}
+
+pub fn register_account(info: MessageInfo) -> Result<Response<PlasticMsg>, ContractError> {
+    let register_account_message = PlasticMsg::RegisterAccount {
+        owner: info.sender.to_string(),
+        connection_id: "connection-0".to_string(), // TODO: Maaaaaaybe not hardocde this? :)
+    };
+
+    let msgs: Vec<SubMsg<PlasticMsg>> = vec![SubMsg::new(register_account_message)];
+
+    Ok(Response::new()
+        .add_attribute("action", "register_account")
+        .add_submessages(msgs))
 }
 
 pub fn set_the_string(info: MessageInfo, the_string: String) -> Result<Response<PlasticMsg>, ContractError> {
@@ -47,5 +76,4 @@ pub fn set_the_string(info: MessageInfo, the_string: String) -> Result<Response<
     Ok(Response::new()
         .add_attribute("action", "set_the_string")
         .add_submessages(msgs))
-
 }

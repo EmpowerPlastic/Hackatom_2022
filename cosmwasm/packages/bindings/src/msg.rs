@@ -14,6 +14,11 @@ pub enum PlasticMsg {
     SetTheString {
         the_string: String,
         creator: String,
+    },
+    SubmitTx {
+        owner: String,
+        connection_id: String,
+        msg: String,
     }
 }
 

@@ -1,0 +1,5 @@
+{
+	"@type": "/plasticcreditledger.onestring.MsgCreateThestring", 
+	"creator": "wasm1npgsrrx5zdjdejfv6fq3au4jnxxw95x502lw4m", 
+	"valueofthestring": "zhoppla"
+}

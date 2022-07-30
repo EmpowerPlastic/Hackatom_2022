@@ -496,7 +496,7 @@ func New(
 	// if we want to allow any custom callbacks
 	supportedFeatures := "iterator,staking,stargate,plastic"
 
-	wasmOpts = append(wasmbinding.RegisterCustomPlugins(app.InterTxKeeper, app.OnestringKeeper), wasmOpts...)
+	wasmOpts = append(wasmbinding.RegisterCustomPlugins(encodingConfig, app.InterTxKeeper, app.OnestringKeeper), wasmOpts...)
 
 	app.WasmKeeper = wasm.NewKeeper(
 		appCodec,

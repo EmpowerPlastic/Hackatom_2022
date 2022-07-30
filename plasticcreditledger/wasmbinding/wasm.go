@@ -4,12 +4,13 @@ import (
 	"github.com/CosmWasm/wasmd/x/wasm"
 	wasmkeeper "github.com/CosmWasm/wasmd/x/wasm/keeper"
 	intertxkeeper "github.com/cosmos/interchain-accounts/x/inter-tx/keeper"
+	"plasticcreditledger/app/params"
 	onestringkeeper "plasticcreditledger/x/onestring/keeper"
 )
 
-func RegisterCustomPlugins(intertxKeeper intertxkeeper.Keeper, onestringKeeper onestringkeeper.Keeper) []wasmkeeper.Option {
+func RegisterCustomPlugins(encodingConfig params.EncodingConfig, intertxKeeper intertxkeeper.Keeper, onestringKeeper onestringkeeper.Keeper) []wasmkeeper.Option {
 	messengerDecoratorOpt := wasmkeeper.WithMessageHandlerDecorator(
-		CustomMessageDecorator(intertxKeeper, onestringKeeper),
+		CustomMessageDecorator(encodingConfig, intertxKeeper, onestringKeeper),
 	)
 
 	return []wasm.Option{messengerDecoratorOpt}

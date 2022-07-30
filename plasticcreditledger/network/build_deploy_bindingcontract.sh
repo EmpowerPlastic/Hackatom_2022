@@ -11,7 +11,7 @@ sudo docker run --rm -v "$(pwd)":/code \
        cosmwasm/workspace-optimizer:0.12.6
 
 plasticcreditledgerd tx wasm store artifacts/bindingcontract.wasm \
-    --home ../plasticcreditledger/data/test-1 --keyring-backend test \
+    --home /home/gg/code/Hackatom_2022/plasticcreditledger/data/test-1 --keyring-backend test \
     --from val1 --chain-id test-1 --node tcp://0.0.0.0:16657 \
     --gas auto --gas-adjustment 1.3
 
@@ -24,3 +24,22 @@ plasticcreditledgerd tx wasm instantiate 1 '{}' --node tcp://0.0.0.0:16657 \
 sleep 1
 
 plasticcreditledgerd q wasm list-contract-by-code 1 --node tcp://0.0.0.0:16657
+
+CONTRACT_ADDR=$(plasticcreditledgerd q wasm list-contract-by-code 1 --node tcp://0.0.0.0:16657 --output json | jq -r ".contracts"[0])
+
+plasticcreditledgerd tx wasm execute "$CONTRACT_ADDR" \
+    '{"register_account": {}}' \
+    --home /home/gg/code/Hackatom_2022/plasticcreditledger/data/test-1 --keyring-backend test \
+    --from val1 --chain-id test-1 --node tcp://0.0.0.0:16657 \
+    --gas auto --gas-adjustment 1.3
+
+echo "make start-rly"
+
+echo "plasticcreditledgerd q intertx interchainaccounts connection-0 wasm18hl5c9xn5dze2g50uaw0l2mr02ew57zkq4ekwt --node tcp://0.0.0.0:16657"
+
+echo "plasticcreditledgerd tx intertx submit ./simplemsg.json --connection-id connection-0 \
+    --home /home/gg/code/Hackatom_2022/plasticcreditledger/data/test-1 \
+    --keyring-backend test --from val1 --chain-id test-1 --node tcp://0.0.0.0:16657 \
+    --gas auto --gas-adjustment 1.3"
+
+# plasticcreditledgerd tx wasm execute "$CONTRACT_ADDR" '{"submit_tx": {"msg": "{\"@type\": \"/plasticcreditledger.onestring.MsgCreateThestring\", \"creator\": \"wasm1npgsrrx5zdjdejfv6fq3au4jnxxw95x502lw4m\", \"valueofthestring\": \"zhoppla\"}"}}' $TEST1_TX --from val1 --gas auto --gas-adjustment 1.3 --node tcp://0.0.0.0:16657 --chain-id test-1
