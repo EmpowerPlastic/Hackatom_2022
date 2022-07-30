@@ -1,11 +1,10 @@
 # Hackatom_2022
-Eco-Plastic Credits based on Regen Network to use as collateral for presale module in Empower. 
 
-## How to run 
+Our initial idea was to create work with eco credits on regen network using interchain accounts so that you could
+create a presale funding mechanism for other chains over IBC and ICA.
 
-To run this process, read `INSTRUCTIONS.md`.
+We quickly realized that Regen was a bit too far behind on the IBC version and after a quick attempt to upgrade it we decided to create our own chain for this purpose.
 
+To make the challenge a bit more interesting, we decided to use the DAO_UP contract as the basis, meaning we would do Interchain Accounts over CosmWasm.
 
-## The process
-
-In order to make this project feasible, we required to update regen to an IBC Chain, that was done following [the path](https://ibc.cosmos.network/main/migrations/v2-to-v3.html).
+<!-- TODO: ADD PICTURE OF FLOW HERE -->
