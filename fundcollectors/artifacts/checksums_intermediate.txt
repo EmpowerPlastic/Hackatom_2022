@@ -1,0 +1,1 @@
+81797f198c0b698f119fc5bee15ad2e1693ee1ccb4601cec1d55b85990ddd541  ./target/wasm32-unknown-unknown/release/fundcollectors.wasm

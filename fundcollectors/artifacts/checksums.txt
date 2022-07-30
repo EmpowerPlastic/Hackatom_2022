@@ -1,0 +1,1 @@
+8a9819b9d3dc07b2dbb45a0ee907a810f8e62f6cd78f4e86638aafec8b782089  fundcollectors-aarch64.wasm

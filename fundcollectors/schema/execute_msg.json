@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExecuteMsg",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "support_funding"
+      ],
+      "properties": {
+        "support_funding": {
+          "type": "object",
+          "required": [
+            "amount"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "conclude_funding"
+      ],
+      "properties": {
+        "conclude_funding": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "status_funding"
+      ],
+      "properties": {
+        "status_funding": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    }
+  ]
+}
