@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { Params } from "../plasticcredits/params";
 import { Issuer } from "../plasticcredits/issuer";
+import { ApprovedCollector } from "../plasticcredits/approved_collector";
 import { Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "plasticcreditledger.plasticcredits";
@@ -9,8 +10,9 @@ export const protobufPackage = "plasticcreditledger.plasticcredits";
 export interface GenesisState {
   params: Params | undefined;
   port_id: string;
-  /** this line is used by starport scaffolding # genesis/proto/state */
   issuerList: Issuer[];
+  /** this line is used by starport scaffolding # genesis/proto/state */
+  approvedCollectorList: ApprovedCollector[];
 }
 
 const baseGenesisState: object = { port_id: "" };
@@ -26,6 +28,9 @@ export const GenesisState = {
     for (const v of message.issuerList) {
       Issuer.encode(v!, writer.uint32(26).fork()).ldelim();
     }
+    for (const v of message.approvedCollectorList) {
+      ApprovedCollector.encode(v!, writer.uint32(34).fork()).ldelim();
+    }
     return writer;
   },
 
@@ -34,6 +39,7 @@ export const GenesisState = {
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = { ...baseGenesisState } as GenesisState;
     message.issuerList = [];
+    message.approvedCollectorList = [];
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -46,6 +52,11 @@ export const GenesisState = {
         case 3:
           message.issuerList.push(Issuer.decode(reader, reader.uint32()));
           break;
+        case 4:
+          message.approvedCollectorList.push(
+            ApprovedCollector.decode(reader, reader.uint32())
+          );
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -57,6 +68,7 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const message = { ...baseGenesisState } as GenesisState;
     message.issuerList = [];
+    message.approvedCollectorList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromJSON(object.params);
     } else {
@@ -70,6 +82,14 @@ export const GenesisState = {
     if (object.issuerList !== undefined && object.issuerList !== null) {
       for (const e of object.issuerList) {
         message.issuerList.push(Issuer.fromJSON(e));
+      }
+    }
+    if (
+      object.approvedCollectorList !== undefined &&
+      object.approvedCollectorList !== null
+    ) {
+      for (const e of object.approvedCollectorList) {
+        message.approvedCollectorList.push(ApprovedCollector.fromJSON(e));
       }
     }
     return message;
@@ -87,12 +107,20 @@ export const GenesisState = {
     } else {
       obj.issuerList = [];
     }
+    if (message.approvedCollectorList) {
+      obj.approvedCollectorList = message.approvedCollectorList.map((e) =>
+        e ? ApprovedCollector.toJSON(e) : undefined
+      );
+    } else {
+      obj.approvedCollectorList = [];
+    }
     return obj;
   },
 
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = { ...baseGenesisState } as GenesisState;
     message.issuerList = [];
+    message.approvedCollectorList = [];
     if (object.params !== undefined && object.params !== null) {
       message.params = Params.fromPartial(object.params);
     } else {
@@ -106,6 +134,14 @@ export const GenesisState = {
     if (object.issuerList !== undefined && object.issuerList !== null) {
       for (const e of object.issuerList) {
         message.issuerList.push(Issuer.fromPartial(e));
+      }
+    }
+    if (
+      object.approvedCollectorList !== undefined &&
+      object.approvedCollectorList !== null
+    ) {
+      for (const e of object.approvedCollectorList) {
+        message.approvedCollectorList.push(ApprovedCollector.fromPartial(e));
       }
     }
     return message;

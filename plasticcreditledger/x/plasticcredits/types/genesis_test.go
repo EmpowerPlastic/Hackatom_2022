@@ -30,6 +30,16 @@ func TestGenesisState_Validate(t *testing.T) {
 						Addr: "1",
 					},
 				},
+				ApprovedCollectorList: []types.ApprovedCollector{
+					{
+						Addr:   "0",
+						Issuer: "0",
+					},
+					{
+						Addr:   "1",
+						Issuer: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -43,6 +53,22 @@ func TestGenesisState_Validate(t *testing.T) {
 					},
 					{
 						Addr: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated approvedCollector",
+			genState: &types.GenesisState{
+				ApprovedCollectorList: []types.ApprovedCollector{
+					{
+						Addr:   "0",
+						Issuer: "0",
+					},
+					{
+						Addr:   "0",
+						Issuer: "0",
 					},
 				},
 			},

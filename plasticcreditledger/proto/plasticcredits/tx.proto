@@ -2,6 +2,7 @@ syntax = "proto3";
 package plasticcreditledger.plasticcredits;
 
 import "plasticcredits/issuer.proto";
+import "plasticcredits/approved_collector.proto";
 // this line is used by starport scaffolding # proto/tx/import
 
 option go_package = "plasticcreditledger/x/plasticcredits/types";
@@ -11,6 +12,9 @@ service Msg {
       rpc CreateIssuer(MsgCreateIssuer) returns (MsgCreateIssuerResponse);
   rpc UpdateIssuer(MsgUpdateIssuer) returns (MsgUpdateIssuerResponse);
   rpc DeleteIssuer(MsgDeleteIssuer) returns (MsgDeleteIssuerResponse);
+  rpc CreateApprovedCollector(MsgCreateApprovedCollector) returns (MsgCreateApprovedCollectorResponse);
+  rpc UpdateApprovedCollector(MsgUpdateApprovedCollector) returns (MsgUpdateApprovedCollectorResponse);
+  rpc DeleteApprovedCollector(MsgDeleteApprovedCollector) returns (MsgDeleteApprovedCollectorResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -35,5 +39,28 @@ message MsgDeleteIssuer {
   string addr = 2;
 }
 message MsgDeleteIssuerResponse {}
+
+message MsgCreateApprovedCollector {
+  string creator = 1;
+  string addr = 2;
+  string issuer = 3;
+
+}
+message MsgCreateApprovedCollectorResponse {}
+
+message MsgUpdateApprovedCollector {
+  string creator = 1;
+  string addr = 2;
+  string issuer = 3;
+
+}
+message MsgUpdateApprovedCollectorResponse {}
+
+message MsgDeleteApprovedCollector {
+  string creator = 1;
+  string addr = 2;
+  string issuer = 3;
+}
+message MsgDeleteApprovedCollectorResponse {}
 
 // this line is used by starport scaffolding # proto/tx/message

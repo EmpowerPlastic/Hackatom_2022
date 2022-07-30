@@ -6,6 +6,7 @@ import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "plasticcredits/params.proto";
 import "plasticcredits/issuer.proto";
+import "plasticcredits/approved_collector.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "plasticcreditledger/x/plasticcredits/types";
@@ -24,6 +25,16 @@ service Query {
 	// Queries a list of Issuer items.
 	rpc IssuerAll(QueryAllIssuerRequest) returns (QueryAllIssuerResponse) {
 		option (google.api.http).get = "/plasticcreditledger/plasticcredits/issuer";
+	}
+
+// Queries a ApprovedCollector by index.
+	rpc ApprovedCollector(QueryGetApprovedCollectorRequest) returns (QueryGetApprovedCollectorResponse) {
+		option (google.api.http).get = "/plasticcreditledger/plasticcredits/approved_collector/{addr}/{issuer}";
+	}
+
+	// Queries a list of ApprovedCollector items.
+	rpc ApprovedCollectorAll(QueryAllApprovedCollectorRequest) returns (QueryAllApprovedCollectorResponse) {
+		option (google.api.http).get = "/plasticcreditledger/plasticcredits/approved_collector";
 	}
 
 // this line is used by starport scaffolding # 2
@@ -53,6 +64,25 @@ message QueryAllIssuerRequest {
 
 message QueryAllIssuerResponse {
 	repeated Issuer issuer = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+message QueryGetApprovedCollectorRequest {
+	  string addr = 1;
+  string issuer = 2;
+
+}
+
+message QueryGetApprovedCollectorResponse {
+	ApprovedCollector approvedCollector = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllApprovedCollectorRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllApprovedCollectorResponse {
+	repeated ApprovedCollector approvedCollector = 1 [(gogoproto.nullable) = false];
 	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 

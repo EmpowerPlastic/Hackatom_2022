@@ -9,15 +9,27 @@
  * ---------------------------------------------------------------
  */
 
+export interface PlasticcreditsApprovedCollector {
+  addr?: string;
+  issuer?: string;
+  creator?: string;
+}
+
 export interface PlasticcreditsIssuer {
   addr?: string;
   name?: string;
   creator?: string;
 }
 
+export type PlasticcreditsMsgCreateApprovedCollectorResponse = object;
+
 export type PlasticcreditsMsgCreateIssuerResponse = object;
 
+export type PlasticcreditsMsgDeleteApprovedCollectorResponse = object;
+
 export type PlasticcreditsMsgDeleteIssuerResponse = object;
+
+export type PlasticcreditsMsgUpdateApprovedCollectorResponse = object;
 
 export type PlasticcreditsMsgUpdateIssuerResponse = object;
 
@@ -25,6 +37,21 @@ export type PlasticcreditsMsgUpdateIssuerResponse = object;
  * Params defines the parameters for the module.
  */
 export type PlasticcreditsParams = object;
+
+export interface PlasticcreditsQueryAllApprovedCollectorResponse {
+  approvedCollector?: PlasticcreditsApprovedCollector[];
+
+  /**
+   * PageResponse is to be embedded in gRPC response messages where the
+   * corresponding request message has used PageRequest.
+   *
+   *  message SomeResponse {
+   *          repeated Bar results = 1;
+   *          PageResponse page = 2;
+   *  }
+   */
+  pagination?: V1Beta1PageResponse;
+}
 
 export interface PlasticcreditsQueryAllIssuerResponse {
   issuer?: PlasticcreditsIssuer[];
@@ -39,6 +66,10 @@ export interface PlasticcreditsQueryAllIssuerResponse {
    *  }
    */
   pagination?: V1Beta1PageResponse;
+}
+
+export interface PlasticcreditsQueryGetApprovedCollectorResponse {
+  approvedCollector?: PlasticcreditsApprovedCollector;
 }
 
 export interface PlasticcreditsQueryGetIssuerResponse {
@@ -101,13 +132,6 @@ export interface V1Beta1PageRequest {
    * is set.
    */
   count_total?: boolean;
-
-  /**
-   * reverse is set to true if results are to be returned in the descending order.
-   *
-   * Since: cosmos-sdk 0.43
-   */
-  reverse?: boolean;
 }
 
 /**
@@ -319,10 +343,51 @@ export class HttpClient<SecurityDataType = unknown> {
 }
 
 /**
- * @title plasticcredits/genesis.proto
+ * @title plasticcredits/approved_collector.proto
  * @version version not set
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryApprovedCollectorAll
+   * @summary Queries a list of ApprovedCollector items.
+   * @request GET:/plasticcreditledger/plasticcredits/approved_collector
+   */
+  queryApprovedCollectorAll = (
+    query?: {
+      "pagination.key"?: string;
+      "pagination.offset"?: string;
+      "pagination.limit"?: string;
+      "pagination.count_total"?: boolean;
+    },
+    params: RequestParams = {},
+  ) =>
+    this.request<PlasticcreditsQueryAllApprovedCollectorResponse, RpcStatus>({
+      path: `/plasticcreditledger/plasticcredits/approved_collector`,
+      method: "GET",
+      query: query,
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QueryApprovedCollector
+   * @summary Queries a ApprovedCollector by index.
+   * @request GET:/plasticcreditledger/plasticcredits/approved_collector/{addr}/{issuer}
+   */
+  queryApprovedCollector = (addr: string, issuer: string, params: RequestParams = {}) =>
+    this.request<PlasticcreditsQueryGetApprovedCollectorResponse, RpcStatus>({
+      path: `/plasticcreditledger/plasticcredits/approved_collector/${addr}/${issuer}`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
   /**
    * No description
    *
@@ -337,7 +402,6 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
       "pagination.offset"?: string;
       "pagination.limit"?: string;
       "pagination.count_total"?: boolean;
-      "pagination.reverse"?: boolean;
     },
     params: RequestParams = {},
   ) =>

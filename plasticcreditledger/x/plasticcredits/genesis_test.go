@@ -22,6 +22,16 @@ func TestGenesis(t *testing.T) {
 				Addr: "1",
 			},
 		},
+		ApprovedCollectorList: []types.ApprovedCollector{
+			{
+				Addr:   "0",
+				Issuer: "0",
+			},
+			{
+				Addr:   "1",
+				Issuer: "1",
+			},
+		},
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -36,5 +46,6 @@ func TestGenesis(t *testing.T) {
 	require.Equal(t, genesisState.PortId, got.PortId)
 
 	require.ElementsMatch(t, genesisState.IssuerList, got.IssuerList)
+	require.ElementsMatch(t, genesisState.ApprovedCollectorList, got.ApprovedCollectorList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }

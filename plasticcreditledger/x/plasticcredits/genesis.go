@@ -13,6 +13,10 @@ func InitGenesis(ctx sdk.Context, k keeper.Keeper, genState types.GenesisState) 
 	for _, elem := range genState.IssuerList {
 		k.SetIssuer(ctx, elem)
 	}
+	// Set all the approvedCollector
+	for _, elem := range genState.ApprovedCollectorList {
+		k.SetApprovedCollector(ctx, elem)
+	}
 	// this line is used by starport scaffolding # genesis/module/init
 	k.SetPort(ctx, genState.PortId)
 	// Only try to bind to port if it is not already bound, since we may already own
@@ -35,6 +39,7 @@ func ExportGenesis(ctx sdk.Context, k keeper.Keeper) *types.GenesisState {
 
 	genesis.PortId = k.GetPort(ctx)
 	genesis.IssuerList = k.GetAllIssuer(ctx)
+	genesis.ApprovedCollectorList = k.GetAllApprovedCollector(ctx)
 	// this line is used by starport scaffolding # genesis/module/export
 
 	return genesis

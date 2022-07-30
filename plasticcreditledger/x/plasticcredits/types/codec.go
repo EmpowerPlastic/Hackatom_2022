@@ -11,6 +11,9 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgCreateIssuer{}, "plasticcredits/CreateIssuer", nil)
 	cdc.RegisterConcrete(&MsgUpdateIssuer{}, "plasticcredits/UpdateIssuer", nil)
 	cdc.RegisterConcrete(&MsgDeleteIssuer{}, "plasticcredits/DeleteIssuer", nil)
+	cdc.RegisterConcrete(&MsgCreateApprovedCollector{}, "plasticcredits/CreateApprovedCollector", nil)
+	cdc.RegisterConcrete(&MsgUpdateApprovedCollector{}, "plasticcredits/UpdateApprovedCollector", nil)
+	cdc.RegisterConcrete(&MsgDeleteApprovedCollector{}, "plasticcredits/DeleteApprovedCollector", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -19,6 +22,11 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 		&MsgCreateIssuer{},
 		&MsgUpdateIssuer{},
 		&MsgDeleteIssuer{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgCreateApprovedCollector{},
+		&MsgUpdateApprovedCollector{},
+		&MsgDeleteApprovedCollector{},
 	)
 	// this line is used by starport scaffolding # 3
 

@@ -1,12 +1,13 @@
 import { txClient, queryClient, MissingWalletError , registry} from './module'
 
+import { ApprovedCollector } from "./module/types/plasticcredits/approved_collector"
 import { Issuer } from "./module/types/plasticcredits/issuer"
 import { PlasticcreditsPacketData } from "./module/types/plasticcredits/packet"
 import { NoData } from "./module/types/plasticcredits/packet"
 import { Params } from "./module/types/plasticcredits/params"
 
 
-export { Issuer, PlasticcreditsPacketData, NoData, Params };
+export { ApprovedCollector, Issuer, PlasticcreditsPacketData, NoData, Params };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -47,8 +48,11 @@ const getDefaultState = () => {
 				Params: {},
 				Issuer: {},
 				IssuerAll: {},
+				ApprovedCollector: {},
+				ApprovedCollectorAll: {},
 				
 				_Structure: {
+						ApprovedCollector: getStructure(ApprovedCollector.fromPartial({})),
 						Issuer: getStructure(Issuer.fromPartial({})),
 						PlasticcreditsPacketData: getStructure(PlasticcreditsPacketData.fromPartial({})),
 						NoData: getStructure(NoData.fromPartial({})),
@@ -98,6 +102,18 @@ export default {
 						(<any> params).query=null
 					}
 			return state.IssuerAll[JSON.stringify(params)] ?? {}
+		},
+				getApprovedCollector: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ApprovedCollector[JSON.stringify(params)] ?? {}
+		},
+				getApprovedCollectorAll: (state) => (params = { params: {}}) => {
+					if (!(<any> params).query) {
+						(<any> params).query=null
+					}
+			return state.ApprovedCollectorAll[JSON.stringify(params)] ?? {}
 		},
 				
 		getTypeStructure: (state) => (type) => {
@@ -203,21 +219,54 @@ export default {
 		},
 		
 		
-		async sendMsgDeleteIssuer({ rootGetters }, { value, fee = [], memo = '' }) {
+		
+		
+		 		
+		
+		
+		async QueryApprovedCollector({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
 			try {
-				const txClient=await initTxClient(rootGetters)
-				const msg = await txClient.msgDeleteIssuer(value)
-				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
-	gas: "200000" }, memo})
-				return result
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryApprovedCollector( key.addr,  key.issuer)).data
+				
+					
+				commit('QUERY', { query: 'ApprovedCollector', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryApprovedCollector', payload: { options: { all }, params: {...key},query }})
+				return getters['getApprovedCollector']( { params: {...key}, query}) ?? {}
 			} catch (e) {
-				if (e == MissingWalletError) {
-					throw new Error('TxClient:MsgDeleteIssuer:Init Could not initialize signing client. Wallet is required.')
-				}else{
-					throw new Error('TxClient:MsgDeleteIssuer:Send Could not broadcast Tx: '+ e.message)
-				}
+				throw new Error('QueryClient:QueryApprovedCollector API Node Unavailable. Could not perform query: ' + e.message)
+				
 			}
 		},
+		
+		
+		
+		
+		 		
+		
+		
+		async QueryApprovedCollectorAll({ commit, rootGetters, getters }, { options: { subscribe, all} = { subscribe:false, all:false}, params, query=null }) {
+			try {
+				const key = params ?? {};
+				const queryClient=await initQueryClient(rootGetters)
+				let value= (await queryClient.queryApprovedCollectorAll(query)).data
+				
+					
+				while (all && (<any> value).pagination && (<any> value).pagination.next_key!=null) {
+					let next_values=(await queryClient.queryApprovedCollectorAll({...query, 'pagination.key':(<any> value).pagination.next_key})).data
+					value = mergeResults(value, next_values);
+				}
+				commit('QUERY', { query: 'ApprovedCollectorAll', key: { params: {...key}, query}, value })
+				if (subscribe) commit('SUBSCRIBE', { action: 'QueryApprovedCollectorAll', payload: { options: { all }, params: {...key},query }})
+				return getters['getApprovedCollectorAll']( { params: {...key}, query}) ?? {}
+			} catch (e) {
+				throw new Error('QueryClient:QueryApprovedCollectorAll API Node Unavailable. Could not perform query: ' + e.message)
+				
+			}
+		},
+		
+		
 		async sendMsgCreateIssuer({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -230,6 +279,51 @@ export default {
 					throw new Error('TxClient:MsgCreateIssuer:Init Could not initialize signing client. Wallet is required.')
 				}else{
 					throw new Error('TxClient:MsgCreateIssuer:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgUpdateApprovedCollector({ rootGetters }, { value, fee = [], memo = '' }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgUpdateApprovedCollector(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: "200000" }, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgUpdateApprovedCollector:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgUpdateApprovedCollector:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgDeleteApprovedCollector({ rootGetters }, { value, fee = [], memo = '' }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgDeleteApprovedCollector(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: "200000" }, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgDeleteApprovedCollector:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgDeleteApprovedCollector:Send Could not broadcast Tx: '+ e.message)
+				}
+			}
+		},
+		async sendMsgCreateApprovedCollector({ rootGetters }, { value, fee = [], memo = '' }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgCreateApprovedCollector(value)
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: "200000" }, memo})
+				return result
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgCreateApprovedCollector:Init Could not initialize signing client. Wallet is required.')
+				}else{
+					throw new Error('TxClient:MsgCreateApprovedCollector:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
@@ -248,20 +342,22 @@ export default {
 				}
 			}
 		},
-		
-		async MsgDeleteIssuer({ rootGetters }, { value }) {
+		async sendMsgDeleteIssuer({ rootGetters }, { value, fee = [], memo = '' }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
 				const msg = await txClient.msgDeleteIssuer(value)
-				return msg
+				const result = await txClient.signAndBroadcast([msg], {fee: { amount: fee, 
+	gas: "200000" }, memo})
+				return result
 			} catch (e) {
 				if (e == MissingWalletError) {
 					throw new Error('TxClient:MsgDeleteIssuer:Init Could not initialize signing client. Wallet is required.')
-				} else{
-					throw new Error('TxClient:MsgDeleteIssuer:Create Could not create message: ' + e.message)
+				}else{
+					throw new Error('TxClient:MsgDeleteIssuer:Send Could not broadcast Tx: '+ e.message)
 				}
 			}
 		},
+		
 		async MsgCreateIssuer({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -275,6 +371,45 @@ export default {
 				}
 			}
 		},
+		async MsgUpdateApprovedCollector({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgUpdateApprovedCollector(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgUpdateApprovedCollector:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgUpdateApprovedCollector:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgDeleteApprovedCollector({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgDeleteApprovedCollector(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgDeleteApprovedCollector:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgDeleteApprovedCollector:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgCreateApprovedCollector({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgCreateApprovedCollector(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgCreateApprovedCollector:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgCreateApprovedCollector:Create Could not create message: ' + e.message)
+				}
+			}
+		},
 		async MsgUpdateIssuer({ rootGetters }, { value }) {
 			try {
 				const txClient=await initTxClient(rootGetters)
@@ -285,6 +420,19 @@ export default {
 					throw new Error('TxClient:MsgUpdateIssuer:Init Could not initialize signing client. Wallet is required.')
 				} else{
 					throw new Error('TxClient:MsgUpdateIssuer:Create Could not create message: ' + e.message)
+				}
+			}
+		},
+		async MsgDeleteIssuer({ rootGetters }, { value }) {
+			try {
+				const txClient=await initTxClient(rootGetters)
+				const msg = await txClient.msgDeleteIssuer(value)
+				return msg
+			} catch (e) {
+				if (e == MissingWalletError) {
+					throw new Error('TxClient:MsgDeleteIssuer:Init Could not initialize signing client. Wallet is required.')
+				} else{
+					throw new Error('TxClient:MsgDeleteIssuer:Create Could not create message: ' + e.message)
 				}
 			}
 		},

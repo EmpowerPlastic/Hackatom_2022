@@ -4,15 +4,21 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
-import { MsgDeleteIssuer } from "./types/plasticcredits/tx";
 import { MsgCreateIssuer } from "./types/plasticcredits/tx";
+import { MsgUpdateApprovedCollector } from "./types/plasticcredits/tx";
+import { MsgDeleteApprovedCollector } from "./types/plasticcredits/tx";
+import { MsgCreateApprovedCollector } from "./types/plasticcredits/tx";
 import { MsgUpdateIssuer } from "./types/plasticcredits/tx";
+import { MsgDeleteIssuer } from "./types/plasticcredits/tx";
 
 
 const types = [
-  ["/plasticcreditledger.plasticcredits.MsgDeleteIssuer", MsgDeleteIssuer],
   ["/plasticcreditledger.plasticcredits.MsgCreateIssuer", MsgCreateIssuer],
+  ["/plasticcreditledger.plasticcredits.MsgUpdateApprovedCollector", MsgUpdateApprovedCollector],
+  ["/plasticcreditledger.plasticcredits.MsgDeleteApprovedCollector", MsgDeleteApprovedCollector],
+  ["/plasticcreditledger.plasticcredits.MsgCreateApprovedCollector", MsgCreateApprovedCollector],
   ["/plasticcreditledger.plasticcredits.MsgUpdateIssuer", MsgUpdateIssuer],
+  ["/plasticcreditledger.plasticcredits.MsgDeleteIssuer", MsgDeleteIssuer],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -45,9 +51,12 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
-    msgDeleteIssuer: (data: MsgDeleteIssuer): EncodeObject => ({ typeUrl: "/plasticcreditledger.plasticcredits.MsgDeleteIssuer", value: MsgDeleteIssuer.fromPartial( data ) }),
     msgCreateIssuer: (data: MsgCreateIssuer): EncodeObject => ({ typeUrl: "/plasticcreditledger.plasticcredits.MsgCreateIssuer", value: MsgCreateIssuer.fromPartial( data ) }),
+    msgUpdateApprovedCollector: (data: MsgUpdateApprovedCollector): EncodeObject => ({ typeUrl: "/plasticcreditledger.plasticcredits.MsgUpdateApprovedCollector", value: MsgUpdateApprovedCollector.fromPartial( data ) }),
+    msgDeleteApprovedCollector: (data: MsgDeleteApprovedCollector): EncodeObject => ({ typeUrl: "/plasticcreditledger.plasticcredits.MsgDeleteApprovedCollector", value: MsgDeleteApprovedCollector.fromPartial( data ) }),
+    msgCreateApprovedCollector: (data: MsgCreateApprovedCollector): EncodeObject => ({ typeUrl: "/plasticcreditledger.plasticcredits.MsgCreateApprovedCollector", value: MsgCreateApprovedCollector.fromPartial( data ) }),
     msgUpdateIssuer: (data: MsgUpdateIssuer): EncodeObject => ({ typeUrl: "/plasticcreditledger.plasticcredits.MsgUpdateIssuer", value: MsgUpdateIssuer.fromPartial( data ) }),
+    msgDeleteIssuer: (data: MsgDeleteIssuer): EncodeObject => ({ typeUrl: "/plasticcreditledger.plasticcredits.MsgDeleteIssuer", value: MsgDeleteIssuer.fromPartial( data ) }),
     
   };
 };

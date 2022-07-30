@@ -297,6 +297,198 @@ func (m *QueryAllIssuerResponse) GetPagination() *query.PageResponse {
 	return nil
 }
 
+type QueryGetApprovedCollectorRequest struct {
+	Addr   string `protobuf:"bytes,1,opt,name=addr,proto3" json:"addr,omitempty"`
+	Issuer string `protobuf:"bytes,2,opt,name=issuer,proto3" json:"issuer,omitempty"`
+}
+
+func (m *QueryGetApprovedCollectorRequest) Reset()         { *m = QueryGetApprovedCollectorRequest{} }
+func (m *QueryGetApprovedCollectorRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryGetApprovedCollectorRequest) ProtoMessage()    {}
+func (*QueryGetApprovedCollectorRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_83bf7985afac762d, []int{6}
+}
+func (m *QueryGetApprovedCollectorRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetApprovedCollectorRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetApprovedCollectorRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetApprovedCollectorRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetApprovedCollectorRequest.Merge(m, src)
+}
+func (m *QueryGetApprovedCollectorRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetApprovedCollectorRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetApprovedCollectorRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetApprovedCollectorRequest proto.InternalMessageInfo
+
+func (m *QueryGetApprovedCollectorRequest) GetAddr() string {
+	if m != nil {
+		return m.Addr
+	}
+	return ""
+}
+
+func (m *QueryGetApprovedCollectorRequest) GetIssuer() string {
+	if m != nil {
+		return m.Issuer
+	}
+	return ""
+}
+
+type QueryGetApprovedCollectorResponse struct {
+	ApprovedCollector ApprovedCollector `protobuf:"bytes,1,opt,name=approvedCollector,proto3" json:"approvedCollector"`
+}
+
+func (m *QueryGetApprovedCollectorResponse) Reset()         { *m = QueryGetApprovedCollectorResponse{} }
+func (m *QueryGetApprovedCollectorResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryGetApprovedCollectorResponse) ProtoMessage()    {}
+func (*QueryGetApprovedCollectorResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_83bf7985afac762d, []int{7}
+}
+func (m *QueryGetApprovedCollectorResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryGetApprovedCollectorResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryGetApprovedCollectorResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryGetApprovedCollectorResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryGetApprovedCollectorResponse.Merge(m, src)
+}
+func (m *QueryGetApprovedCollectorResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryGetApprovedCollectorResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryGetApprovedCollectorResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryGetApprovedCollectorResponse proto.InternalMessageInfo
+
+func (m *QueryGetApprovedCollectorResponse) GetApprovedCollector() ApprovedCollector {
+	if m != nil {
+		return m.ApprovedCollector
+	}
+	return ApprovedCollector{}
+}
+
+type QueryAllApprovedCollectorRequest struct {
+	Pagination *query.PageRequest `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllApprovedCollectorRequest) Reset()         { *m = QueryAllApprovedCollectorRequest{} }
+func (m *QueryAllApprovedCollectorRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryAllApprovedCollectorRequest) ProtoMessage()    {}
+func (*QueryAllApprovedCollectorRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_83bf7985afac762d, []int{8}
+}
+func (m *QueryAllApprovedCollectorRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllApprovedCollectorRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllApprovedCollectorRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllApprovedCollectorRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllApprovedCollectorRequest.Merge(m, src)
+}
+func (m *QueryAllApprovedCollectorRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllApprovedCollectorRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllApprovedCollectorRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllApprovedCollectorRequest proto.InternalMessageInfo
+
+func (m *QueryAllApprovedCollectorRequest) GetPagination() *query.PageRequest {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
+type QueryAllApprovedCollectorResponse struct {
+	ApprovedCollector []ApprovedCollector `protobuf:"bytes,1,rep,name=approvedCollector,proto3" json:"approvedCollector"`
+	Pagination        *query.PageResponse `protobuf:"bytes,2,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (m *QueryAllApprovedCollectorResponse) Reset()         { *m = QueryAllApprovedCollectorResponse{} }
+func (m *QueryAllApprovedCollectorResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryAllApprovedCollectorResponse) ProtoMessage()    {}
+func (*QueryAllApprovedCollectorResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_83bf7985afac762d, []int{9}
+}
+func (m *QueryAllApprovedCollectorResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryAllApprovedCollectorResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryAllApprovedCollectorResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryAllApprovedCollectorResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryAllApprovedCollectorResponse.Merge(m, src)
+}
+func (m *QueryAllApprovedCollectorResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryAllApprovedCollectorResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryAllApprovedCollectorResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryAllApprovedCollectorResponse proto.InternalMessageInfo
+
+func (m *QueryAllApprovedCollectorResponse) GetApprovedCollector() []ApprovedCollector {
+	if m != nil {
+		return m.ApprovedCollector
+	}
+	return nil
+}
+
+func (m *QueryAllApprovedCollectorResponse) GetPagination() *query.PageResponse {
+	if m != nil {
+		return m.Pagination
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "plasticcreditledger.plasticcredits.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "plasticcreditledger.plasticcredits.QueryParamsResponse")
@@ -304,42 +496,57 @@ func init() {
 	proto.RegisterType((*QueryGetIssuerResponse)(nil), "plasticcreditledger.plasticcredits.QueryGetIssuerResponse")
 	proto.RegisterType((*QueryAllIssuerRequest)(nil), "plasticcreditledger.plasticcredits.QueryAllIssuerRequest")
 	proto.RegisterType((*QueryAllIssuerResponse)(nil), "plasticcreditledger.plasticcredits.QueryAllIssuerResponse")
+	proto.RegisterType((*QueryGetApprovedCollectorRequest)(nil), "plasticcreditledger.plasticcredits.QueryGetApprovedCollectorRequest")
+	proto.RegisterType((*QueryGetApprovedCollectorResponse)(nil), "plasticcreditledger.plasticcredits.QueryGetApprovedCollectorResponse")
+	proto.RegisterType((*QueryAllApprovedCollectorRequest)(nil), "plasticcreditledger.plasticcredits.QueryAllApprovedCollectorRequest")
+	proto.RegisterType((*QueryAllApprovedCollectorResponse)(nil), "plasticcreditledger.plasticcredits.QueryAllApprovedCollectorResponse")
 }
 
 func init() { proto.RegisterFile("plasticcredits/query.proto", fileDescriptor_83bf7985afac762d) }
 
 var fileDescriptor_83bf7985afac762d = []byte{
-	// 477 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x94, 0x41, 0x6b, 0xd4, 0x40,
-	0x14, 0xc7, 0x33, 0x75, 0x0d, 0x74, 0xbc, 0x8d, 0x55, 0x24, 0x4a, 0x94, 0x39, 0xa8, 0x44, 0x99,
-	0x61, 0xb7, 0xa0, 0xd4, 0x5b, 0x8b, 0x58, 0xbd, 0xd5, 0x1c, 0xbd, 0x94, 0xc9, 0x66, 0x08, 0x81,
-	0x34, 0x93, 0x66, 0x66, 0xc5, 0x22, 0x5e, 0xfc, 0x04, 0x82, 0x1f, 0x43, 0x7a, 0xf5, 0xe0, 0x27,
-	0xe8, 0xb1, 0xe0, 0xc5, 0x93, 0xc8, 0xae, 0x1f, 0x44, 0x32, 0x6f, 0xa4, 0x9b, 0x34, 0xd2, 0x8d,
-	0xbd, 0x85, 0x7d, 0xef, 0xff, 0x7f, 0xbf, 0x37, 0xef, 0xcf, 0xe2, 0xa0, 0x2a, 0x84, 0x36, 0xf9,
-	0x74, 0x5a, 0xcb, 0x34, 0x37, 0x9a, 0x1f, 0xce, 0x64, 0x7d, 0xc4, 0xaa, 0x5a, 0x19, 0x45, 0x68,
-	0xab, 0x56, 0xc8, 0x34, 0x93, 0x35, 0x6b, 0xf7, 0x07, 0x1b, 0x99, 0xca, 0x94, 0x6d, 0xe7, 0xcd,
-	0x17, 0x28, 0x83, 0x3b, 0x99, 0x52, 0x59, 0x21, 0xb9, 0xa8, 0x72, 0x2e, 0xca, 0x52, 0x19, 0x61,
-	0x72, 0x55, 0x6a, 0x57, 0x8d, 0xa6, 0x4a, 0x1f, 0x28, 0xcd, 0x13, 0xa1, 0x25, 0x0c, 0xe4, 0x6f,
-	0xc7, 0x89, 0x34, 0x62, 0xcc, 0x2b, 0x91, 0xe5, 0xa5, 0x6d, 0x76, 0xbd, 0xb7, 0x3b, 0x7c, 0x95,
-	0xa8, 0xc5, 0x81, 0xfe, 0x47, 0x31, 0xd7, 0x7a, 0xd6, 0x20, 0x36, 0x45, 0xba, 0x81, 0xc9, 0xeb,
-	0xc6, 0x7b, 0xcf, 0x2a, 0x62, 0x79, 0x38, 0x93, 0xda, 0xd0, 0x7d, 0x7c, 0xbd, 0xf5, 0xab, 0xae,
-	0x54, 0xa9, 0x25, 0x79, 0x89, 0x7d, 0x70, 0xbe, 0x85, 0xee, 0xa1, 0x87, 0xd7, 0x26, 0x11, 0xbb,
-	0x78, 0x77, 0x06, 0x1e, 0x3b, 0xa3, 0x93, 0x9f, 0x77, 0xbd, 0xd8, 0xe9, 0xe9, 0x23, 0x7c, 0xc3,
-	0x0e, 0xd8, 0x95, 0xe6, 0x95, 0xc5, 0x71, 0x93, 0x09, 0xc1, 0x23, 0x91, 0xa6, 0xb5, 0x1d, 0xb0,
-	0x1e, 0xdb, 0x6f, 0x9a, 0xe0, 0x9b, 0xdd, 0xe6, 0x33, 0x20, 0xd8, 0x66, 0x08, 0x10, 0x78, 0xfc,
-	0x05, 0x02, 0x3d, 0xdd, 0x77, 0x40, 0xdb, 0x45, 0xd1, 0x06, 0x7a, 0x81, 0xf1, 0xd9, 0x73, 0xbb,
-	0x31, 0xf7, 0x19, 0xdc, 0x86, 0x35, 0xb7, 0x61, 0x10, 0x06, 0x77, 0x1b, 0xb6, 0x27, 0x32, 0xe9,
-	0xb4, 0xf1, 0x92, 0x92, 0x7e, 0x41, 0x6e, 0x8b, 0xa5, 0x09, 0x3d, 0x5b, 0x5c, 0xb9, 0xcc, 0x16,
-	0x64, 0xb7, 0x05, 0xbb, 0x66, 0x61, 0x1f, 0x5c, 0x08, 0x0b, 0x18, 0xcb, 0xb4, 0x93, 0xe3, 0x11,
-	0xbe, 0x6a, 0x69, 0xc9, 0x31, 0xc2, 0x3e, 0x9c, 0x90, 0x3c, 0x59, 0x85, 0xeb, 0x7c, 0x9a, 0x82,
-	0xa7, 0x83, 0x75, 0x40, 0x44, 0x27, 0x1f, 0xbf, 0xff, 0xfe, 0xbc, 0xf6, 0x98, 0x44, 0xbc, 0xc7,
-	0x80, 0xf7, 0x66, 0x9e, 0x7c, 0x43, 0xd8, 0x87, 0xb7, 0x21, 0x5b, 0x2b, 0xcf, 0xed, 0xc6, 0x30,
-	0x78, 0xf6, 0x3f, 0x52, 0x47, 0xbd, 0x65, 0xa9, 0x37, 0xc9, 0x78, 0x15, 0x6a, 0x38, 0x1c, 0x7f,
-	0xdf, 0x04, 0xfd, 0x03, 0xf9, 0x8a, 0xf0, 0x3a, 0xb8, 0x6d, 0x17, 0xc5, 0x00, 0xfe, 0x6e, 0x6a,
-	0x07, 0xf0, 0x9f, 0x8b, 0xe3, 0xb0, 0x57, 0x07, 0xfe, 0x9d, 0xe7, 0x27, 0xf3, 0x10, 0x9d, 0xce,
-	0x43, 0xf4, 0x6b, 0x1e, 0xa2, 0x4f, 0x8b, 0xd0, 0x3b, 0x5d, 0x84, 0xde, 0x8f, 0x45, 0xe8, 0xbd,
-	0x89, 0xfa, 0x4c, 0xde, 0x75, 0x6d, 0xcc, 0x51, 0x25, 0x75, 0xe2, 0xdb, 0xff, 0xa4, 0xcd, 0x3f,
-	0x01, 0x00, 0x00, 0xff, 0xff, 0x60, 0x07, 0x55, 0x73, 0x6f, 0x05, 0x00, 0x00,
+	// 641 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x96, 0x3d, 0x6f, 0x13, 0x31,
+	0x18, 0xc7, 0xe3, 0xb6, 0x44, 0xd4, 0x4c, 0x35, 0xa1, 0x42, 0x07, 0x3a, 0xca, 0x0d, 0x14, 0x05,
+	0x74, 0x56, 0x52, 0x51, 0x28, 0x03, 0x52, 0x4a, 0x68, 0xcb, 0x52, 0x95, 0x8c, 0x2c, 0x91, 0x93,
+	0x58, 0xa7, 0x43, 0x6e, 0x7c, 0x3d, 0x3b, 0x15, 0x55, 0xd5, 0x85, 0x81, 0x11, 0x21, 0xf1, 0x31,
+	0x10, 0x2b, 0x03, 0x9f, 0xa0, 0x63, 0x25, 0x06, 0x98, 0x10, 0x4a, 0xf8, 0x00, 0x7c, 0x04, 0x74,
+	0xb6, 0x43, 0x7b, 0x77, 0x49, 0x7a, 0xd7, 0x66, 0x3b, 0xf9, 0x79, 0xfb, 0xfd, 0x9f, 0xc7, 0x7e,
+	0x12, 0x68, 0x05, 0x8c, 0x08, 0xe9, 0xb7, 0xdb, 0x21, 0xed, 0xf8, 0x52, 0xe0, 0xbd, 0x1e, 0x0d,
+	0x0f, 0xdc, 0x20, 0xe4, 0x92, 0x23, 0x27, 0x66, 0x63, 0xb4, 0xe3, 0xd1, 0xd0, 0x8d, 0xfb, 0x5b,
+	0x25, 0x8f, 0x7b, 0x5c, 0xb9, 0xe3, 0xe8, 0x4b, 0x47, 0x5a, 0xb7, 0x3d, 0xce, 0x3d, 0x46, 0x31,
+	0x09, 0x7c, 0x4c, 0xba, 0x5d, 0x2e, 0x89, 0xf4, 0x79, 0x57, 0x18, 0x6b, 0xb9, 0xcd, 0xc5, 0x2e,
+	0x17, 0xb8, 0x45, 0x04, 0xd5, 0x05, 0xf1, 0x7e, 0xa5, 0x45, 0x25, 0xa9, 0xe0, 0x80, 0x78, 0x7e,
+	0x57, 0x39, 0x1b, 0xdf, 0x5b, 0x09, 0xbe, 0x80, 0x84, 0x64, 0x57, 0x8c, 0x31, 0xfa, 0x42, 0xf4,
+	0x22, 0x44, 0x65, 0x5c, 0x4e, 0x18, 0x49, 0x10, 0x84, 0x7c, 0x9f, 0x76, 0x9a, 0x6d, 0xce, 0x18,
+	0x6d, 0x4b, 0x6e, 0x1c, 0x9d, 0x12, 0x44, 0xaf, 0x22, 0x88, 0x1d, 0x95, 0xba, 0x41, 0xf7, 0x7a,
+	0x54, 0x48, 0xa7, 0x09, 0xaf, 0xc7, 0x4e, 0x45, 0xc0, 0xbb, 0x82, 0xa2, 0x2d, 0x58, 0xd4, 0x08,
+	0x37, 0xc1, 0x12, 0xb8, 0x7f, 0xad, 0x5a, 0x76, 0xcf, 0x6f, 0x92, 0xab, 0x73, 0xac, 0xcf, 0x1d,
+	0xff, 0xba, 0x53, 0x68, 0x98, 0x78, 0xe7, 0x01, 0xbc, 0xa1, 0x0a, 0x6c, 0x52, 0xf9, 0x52, 0x71,
+	0x9b, 0xca, 0x08, 0xc1, 0x39, 0xd2, 0xe9, 0x84, 0xaa, 0xc0, 0x7c, 0x43, 0x7d, 0x3b, 0x2d, 0xb8,
+	0x98, 0x74, 0x3e, 0x05, 0xd2, 0xb2, 0xf3, 0x00, 0xe9, 0x1c, 0x43, 0x20, 0x1d, 0xef, 0x34, 0x0d,
+	0x50, 0x8d, 0xb1, 0x38, 0xd0, 0x06, 0x84, 0xa7, 0x73, 0x31, 0x65, 0xee, 0xb9, 0x7a, 0x88, 0x6e,
+	0x34, 0x44, 0x57, 0xdf, 0x1a, 0x33, 0x44, 0x77, 0x87, 0x78, 0xd4, 0xc4, 0x36, 0xce, 0x44, 0x3a,
+	0x9f, 0x81, 0x51, 0x71, 0xa6, 0xc2, 0x08, 0x15, 0xb3, 0x97, 0x51, 0x81, 0x36, 0x63, 0xb0, 0x33,
+	0x0a, 0x76, 0xf9, 0x5c, 0x58, 0x8d, 0x11, 0xa3, 0xdd, 0x86, 0x4b, 0xc3, 0x96, 0xd7, 0xcc, 0xd5,
+	0x79, 0x3e, 0xbc, 0x39, 0x13, 0x46, 0x85, 0x16, 0xff, 0x4b, 0x99, 0x51, 0xa7, 0xc3, 0xf6, 0x7e,
+	0x00, 0xf0, 0xee, 0x84, 0x84, 0xa6, 0x11, 0x3e, 0x5c, 0x20, 0x49, 0xa3, 0x69, 0xf9, 0xa3, 0x2c,
+	0x3d, 0x49, 0x65, 0x36, 0xed, 0x49, 0x67, 0x75, 0xde, 0x18, 0x81, 0x35, 0xc6, 0xc6, 0x0a, 0x9c,
+	0xd6, 0xe8, 0x7f, 0x0c, 0xc5, 0x8f, 0x2e, 0x36, 0x59, 0xfc, 0xec, 0xf4, 0xc5, 0x4f, 0xed, 0x9a,
+	0x54, 0xdf, 0x5f, 0x85, 0x57, 0x94, 0x32, 0xf4, 0x05, 0xc0, 0xa2, 0x7e, 0xe9, 0x68, 0x35, 0x0b,
+	0x6d, 0x7a, 0xe9, 0x58, 0x8f, 0x73, 0xc7, 0x69, 0x22, 0xa7, 0xfa, 0xee, 0xfb, 0x9f, 0x4f, 0x33,
+	0x0f, 0x51, 0x19, 0x8f, 0x48, 0x80, 0x47, 0xee, 0x50, 0xf4, 0x0d, 0xc0, 0xa2, 0x7e, 0x42, 0x68,
+	0x2d, 0x73, 0xdd, 0xe4, 0xb6, 0xb2, 0x9e, 0x5e, 0x24, 0xd4, 0x50, 0xaf, 0x29, 0xea, 0x15, 0x54,
+	0xc9, 0x42, 0xad, 0x9f, 0x11, 0x3e, 0x8c, 0x1e, 0xd9, 0x11, 0xfa, 0x0a, 0xe0, 0xbc, 0xce, 0x56,
+	0x63, 0x2c, 0x07, 0x7f, 0x72, 0xb9, 0xe5, 0xe0, 0x4f, 0x6d, 0xad, 0x7c, 0x5d, 0x37, 0xfb, 0xe9,
+	0x2f, 0x80, 0x0b, 0xa9, 0x7b, 0x8a, 0xea, 0x79, 0xba, 0x38, 0xee, 0xb5, 0x5a, 0x2f, 0x2e, 0x99,
+	0xc5, 0xc8, 0xda, 0x56, 0xb2, 0xb6, 0xd0, 0x46, 0x16, 0x59, 0xe9, 0x9f, 0x55, 0x33, 0x22, 0x7c,
+	0xa8, 0x15, 0x1f, 0xa1, 0x01, 0x80, 0xa5, 0x54, 0xb5, 0x68, 0x6c, 0xf5, 0x3c, 0xbd, 0x9f, 0x82,
+	0xea, 0x49, 0xcb, 0xc7, 0x79, 0xa6, 0x54, 0x3f, 0x41, 0xab, 0x17, 0x53, 0xbd, 0x5e, 0x3f, 0xee,
+	0xdb, 0xe0, 0xa4, 0x6f, 0x83, 0xdf, 0x7d, 0x1b, 0x7c, 0x1c, 0xd8, 0x85, 0x93, 0x81, 0x5d, 0xf8,
+	0x39, 0xb0, 0x0b, 0xaf, 0xcb, 0xa3, 0x12, 0xbe, 0x4d, 0xa6, 0x94, 0x07, 0x01, 0x15, 0xad, 0xa2,
+	0xfa, 0x4f, 0xb2, 0xf2, 0x2f, 0x00, 0x00, 0xff, 0xff, 0x54, 0x64, 0x3d, 0x24, 0x98, 0x09, 0x00,
+	0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -360,6 +567,10 @@ type QueryClient interface {
 	Issuer(ctx context.Context, in *QueryGetIssuerRequest, opts ...grpc.CallOption) (*QueryGetIssuerResponse, error)
 	// Queries a list of Issuer items.
 	IssuerAll(ctx context.Context, in *QueryAllIssuerRequest, opts ...grpc.CallOption) (*QueryAllIssuerResponse, error)
+	// Queries a ApprovedCollector by index.
+	ApprovedCollector(ctx context.Context, in *QueryGetApprovedCollectorRequest, opts ...grpc.CallOption) (*QueryGetApprovedCollectorResponse, error)
+	// Queries a list of ApprovedCollector items.
+	ApprovedCollectorAll(ctx context.Context, in *QueryAllApprovedCollectorRequest, opts ...grpc.CallOption) (*QueryAllApprovedCollectorResponse, error)
 }
 
 type queryClient struct {
@@ -397,6 +608,24 @@ func (c *queryClient) IssuerAll(ctx context.Context, in *QueryAllIssuerRequest, 
 	return out, nil
 }
 
+func (c *queryClient) ApprovedCollector(ctx context.Context, in *QueryGetApprovedCollectorRequest, opts ...grpc.CallOption) (*QueryGetApprovedCollectorResponse, error) {
+	out := new(QueryGetApprovedCollectorResponse)
+	err := c.cc.Invoke(ctx, "/plasticcreditledger.plasticcredits.Query/ApprovedCollector", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *queryClient) ApprovedCollectorAll(ctx context.Context, in *QueryAllApprovedCollectorRequest, opts ...grpc.CallOption) (*QueryAllApprovedCollectorResponse, error) {
+	out := new(QueryAllApprovedCollectorResponse)
+	err := c.cc.Invoke(ctx, "/plasticcreditledger.plasticcredits.Query/ApprovedCollectorAll", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
@@ -405,6 +634,10 @@ type QueryServer interface {
 	Issuer(context.Context, *QueryGetIssuerRequest) (*QueryGetIssuerResponse, error)
 	// Queries a list of Issuer items.
 	IssuerAll(context.Context, *QueryAllIssuerRequest) (*QueryAllIssuerResponse, error)
+	// Queries a ApprovedCollector by index.
+	ApprovedCollector(context.Context, *QueryGetApprovedCollectorRequest) (*QueryGetApprovedCollectorResponse, error)
+	// Queries a list of ApprovedCollector items.
+	ApprovedCollectorAll(context.Context, *QueryAllApprovedCollectorRequest) (*QueryAllApprovedCollectorResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -419,6 +652,12 @@ func (*UnimplementedQueryServer) Issuer(ctx context.Context, req *QueryGetIssuer
 }
 func (*UnimplementedQueryServer) IssuerAll(ctx context.Context, req *QueryAllIssuerRequest) (*QueryAllIssuerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method IssuerAll not implemented")
+}
+func (*UnimplementedQueryServer) ApprovedCollector(ctx context.Context, req *QueryGetApprovedCollectorRequest) (*QueryGetApprovedCollectorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ApprovedCollector not implemented")
+}
+func (*UnimplementedQueryServer) ApprovedCollectorAll(ctx context.Context, req *QueryAllApprovedCollectorRequest) (*QueryAllApprovedCollectorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ApprovedCollectorAll not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -479,6 +718,42 @@ func _Query_IssuerAll_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_ApprovedCollector_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryGetApprovedCollectorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ApprovedCollector(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/plasticcreditledger.plasticcredits.Query/ApprovedCollector",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ApprovedCollector(ctx, req.(*QueryGetApprovedCollectorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Query_ApprovedCollectorAll_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryAllApprovedCollectorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).ApprovedCollectorAll(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/plasticcreditledger.plasticcredits.Query/ApprovedCollectorAll",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).ApprovedCollectorAll(ctx, req.(*QueryAllApprovedCollectorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "plasticcreditledger.plasticcredits.Query",
 	HandlerType: (*QueryServer)(nil),
@@ -494,6 +769,14 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "IssuerAll",
 			Handler:    _Query_IssuerAll_Handler,
+		},
+		{
+			MethodName: "ApprovedCollector",
+			Handler:    _Query_ApprovedCollector_Handler,
+		},
+		{
+			MethodName: "ApprovedCollectorAll",
+			Handler:    _Query_ApprovedCollectorAll_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -703,6 +986,160 @@ func (m *QueryAllIssuerResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) 
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryGetApprovedCollectorRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetApprovedCollectorRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetApprovedCollectorRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Issuer) > 0 {
+		i -= len(m.Issuer)
+		copy(dAtA[i:], m.Issuer)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Issuer)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Addr) > 0 {
+		i -= len(m.Addr)
+		copy(dAtA[i:], m.Addr)
+		i = encodeVarintQuery(dAtA, i, uint64(len(m.Addr)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryGetApprovedCollectorResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryGetApprovedCollectorResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryGetApprovedCollectorResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.ApprovedCollector.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintQuery(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllApprovedCollectorRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllApprovedCollectorRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllApprovedCollectorRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryAllApprovedCollectorResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryAllApprovedCollectorResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryAllApprovedCollectorResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		{
+			size, err := m.Pagination.MarshalToSizedBuffer(dAtA[:i])
+			if err != nil {
+				return 0, err
+			}
+			i -= size
+			i = encodeVarintQuery(dAtA, i, uint64(size))
+		}
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.ApprovedCollector) > 0 {
+		for iNdEx := len(m.ApprovedCollector) - 1; iNdEx >= 0; iNdEx-- {
+			{
+				size, err := m.ApprovedCollector[iNdEx].MarshalToSizedBuffer(dAtA[:i])
+				if err != nil {
+					return 0, err
+				}
+				i -= size
+				i = encodeVarintQuery(dAtA, i, uint64(size))
+			}
+			i--
+			dAtA[i] = 0xa
+		}
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -779,6 +1216,66 @@ func (m *QueryAllIssuerResponse) Size() (n int) {
 	_ = l
 	if len(m.Issuer) > 0 {
 		for _, e := range m.Issuer {
+			l = e.Size()
+			n += 1 + l + sovQuery(uint64(l))
+		}
+	}
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetApprovedCollectorRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Addr)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	l = len(m.Issuer)
+	if l > 0 {
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryGetApprovedCollectorResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = m.ApprovedCollector.Size()
+	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryAllApprovedCollectorRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if m.Pagination != nil {
+		l = m.Pagination.Size()
+		n += 1 + l + sovQuery(uint64(l))
+	}
+	return n
+}
+
+func (m *QueryAllApprovedCollectorResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	if len(m.ApprovedCollector) > 0 {
+		for _, e := range m.ApprovedCollector {
 			l = e.Size()
 			n += 1 + l + sovQuery(uint64(l))
 		}
@@ -1240,6 +1737,409 @@ func (m *QueryAllIssuerResponse) Unmarshal(dAtA []byte) error {
 			}
 			m.Issuer = append(m.Issuer, Issuer{})
 			if err := m.Issuer[len(m.Issuer)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageResponse{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetApprovedCollectorRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetApprovedCollectorRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetApprovedCollectorRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Addr", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Addr = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Issuer", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Issuer = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryGetApprovedCollectorResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryGetApprovedCollectorResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryGetApprovedCollectorResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ApprovedCollector", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.ApprovedCollector.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllApprovedCollectorRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllApprovedCollectorRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllApprovedCollectorRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Pagination", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if m.Pagination == nil {
+				m.Pagination = &query.PageRequest{}
+			}
+			if err := m.Pagination.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryAllApprovedCollectorResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryAllApprovedCollectorResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryAllApprovedCollectorResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ApprovedCollector", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ApprovedCollector = append(m.ApprovedCollector, ApprovedCollector{})
+			if err := m.ApprovedCollector[len(m.ApprovedCollector)-1].Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex

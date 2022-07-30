@@ -6,6 +6,7 @@ import {
   PageRequest,
   PageResponse,
 } from "../cosmos/base/query/v1beta1/pagination";
+import { ApprovedCollector } from "../plasticcredits/approved_collector";
 
 export const protobufPackage = "plasticcreditledger.plasticcredits";
 
@@ -32,6 +33,24 @@ export interface QueryAllIssuerRequest {
 
 export interface QueryAllIssuerResponse {
   issuer: Issuer[];
+  pagination: PageResponse | undefined;
+}
+
+export interface QueryGetApprovedCollectorRequest {
+  addr: string;
+  issuer: string;
+}
+
+export interface QueryGetApprovedCollectorResponse {
+  approvedCollector: ApprovedCollector | undefined;
+}
+
+export interface QueryAllApprovedCollectorRequest {
+  pagination: PageRequest | undefined;
+}
+
+export interface QueryAllApprovedCollectorResponse {
+  approvedCollector: ApprovedCollector[];
   pagination: PageResponse | undefined;
 }
 
@@ -408,6 +427,361 @@ export const QueryAllIssuerResponse = {
   },
 };
 
+const baseQueryGetApprovedCollectorRequest: object = { addr: "", issuer: "" };
+
+export const QueryGetApprovedCollectorRequest = {
+  encode(
+    message: QueryGetApprovedCollectorRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.addr !== "") {
+      writer.uint32(10).string(message.addr);
+    }
+    if (message.issuer !== "") {
+      writer.uint32(18).string(message.issuer);
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetApprovedCollectorRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetApprovedCollectorRequest,
+    } as QueryGetApprovedCollectorRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.addr = reader.string();
+          break;
+        case 2:
+          message.issuer = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetApprovedCollectorRequest {
+    const message = {
+      ...baseQueryGetApprovedCollectorRequest,
+    } as QueryGetApprovedCollectorRequest;
+    if (object.addr !== undefined && object.addr !== null) {
+      message.addr = String(object.addr);
+    } else {
+      message.addr = "";
+    }
+    if (object.issuer !== undefined && object.issuer !== null) {
+      message.issuer = String(object.issuer);
+    } else {
+      message.issuer = "";
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetApprovedCollectorRequest): unknown {
+    const obj: any = {};
+    message.addr !== undefined && (obj.addr = message.addr);
+    message.issuer !== undefined && (obj.issuer = message.issuer);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetApprovedCollectorRequest>
+  ): QueryGetApprovedCollectorRequest {
+    const message = {
+      ...baseQueryGetApprovedCollectorRequest,
+    } as QueryGetApprovedCollectorRequest;
+    if (object.addr !== undefined && object.addr !== null) {
+      message.addr = object.addr;
+    } else {
+      message.addr = "";
+    }
+    if (object.issuer !== undefined && object.issuer !== null) {
+      message.issuer = object.issuer;
+    } else {
+      message.issuer = "";
+    }
+    return message;
+  },
+};
+
+const baseQueryGetApprovedCollectorResponse: object = {};
+
+export const QueryGetApprovedCollectorResponse = {
+  encode(
+    message: QueryGetApprovedCollectorResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.approvedCollector !== undefined) {
+      ApprovedCollector.encode(
+        message.approvedCollector,
+        writer.uint32(10).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryGetApprovedCollectorResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryGetApprovedCollectorResponse,
+    } as QueryGetApprovedCollectorResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.approvedCollector = ApprovedCollector.decode(
+            reader,
+            reader.uint32()
+          );
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryGetApprovedCollectorResponse {
+    const message = {
+      ...baseQueryGetApprovedCollectorResponse,
+    } as QueryGetApprovedCollectorResponse;
+    if (
+      object.approvedCollector !== undefined &&
+      object.approvedCollector !== null
+    ) {
+      message.approvedCollector = ApprovedCollector.fromJSON(
+        object.approvedCollector
+      );
+    } else {
+      message.approvedCollector = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryGetApprovedCollectorResponse): unknown {
+    const obj: any = {};
+    message.approvedCollector !== undefined &&
+      (obj.approvedCollector = message.approvedCollector
+        ? ApprovedCollector.toJSON(message.approvedCollector)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryGetApprovedCollectorResponse>
+  ): QueryGetApprovedCollectorResponse {
+    const message = {
+      ...baseQueryGetApprovedCollectorResponse,
+    } as QueryGetApprovedCollectorResponse;
+    if (
+      object.approvedCollector !== undefined &&
+      object.approvedCollector !== null
+    ) {
+      message.approvedCollector = ApprovedCollector.fromPartial(
+        object.approvedCollector
+      );
+    } else {
+      message.approvedCollector = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllApprovedCollectorRequest: object = {};
+
+export const QueryAllApprovedCollectorRequest = {
+  encode(
+    message: QueryAllApprovedCollectorRequest,
+    writer: Writer = Writer.create()
+  ): Writer {
+    if (message.pagination !== undefined) {
+      PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllApprovedCollectorRequest {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllApprovedCollectorRequest,
+    } as QueryAllApprovedCollectorRequest;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.pagination = PageRequest.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllApprovedCollectorRequest {
+    const message = {
+      ...baseQueryAllApprovedCollectorRequest,
+    } as QueryAllApprovedCollectorRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllApprovedCollectorRequest): unknown {
+    const obj: any = {};
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageRequest.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllApprovedCollectorRequest>
+  ): QueryAllApprovedCollectorRequest {
+    const message = {
+      ...baseQueryAllApprovedCollectorRequest,
+    } as QueryAllApprovedCollectorRequest;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
+const baseQueryAllApprovedCollectorResponse: object = {};
+
+export const QueryAllApprovedCollectorResponse = {
+  encode(
+    message: QueryAllApprovedCollectorResponse,
+    writer: Writer = Writer.create()
+  ): Writer {
+    for (const v of message.approvedCollector) {
+      ApprovedCollector.encode(v!, writer.uint32(10).fork()).ldelim();
+    }
+    if (message.pagination !== undefined) {
+      PageResponse.encode(
+        message.pagination,
+        writer.uint32(18).fork()
+      ).ldelim();
+    }
+    return writer;
+  },
+
+  decode(
+    input: Reader | Uint8Array,
+    length?: number
+  ): QueryAllApprovedCollectorResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseQueryAllApprovedCollectorResponse,
+    } as QueryAllApprovedCollectorResponse;
+    message.approvedCollector = [];
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.approvedCollector.push(
+            ApprovedCollector.decode(reader, reader.uint32())
+          );
+          break;
+        case 2:
+          message.pagination = PageResponse.decode(reader, reader.uint32());
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): QueryAllApprovedCollectorResponse {
+    const message = {
+      ...baseQueryAllApprovedCollectorResponse,
+    } as QueryAllApprovedCollectorResponse;
+    message.approvedCollector = [];
+    if (
+      object.approvedCollector !== undefined &&
+      object.approvedCollector !== null
+    ) {
+      for (const e of object.approvedCollector) {
+        message.approvedCollector.push(ApprovedCollector.fromJSON(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromJSON(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+
+  toJSON(message: QueryAllApprovedCollectorResponse): unknown {
+    const obj: any = {};
+    if (message.approvedCollector) {
+      obj.approvedCollector = message.approvedCollector.map((e) =>
+        e ? ApprovedCollector.toJSON(e) : undefined
+      );
+    } else {
+      obj.approvedCollector = [];
+    }
+    message.pagination !== undefined &&
+      (obj.pagination = message.pagination
+        ? PageResponse.toJSON(message.pagination)
+        : undefined);
+    return obj;
+  },
+
+  fromPartial(
+    object: DeepPartial<QueryAllApprovedCollectorResponse>
+  ): QueryAllApprovedCollectorResponse {
+    const message = {
+      ...baseQueryAllApprovedCollectorResponse,
+    } as QueryAllApprovedCollectorResponse;
+    message.approvedCollector = [];
+    if (
+      object.approvedCollector !== undefined &&
+      object.approvedCollector !== null
+    ) {
+      for (const e of object.approvedCollector) {
+        message.approvedCollector.push(ApprovedCollector.fromPartial(e));
+      }
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    } else {
+      message.pagination = undefined;
+    }
+    return message;
+  },
+};
+
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Parameters queries the parameters of the module. */
@@ -416,6 +790,14 @@ export interface Query {
   Issuer(request: QueryGetIssuerRequest): Promise<QueryGetIssuerResponse>;
   /** Queries a list of Issuer items. */
   IssuerAll(request: QueryAllIssuerRequest): Promise<QueryAllIssuerResponse>;
+  /** Queries a ApprovedCollector by index. */
+  ApprovedCollector(
+    request: QueryGetApprovedCollectorRequest
+  ): Promise<QueryGetApprovedCollectorResponse>;
+  /** Queries a list of ApprovedCollector items. */
+  ApprovedCollectorAll(
+    request: QueryAllApprovedCollectorRequest
+  ): Promise<QueryAllApprovedCollectorResponse>;
 }
 
 export class QueryClientImpl implements Query {
@@ -454,6 +836,34 @@ export class QueryClientImpl implements Query {
     );
     return promise.then((data) =>
       QueryAllIssuerResponse.decode(new Reader(data))
+    );
+  }
+
+  ApprovedCollector(
+    request: QueryGetApprovedCollectorRequest
+  ): Promise<QueryGetApprovedCollectorResponse> {
+    const data = QueryGetApprovedCollectorRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "plasticcreditledger.plasticcredits.Query",
+      "ApprovedCollector",
+      data
+    );
+    return promise.then((data) =>
+      QueryGetApprovedCollectorResponse.decode(new Reader(data))
+    );
+  }
+
+  ApprovedCollectorAll(
+    request: QueryAllApprovedCollectorRequest
+  ): Promise<QueryAllApprovedCollectorResponse> {
+    const data = QueryAllApprovedCollectorRequest.encode(request).finish();
+    const promise = this.rpc.request(
+      "plasticcreditledger.plasticcredits.Query",
+      "ApprovedCollectorAll",
+      data
+    );
+    return promise.then((data) =>
+      QueryAllApprovedCollectorResponse.decode(new Reader(data))
     );
   }
 }

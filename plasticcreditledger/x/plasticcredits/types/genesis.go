@@ -11,8 +11,9 @@ const DefaultIndex uint64 = 1
 // DefaultGenesis returns the default Capability genesis state
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
-		PortId:     PortID,
-		IssuerList: []Issuer{},
+		PortId:                PortID,
+		IssuerList:            []Issuer{},
+		ApprovedCollectorList: []ApprovedCollector{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -33,6 +34,16 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("duplicated index for issuer")
 		}
 		issuerIndexMap[index] = struct{}{}
+	}
+	// Check for duplicated index in approvedCollector
+	approvedCollectorIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.ApprovedCollectorList {
+		index := string(ApprovedCollectorKey(elem.Addr, elem.Issuer))
+		if _, ok := approvedCollectorIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for approvedCollector")
+		}
+		approvedCollectorIndexMap[index] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 

@@ -36,6 +36,18 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgDeleteIssuer int = 100
 
+	opWeightMsgCreateApprovedCollector = "op_weight_msg_approved_collector"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateApprovedCollector int = 100
+
+	opWeightMsgUpdateApprovedCollector = "op_weight_msg_approved_collector"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateApprovedCollector int = 100
+
+	opWeightMsgDeleteApprovedCollector = "op_weight_msg_approved_collector"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDeleteApprovedCollector int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -56,6 +68,18 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 			{
 				Creator: sample.AccAddress(),
 				Addr:    "1",
+			},
+		},
+		ApprovedCollectorList: []types.ApprovedCollector{
+			{
+				Creator: sample.AccAddress(),
+				Addr:    "0",
+				Issuer:  "0",
+			},
+			{
+				Creator: sample.AccAddress(),
+				Addr:    "1",
+				Issuer:  "1",
 			},
 		},
 		// this line is used by starport scaffolding # simapp/module/genesisState
@@ -112,6 +136,39 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgDeleteIssuer,
 		plasticcreditssimulation.SimulateMsgDeleteIssuer(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgCreateApprovedCollector int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateApprovedCollector, &weightMsgCreateApprovedCollector, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateApprovedCollector = defaultWeightMsgCreateApprovedCollector
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateApprovedCollector,
+		plasticcreditssimulation.SimulateMsgCreateApprovedCollector(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgUpdateApprovedCollector int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateApprovedCollector, &weightMsgUpdateApprovedCollector, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateApprovedCollector = defaultWeightMsgUpdateApprovedCollector
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateApprovedCollector,
+		plasticcreditssimulation.SimulateMsgUpdateApprovedCollector(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgDeleteApprovedCollector int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteApprovedCollector, &weightMsgDeleteApprovedCollector, nil,
+		func(_ *rand.Rand) {
+			weightMsgDeleteApprovedCollector = defaultWeightMsgDeleteApprovedCollector
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDeleteApprovedCollector,
+		plasticcreditssimulation.SimulateMsgDeleteApprovedCollector(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation
