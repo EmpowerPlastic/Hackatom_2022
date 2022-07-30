@@ -4,11 +4,14 @@ package plasticcreditledger.plasticcredits;
 option go_package = "plasticcreditledger/x/plasticcredits/types";
 
 message Credit {
-  string index = 1; 
-  string owner = 2; 
-  string material = 3; 
-  string description = 4; 
-  string image = 5; 
-  
+  string index = 1;
+  string issuer = 2;
+  string collector = 3;
+  string owner = 4;
+  string material = 5;
+  string description = 6;
+  string image = 7;
+  double lat = 8;
+  double lng = 9;
 }
 

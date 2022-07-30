@@ -29,6 +29,7 @@ export interface MsgDeleteIssuerResponse {}
 export interface MsgCreateApprovedCollector {
   creator: string;
   addr: string;
+  name: string;
   issuer: string;
 }
 
@@ -37,6 +38,7 @@ export interface MsgCreateApprovedCollectorResponse {}
 export interface MsgUpdateApprovedCollector {
   creator: string;
   addr: string;
+  name: string;
   issuer: string;
 }
 
@@ -49,6 +51,18 @@ export interface MsgDeleteApprovedCollector {
 }
 
 export interface MsgDeleteApprovedCollectorResponse {}
+
+export interface MsgIssueCredits {
+  issuer: string;
+  collector: string;
+  material: string;
+  description: string;
+  image: string;
+  lat: string;
+  lng: string;
+}
+
+export interface MsgIssueCreditsResponse {}
 
 const baseMsgCreateIssuer: object = { creator: "", addr: "", name: "" };
 
@@ -441,6 +455,7 @@ export const MsgDeleteIssuerResponse = {
 const baseMsgCreateApprovedCollector: object = {
   creator: "",
   addr: "",
+  name: "",
   issuer: "",
 };
 
@@ -455,8 +470,11 @@ export const MsgCreateApprovedCollector = {
     if (message.addr !== "") {
       writer.uint32(18).string(message.addr);
     }
+    if (message.name !== "") {
+      writer.uint32(26).string(message.name);
+    }
     if (message.issuer !== "") {
-      writer.uint32(26).string(message.issuer);
+      writer.uint32(34).string(message.issuer);
     }
     return writer;
   },
@@ -480,6 +498,9 @@ export const MsgCreateApprovedCollector = {
           message.addr = reader.string();
           break;
         case 3:
+          message.name = reader.string();
+          break;
+        case 4:
           message.issuer = reader.string();
           break;
         default:
@@ -504,6 +525,11 @@ export const MsgCreateApprovedCollector = {
     } else {
       message.addr = "";
     }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = String(object.name);
+    } else {
+      message.name = "";
+    }
     if (object.issuer !== undefined && object.issuer !== null) {
       message.issuer = String(object.issuer);
     } else {
@@ -516,6 +542,7 @@ export const MsgCreateApprovedCollector = {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
     message.addr !== undefined && (obj.addr = message.addr);
+    message.name !== undefined && (obj.name = message.name);
     message.issuer !== undefined && (obj.issuer = message.issuer);
     return obj;
   },
@@ -535,6 +562,11 @@ export const MsgCreateApprovedCollector = {
       message.addr = object.addr;
     } else {
       message.addr = "";
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    } else {
+      message.name = "";
     }
     if (object.issuer !== undefined && object.issuer !== null) {
       message.issuer = object.issuer;
@@ -600,6 +632,7 @@ export const MsgCreateApprovedCollectorResponse = {
 const baseMsgUpdateApprovedCollector: object = {
   creator: "",
   addr: "",
+  name: "",
   issuer: "",
 };
 
@@ -614,8 +647,11 @@ export const MsgUpdateApprovedCollector = {
     if (message.addr !== "") {
       writer.uint32(18).string(message.addr);
     }
+    if (message.name !== "") {
+      writer.uint32(26).string(message.name);
+    }
     if (message.issuer !== "") {
-      writer.uint32(26).string(message.issuer);
+      writer.uint32(34).string(message.issuer);
     }
     return writer;
   },
@@ -639,6 +675,9 @@ export const MsgUpdateApprovedCollector = {
           message.addr = reader.string();
           break;
         case 3:
+          message.name = reader.string();
+          break;
+        case 4:
           message.issuer = reader.string();
           break;
         default:
@@ -663,6 +702,11 @@ export const MsgUpdateApprovedCollector = {
     } else {
       message.addr = "";
     }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = String(object.name);
+    } else {
+      message.name = "";
+    }
     if (object.issuer !== undefined && object.issuer !== null) {
       message.issuer = String(object.issuer);
     } else {
@@ -675,6 +719,7 @@ export const MsgUpdateApprovedCollector = {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
     message.addr !== undefined && (obj.addr = message.addr);
+    message.name !== undefined && (obj.name = message.name);
     message.issuer !== undefined && (obj.issuer = message.issuer);
     return obj;
   },
@@ -694,6 +739,11 @@ export const MsgUpdateApprovedCollector = {
       message.addr = object.addr;
     } else {
       message.addr = "";
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    } else {
+      message.name = "";
     }
     if (object.issuer !== undefined && object.issuer !== null) {
       message.issuer = object.issuer;
@@ -915,6 +965,218 @@ export const MsgDeleteApprovedCollectorResponse = {
   },
 };
 
+const baseMsgIssueCredits: object = {
+  issuer: "",
+  collector: "",
+  material: "",
+  description: "",
+  image: "",
+  lat: "",
+  lng: "",
+};
+
+export const MsgIssueCredits = {
+  encode(message: MsgIssueCredits, writer: Writer = Writer.create()): Writer {
+    if (message.issuer !== "") {
+      writer.uint32(10).string(message.issuer);
+    }
+    if (message.collector !== "") {
+      writer.uint32(18).string(message.collector);
+    }
+    if (message.material !== "") {
+      writer.uint32(26).string(message.material);
+    }
+    if (message.description !== "") {
+      writer.uint32(34).string(message.description);
+    }
+    if (message.image !== "") {
+      writer.uint32(42).string(message.image);
+    }
+    if (message.lat !== "") {
+      writer.uint32(50).string(message.lat);
+    }
+    if (message.lng !== "") {
+      writer.uint32(58).string(message.lng);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgIssueCredits {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgIssueCredits } as MsgIssueCredits;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.issuer = reader.string();
+          break;
+        case 2:
+          message.collector = reader.string();
+          break;
+        case 3:
+          message.material = reader.string();
+          break;
+        case 4:
+          message.description = reader.string();
+          break;
+        case 5:
+          message.image = reader.string();
+          break;
+        case 6:
+          message.lat = reader.string();
+          break;
+        case 7:
+          message.lng = reader.string();
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgIssueCredits {
+    const message = { ...baseMsgIssueCredits } as MsgIssueCredits;
+    if (object.issuer !== undefined && object.issuer !== null) {
+      message.issuer = String(object.issuer);
+    } else {
+      message.issuer = "";
+    }
+    if (object.collector !== undefined && object.collector !== null) {
+      message.collector = String(object.collector);
+    } else {
+      message.collector = "";
+    }
+    if (object.material !== undefined && object.material !== null) {
+      message.material = String(object.material);
+    } else {
+      message.material = "";
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = String(object.description);
+    } else {
+      message.description = "";
+    }
+    if (object.image !== undefined && object.image !== null) {
+      message.image = String(object.image);
+    } else {
+      message.image = "";
+    }
+    if (object.lat !== undefined && object.lat !== null) {
+      message.lat = String(object.lat);
+    } else {
+      message.lat = "";
+    }
+    if (object.lng !== undefined && object.lng !== null) {
+      message.lng = String(object.lng);
+    } else {
+      message.lng = "";
+    }
+    return message;
+  },
+
+  toJSON(message: MsgIssueCredits): unknown {
+    const obj: any = {};
+    message.issuer !== undefined && (obj.issuer = message.issuer);
+    message.collector !== undefined && (obj.collector = message.collector);
+    message.material !== undefined && (obj.material = message.material);
+    message.description !== undefined &&
+      (obj.description = message.description);
+    message.image !== undefined && (obj.image = message.image);
+    message.lat !== undefined && (obj.lat = message.lat);
+    message.lng !== undefined && (obj.lng = message.lng);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgIssueCredits>): MsgIssueCredits {
+    const message = { ...baseMsgIssueCredits } as MsgIssueCredits;
+    if (object.issuer !== undefined && object.issuer !== null) {
+      message.issuer = object.issuer;
+    } else {
+      message.issuer = "";
+    }
+    if (object.collector !== undefined && object.collector !== null) {
+      message.collector = object.collector;
+    } else {
+      message.collector = "";
+    }
+    if (object.material !== undefined && object.material !== null) {
+      message.material = object.material;
+    } else {
+      message.material = "";
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    } else {
+      message.description = "";
+    }
+    if (object.image !== undefined && object.image !== null) {
+      message.image = object.image;
+    } else {
+      message.image = "";
+    }
+    if (object.lat !== undefined && object.lat !== null) {
+      message.lat = object.lat;
+    } else {
+      message.lat = "";
+    }
+    if (object.lng !== undefined && object.lng !== null) {
+      message.lng = object.lng;
+    } else {
+      message.lng = "";
+    }
+    return message;
+  },
+};
+
+const baseMsgIssueCreditsResponse: object = {};
+
+export const MsgIssueCreditsResponse = {
+  encode(_: MsgIssueCreditsResponse, writer: Writer = Writer.create()): Writer {
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgIssueCreditsResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = {
+      ...baseMsgIssueCreditsResponse,
+    } as MsgIssueCreditsResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgIssueCreditsResponse {
+    const message = {
+      ...baseMsgIssueCreditsResponse,
+    } as MsgIssueCreditsResponse;
+    return message;
+  },
+
+  toJSON(_: MsgIssueCreditsResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(
+    _: DeepPartial<MsgIssueCreditsResponse>
+  ): MsgIssueCreditsResponse {
+    const message = {
+      ...baseMsgIssueCreditsResponse,
+    } as MsgIssueCreditsResponse;
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   CreateIssuer(request: MsgCreateIssuer): Promise<MsgCreateIssuerResponse>;
@@ -926,10 +1188,11 @@ export interface Msg {
   UpdateApprovedCollector(
     request: MsgUpdateApprovedCollector
   ): Promise<MsgUpdateApprovedCollectorResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   DeleteApprovedCollector(
     request: MsgDeleteApprovedCollector
   ): Promise<MsgDeleteApprovedCollectorResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  IssueCredits(request: MsgIssueCredits): Promise<MsgIssueCreditsResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -1012,6 +1275,18 @@ export class MsgClientImpl implements Msg {
     );
     return promise.then((data) =>
       MsgDeleteApprovedCollectorResponse.decode(new Reader(data))
+    );
+  }
+
+  IssueCredits(request: MsgIssueCredits): Promise<MsgIssueCreditsResponse> {
+    const data = MsgIssueCredits.encode(request).finish();
+    const promise = this.rpc.request(
+      "plasticcreditledger.plasticcredits.Msg",
+      "IssueCredits",
+      data
+    );
+    return promise.then((data) =>
+      MsgIssueCreditsResponse.decode(new Reader(data))
     );
   }
 }

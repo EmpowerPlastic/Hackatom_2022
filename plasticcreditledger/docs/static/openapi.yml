@@ -33409,6 +33409,8 @@ paths:
                   properties:
                     addr:
                       type: string
+                    name:
+                      type: string
                     issuer:
                       type: string
                     creator:
@@ -33505,6 +33507,16 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
   '/plasticcreditledger/plasticcredits/approved_collector/{addr}/{issuer}':
@@ -33521,6 +33533,8 @@ paths:
                 type: object
                 properties:
                   addr:
+                    type: string
+                  name:
                     type: string
                   issuer:
                     type: string
@@ -33572,6 +33586,10 @@ paths:
                   properties:
                     index:
                       type: string
+                    issuer:
+                      type: string
+                    collector:
+                      type: string
                     owner:
                       type: string
                     material:
@@ -33580,6 +33598,12 @@ paths:
                       type: string
                     image:
                       type: string
+                    lat:
+                      type: number
+                      format: double
+                    lng:
+                      type: number
+                      format: double
               pagination:
                 type: object
                 properties:
@@ -33672,6 +33696,16 @@ paths:
           in: query
           required: false
           type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
+          in: query
+          required: false
+          type: boolean
       tags:
         - Query
   '/plasticcreditledger/plasticcredits/credit/{index}':
@@ -33689,6 +33723,10 @@ paths:
                 properties:
                   index:
                     type: string
+                  issuer:
+                    type: string
+                  collector:
+                    type: string
                   owner:
                     type: string
                   material:
@@ -33697,6 +33735,12 @@ paths:
                     type: string
                   image:
                     type: string
+                  lat:
+                    type: number
+                    format: double
+                  lng:
+                    type: number
+                    format: double
         default:
           description: An unexpected error response.
           schema:
@@ -33832,6 +33876,16 @@ paths:
             when key
 
             is set.
+          in: query
+          required: false
+          type: boolean
+        - name: pagination.reverse
+          description: >-
+            reverse is set to true if results are to be returned in the
+            descending order.
+
+
+            Since: cosmos-sdk 0.43
           in: query
           required: false
           type: boolean
@@ -56348,6 +56402,8 @@ definitions:
     properties:
       addr:
         type: string
+      name:
+        type: string
       issuer:
         type: string
       creator:
@@ -56357,6 +56413,10 @@ definitions:
     properties:
       index:
         type: string
+      issuer:
+        type: string
+      collector:
+        type: string
       owner:
         type: string
       material:
@@ -56365,6 +56425,12 @@ definitions:
         type: string
       image:
         type: string
+      lat:
+        type: number
+        format: double
+      lng:
+        type: number
+        format: double
   plasticcreditledger.plasticcredits.Issuer:
     type: object
     properties:
@@ -56382,6 +56448,8 @@ definitions:
     type: object
   plasticcreditledger.plasticcredits.MsgDeleteIssuerResponse:
     type: object
+  plasticcreditledger.plasticcredits.MsgIssueCreditsResponse:
+    type: object
   plasticcreditledger.plasticcredits.MsgUpdateApprovedCollectorResponse:
     type: object
   plasticcreditledger.plasticcredits.MsgUpdateIssuerResponse:
@@ -56398,6 +56466,8 @@ definitions:
           type: object
           properties:
             addr:
+              type: string
+            name:
               type: string
             issuer:
               type: string
@@ -56438,6 +56508,10 @@ definitions:
           properties:
             index:
               type: string
+            issuer:
+              type: string
+            collector:
+              type: string
             owner:
               type: string
             material:
@@ -56446,6 +56520,12 @@ definitions:
               type: string
             image:
               type: string
+            lat:
+              type: number
+              format: double
+            lng:
+              type: number
+              format: double
       pagination:
         type: object
         properties:
@@ -56518,6 +56598,8 @@ definitions:
         properties:
           addr:
             type: string
+          name:
+            type: string
           issuer:
             type: string
           creator:
@@ -56530,6 +56612,10 @@ definitions:
         properties:
           index:
             type: string
+          issuer:
+            type: string
+          collector:
+            type: string
           owner:
             type: string
           material:
@@ -56538,6 +56624,12 @@ definitions:
             type: string
           image:
             type: string
+          lat:
+            type: number
+            format: double
+          lng:
+            type: number
+            format: double
   plasticcreditledger.plasticcredits.QueryGetIssuerResponse:
     type: object
     properties:

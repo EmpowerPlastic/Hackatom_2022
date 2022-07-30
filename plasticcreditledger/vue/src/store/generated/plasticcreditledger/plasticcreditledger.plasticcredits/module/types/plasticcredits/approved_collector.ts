@@ -5,22 +5,31 @@ export const protobufPackage = "plasticcreditledger.plasticcredits";
 
 export interface ApprovedCollector {
   addr: string;
+  name: string;
   issuer: string;
   creator: string;
 }
 
-const baseApprovedCollector: object = { addr: "", issuer: "", creator: "" };
+const baseApprovedCollector: object = {
+  addr: "",
+  name: "",
+  issuer: "",
+  creator: "",
+};
 
 export const ApprovedCollector = {
   encode(message: ApprovedCollector, writer: Writer = Writer.create()): Writer {
     if (message.addr !== "") {
       writer.uint32(10).string(message.addr);
     }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
     if (message.issuer !== "") {
-      writer.uint32(18).string(message.issuer);
+      writer.uint32(26).string(message.issuer);
     }
     if (message.creator !== "") {
-      writer.uint32(26).string(message.creator);
+      writer.uint32(34).string(message.creator);
     }
     return writer;
   },
@@ -36,9 +45,12 @@ export const ApprovedCollector = {
           message.addr = reader.string();
           break;
         case 2:
-          message.issuer = reader.string();
+          message.name = reader.string();
           break;
         case 3:
+          message.issuer = reader.string();
+          break;
+        case 4:
           message.creator = reader.string();
           break;
         default:
@@ -56,6 +68,11 @@ export const ApprovedCollector = {
     } else {
       message.addr = "";
     }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = String(object.name);
+    } else {
+      message.name = "";
+    }
     if (object.issuer !== undefined && object.issuer !== null) {
       message.issuer = String(object.issuer);
     } else {
@@ -72,6 +89,7 @@ export const ApprovedCollector = {
   toJSON(message: ApprovedCollector): unknown {
     const obj: any = {};
     message.addr !== undefined && (obj.addr = message.addr);
+    message.name !== undefined && (obj.name = message.name);
     message.issuer !== undefined && (obj.issuer = message.issuer);
     message.creator !== undefined && (obj.creator = message.creator);
     return obj;
@@ -83,6 +101,11 @@ export const ApprovedCollector = {
       message.addr = object.addr;
     } else {
       message.addr = "";
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    } else {
+      message.name = "";
     }
     if (object.issuer !== undefined && object.issuer !== null) {
       message.issuer = object.issuer;

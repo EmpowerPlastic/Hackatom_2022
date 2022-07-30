@@ -611,6 +611,134 @@ func (m *MsgDeleteApprovedCollectorResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgDeleteApprovedCollectorResponse proto.InternalMessageInfo
 
+type MsgIssueCredits struct {
+	Issuer      string `protobuf:"bytes,1,opt,name=issuer,proto3" json:"issuer,omitempty"`
+	Collector   string `protobuf:"bytes,2,opt,name=collector,proto3" json:"collector,omitempty"`
+	Material    string `protobuf:"bytes,3,opt,name=material,proto3" json:"material,omitempty"`
+	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	Image       string `protobuf:"bytes,5,opt,name=image,proto3" json:"image,omitempty"`
+	Lat         string `protobuf:"bytes,6,opt,name=lat,proto3" json:"lat,omitempty"`
+	Lng         string `protobuf:"bytes,7,opt,name=lng,proto3" json:"lng,omitempty"`
+}
+
+func (m *MsgIssueCredits) Reset()         { *m = MsgIssueCredits{} }
+func (m *MsgIssueCredits) String() string { return proto.CompactTextString(m) }
+func (*MsgIssueCredits) ProtoMessage()    {}
+func (*MsgIssueCredits) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31204beb98f14bb9, []int{12}
+}
+func (m *MsgIssueCredits) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgIssueCredits) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgIssueCredits.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgIssueCredits) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgIssueCredits.Merge(m, src)
+}
+func (m *MsgIssueCredits) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgIssueCredits) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgIssueCredits.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgIssueCredits proto.InternalMessageInfo
+
+func (m *MsgIssueCredits) GetIssuer() string {
+	if m != nil {
+		return m.Issuer
+	}
+	return ""
+}
+
+func (m *MsgIssueCredits) GetCollector() string {
+	if m != nil {
+		return m.Collector
+	}
+	return ""
+}
+
+func (m *MsgIssueCredits) GetMaterial() string {
+	if m != nil {
+		return m.Material
+	}
+	return ""
+}
+
+func (m *MsgIssueCredits) GetDescription() string {
+	if m != nil {
+		return m.Description
+	}
+	return ""
+}
+
+func (m *MsgIssueCredits) GetImage() string {
+	if m != nil {
+		return m.Image
+	}
+	return ""
+}
+
+func (m *MsgIssueCredits) GetLat() string {
+	if m != nil {
+		return m.Lat
+	}
+	return ""
+}
+
+func (m *MsgIssueCredits) GetLng() string {
+	if m != nil {
+		return m.Lng
+	}
+	return ""
+}
+
+type MsgIssueCreditsResponse struct {
+}
+
+func (m *MsgIssueCreditsResponse) Reset()         { *m = MsgIssueCreditsResponse{} }
+func (m *MsgIssueCreditsResponse) String() string { return proto.CompactTextString(m) }
+func (*MsgIssueCreditsResponse) ProtoMessage()    {}
+func (*MsgIssueCreditsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_31204beb98f14bb9, []int{13}
+}
+func (m *MsgIssueCreditsResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *MsgIssueCreditsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_MsgIssueCreditsResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *MsgIssueCreditsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_MsgIssueCreditsResponse.Merge(m, src)
+}
+func (m *MsgIssueCreditsResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *MsgIssueCreditsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_MsgIssueCreditsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_MsgIssueCreditsResponse proto.InternalMessageInfo
+
 func init() {
 	proto.RegisterType((*MsgCreateIssuer)(nil), "plasticcreditledger.plasticcredits.MsgCreateIssuer")
 	proto.RegisterType((*MsgCreateIssuerResponse)(nil), "plasticcreditledger.plasticcredits.MsgCreateIssuerResponse")
@@ -624,38 +752,47 @@ func init() {
 	proto.RegisterType((*MsgUpdateApprovedCollectorResponse)(nil), "plasticcreditledger.plasticcredits.MsgUpdateApprovedCollectorResponse")
 	proto.RegisterType((*MsgDeleteApprovedCollector)(nil), "plasticcreditledger.plasticcredits.MsgDeleteApprovedCollector")
 	proto.RegisterType((*MsgDeleteApprovedCollectorResponse)(nil), "plasticcreditledger.plasticcredits.MsgDeleteApprovedCollectorResponse")
+	proto.RegisterType((*MsgIssueCredits)(nil), "plasticcreditledger.plasticcredits.MsgIssueCredits")
+	proto.RegisterType((*MsgIssueCreditsResponse)(nil), "plasticcreditledger.plasticcredits.MsgIssueCreditsResponse")
 }
 
 func init() { proto.RegisterFile("plasticcredits/tx.proto", fileDescriptor_31204beb98f14bb9) }
 
 var fileDescriptor_31204beb98f14bb9 = []byte{
-	// 417 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2f, 0xc8, 0x49, 0x2c,
-	0x2e, 0xc9, 0x4c, 0x4e, 0x2e, 0x4a, 0x4d, 0xc9, 0x2c, 0x29, 0xd6, 0x2f, 0xa9, 0xd0, 0x2b, 0x28,
-	0xca, 0x2f, 0xc9, 0x17, 0x52, 0x42, 0x91, 0xc8, 0x49, 0x4d, 0x49, 0x4f, 0x2d, 0xd2, 0x43, 0x55,
-	0x2c, 0x25, 0x8d, 0xa6, 0x39, 0xb3, 0xb8, 0xb8, 0x14, 0xa4, 0x0a, 0x64, 0x80, 0x94, 0x3a, 0x9a,
-	0x64, 0x62, 0x41, 0x41, 0x51, 0x7e, 0x59, 0x6a, 0x4a, 0x7c, 0x72, 0x7e, 0x4e, 0x4e, 0x6a, 0x72,
-	0x49, 0x3e, 0x54, 0xa1, 0x52, 0x30, 0x17, 0xbf, 0x6f, 0x71, 0xba, 0x73, 0x51, 0x6a, 0x62, 0x49,
-	0xaa, 0x27, 0xd8, 0x04, 0x21, 0x09, 0x2e, 0xf6, 0x64, 0x10, 0x3f, 0xbf, 0x48, 0x82, 0x51, 0x81,
-	0x51, 0x83, 0x33, 0x08, 0xc6, 0x15, 0x12, 0xe2, 0x62, 0x49, 0x4c, 0x49, 0x29, 0x92, 0x60, 0x02,
-	0x0b, 0x83, 0xd9, 0x20, 0xb1, 0xbc, 0xc4, 0xdc, 0x54, 0x09, 0x66, 0x88, 0x18, 0x88, 0xad, 0x24,
-	0xc9, 0x25, 0x8e, 0x66, 0x68, 0x50, 0x6a, 0x71, 0x41, 0x7e, 0x5e, 0x71, 0x2a, 0xd4, 0xbe, 0xd0,
-	0x82, 0x14, 0xea, 0xdb, 0x87, 0x6c, 0x28, 0xdc, 0x3e, 0x7b, 0xb0, 0x7d, 0x2e, 0xa9, 0x39, 0xa9,
-	0xe4, 0xd9, 0x07, 0x35, 0x1b, 0xd9, 0x00, 0xb8, 0xd9, 0x65, 0x5c, 0x52, 0x70, 0x6f, 0x3a, 0x42,
-	0x03, 0xd8, 0x19, 0x16, 0xbe, 0x94, 0x7b, 0x4b, 0x48, 0x8c, 0x8b, 0x0d, 0x12, 0xa9, 0x12, 0x2c,
-	0x60, 0x51, 0x28, 0x4f, 0x49, 0x85, 0x4b, 0x09, 0xb7, 0xbd, 0x68, 0xae, 0x83, 0x04, 0x0a, 0xfd,
-	0x5d, 0x87, 0xc3, 0x5e, 0xb8, 0xeb, 0x92, 0xc0, 0xae, 0x83, 0x04, 0x2b, 0xa5, 0xae, 0x43, 0xb8,
-	0x84, 0x19, 0x8b, 0x4b, 0x70, 0xd8, 0x01, 0x73, 0x89, 0xd1, 0x2f, 0x36, 0x2e, 0x66, 0xdf, 0xe2,
-	0x74, 0xa1, 0x06, 0x46, 0x2e, 0x1e, 0x94, 0x7c, 0x60, 0xac, 0x47, 0x38, 0x17, 0xea, 0xa1, 0xa5,
-	0x73, 0x29, 0x6b, 0x32, 0x34, 0xc1, 0x9c, 0x02, 0x76, 0x02, 0x4a, 0xd6, 0x20, 0xd6, 0x09, 0xc8,
-	0x9a, 0x88, 0x76, 0x02, 0xb6, 0xfc, 0x02, 0x76, 0x02, 0x4a, 0x6e, 0x21, 0xd6, 0x09, 0xc8, 0x9a,
-	0x88, 0x76, 0x02, 0xb6, 0x6c, 0x25, 0xb4, 0x90, 0x91, 0x4b, 0x1c, 0x57, 0xa6, 0xb2, 0x23, 0x29,
-	0x78, 0x31, 0xf4, 0x4b, 0xb9, 0x51, 0xa6, 0x1f, 0xc5, 0x8d, 0xb8, 0xb2, 0x96, 0x1d, 0x49, 0xe1,
-	0x4f, 0xbe, 0x1b, 0x09, 0x64, 0x31, 0xb0, 0x1b, 0x71, 0x65, 0x30, 0x3b, 0x92, 0x22, 0x88, 0x7c,
-	0x37, 0x12, 0xc8, 0x7c, 0x4e, 0x2e, 0x27, 0x1e, 0xc9, 0x31, 0x5e, 0x78, 0x24, 0xc7, 0xf8, 0xe0,
-	0x91, 0x1c, 0xe3, 0x84, 0xc7, 0x72, 0x0c, 0x17, 0x1e, 0xcb, 0x31, 0xdc, 0x78, 0x2c, 0xc7, 0x10,
-	0xa5, 0x85, 0xc5, 0x02, 0xfd, 0x0a, 0x7d, 0xf4, 0x1a, 0xb3, 0xb2, 0x20, 0xb5, 0x38, 0x89, 0x0d,
-	0x5c, 0x97, 0x19, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0xea, 0x5e, 0x35, 0xe5, 0x50, 0x07, 0x00,
+	// 529 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xbc, 0x96, 0x41, 0x8b, 0xd3, 0x40,
+	0x14, 0xc7, 0x3b, 0x76, 0xb7, 0x75, 0x47, 0x41, 0x19, 0xc4, 0xc6, 0x28, 0x61, 0x09, 0x82, 0xe2,
+	0xa1, 0x05, 0xf7, 0x28, 0x54, 0xb4, 0x8b, 0xe0, 0x61, 0x2f, 0x2b, 0x5e, 0xbc, 0xc8, 0x6c, 0xf2,
+	0x08, 0x81, 0x34, 0x19, 0x66, 0xc6, 0x65, 0xbd, 0xf9, 0x11, 0xfc, 0x0a, 0x7e, 0x12, 0xaf, 0x1e,
+	0xf7, 0xe8, 0x51, 0xda, 0xcf, 0x21, 0x48, 0x5e, 0xa6, 0xe9, 0x24, 0x26, 0x34, 0x6d, 0xc5, 0x5b,
+	0xe6, 0xcd, 0xbc, 0xf7, 0x7e, 0xf3, 0xe6, 0xbd, 0x3f, 0xa1, 0x23, 0x91, 0x70, 0xa5, 0xe3, 0x20,
+	0x90, 0x10, 0xc6, 0x5a, 0x4d, 0xf4, 0xd5, 0x58, 0xc8, 0x4c, 0x67, 0xcc, 0xaf, 0x6c, 0x24, 0x10,
+	0x46, 0x20, 0xc7, 0xd5, 0xc3, 0xee, 0xc3, 0x9a, 0x73, 0xac, 0xd4, 0xa7, 0xfc, 0x54, 0x1e, 0xc0,
+	0x7d, 0x52, 0xdb, 0xe4, 0x42, 0xc8, 0xec, 0x12, 0xc2, 0x8f, 0x41, 0x96, 0x24, 0x10, 0xe8, 0xcc,
+	0x1c, 0xf4, 0xdf, 0xd1, 0x3b, 0x67, 0x2a, 0x9a, 0x49, 0xe0, 0x1a, 0xde, 0x62, 0x04, 0xe6, 0xd0,
+	0x61, 0x90, 0xaf, 0x33, 0xe9, 0x90, 0x63, 0xf2, 0xf4, 0xe8, 0x7c, 0xb5, 0x64, 0x8c, 0x1e, 0xf0,
+	0x30, 0x94, 0xce, 0x0d, 0x34, 0xe3, 0x77, 0x6e, 0x4b, 0xf9, 0x1c, 0x9c, 0x7e, 0x61, 0xcb, 0xbf,
+	0xfd, 0x07, 0x74, 0x54, 0x0b, 0x7a, 0x0e, 0x4a, 0x64, 0xa9, 0x02, 0x93, 0xef, 0xbd, 0x08, 0xff,
+	0x7d, 0x3e, 0x3b, 0x68, 0x99, 0xef, 0x25, 0xe6, 0x3b, 0x85, 0x04, 0x76, 0xcb, 0x67, 0x62, 0xdb,
+	0x01, 0xca, 0xd8, 0x97, 0xd4, 0x2d, 0xaf, 0xf9, 0xca, 0x14, 0x78, 0xb6, 0xaa, 0xef, 0xfe, 0xd7,
+	0x62, 0xf7, 0xe9, 0xa0, 0x78, 0x54, 0xe7, 0x00, 0xad, 0x66, 0xe5, 0x3f, 0xa6, 0x7e, 0x7b, 0xde,
+	0x1a, 0x5d, 0x51, 0x94, 0xff, 0x4f, 0xd7, 0x92, 0xb7, 0xa4, 0xbb, 0x40, 0xba, 0xa2, 0xac, 0xfb,
+	0xd2, 0xad, 0x49, 0xfa, 0x0d, 0x24, 0x2d, 0x39, 0x4a, 0x92, 0xef, 0x04, 0x5b, 0x04, 0xdf, 0x76,
+	0x56, 0x8c, 0x8b, 0x15, 0x91, 0xd8, 0x11, 0xd9, 0x23, 0x7a, 0x54, 0x0e, 0x90, 0x41, 0x58, 0x1b,
+	0x98, 0x4b, 0x6f, 0xce, 0xb9, 0x06, 0x19, 0xf3, 0xc4, 0x90, 0x94, 0x6b, 0x76, 0x4c, 0x6f, 0x85,
+	0xa0, 0x02, 0x19, 0x0b, 0x1d, 0x67, 0xa9, 0x29, 0x99, 0x6d, 0x62, 0xf7, 0xe8, 0x61, 0x3c, 0xe7,
+	0x11, 0x38, 0x87, 0xb8, 0x57, 0x2c, 0xd8, 0x5d, 0xda, 0x4f, 0xb8, 0x76, 0x06, 0x68, 0xcb, 0x3f,
+	0xd1, 0x92, 0x46, 0xce, 0xd0, 0x58, 0xd2, 0xc8, 0xb4, 0xa8, 0x7d, 0x81, 0xd5, 0xe5, 0x9e, 0xff,
+	0x1e, 0xd2, 0xfe, 0x99, 0x8a, 0xd8, 0x17, 0x42, 0x6f, 0x57, 0x86, 0xfc, 0x64, 0xbc, 0x59, 0x62,
+	0xc6, 0xb5, 0x21, 0x76, 0x5f, 0xec, 0xe0, 0xb4, 0x42, 0x41, 0x84, 0xca, 0xdc, 0x77, 0x45, 0xb0,
+	0x9d, 0x3a, 0x23, 0x34, 0x89, 0x01, 0x22, 0x54, 0xa4, 0xa0, 0x2b, 0x82, 0xed, 0xd4, 0x19, 0xa1,
+	0x49, 0x33, 0xd8, 0x37, 0x42, 0x47, 0x6d, 0x8a, 0x31, 0xdd, 0xaa, 0xbc, 0x7f, 0xf9, 0xbb, 0x6f,
+	0xf6, 0xf3, 0xaf, 0x30, 0xb6, 0xe9, 0xc6, 0x74, 0xab, 0xfa, 0xef, 0xce, 0xb8, 0x41, 0x3f, 0x90,
+	0xb1, 0x4d, 0x3d, 0xa6, 0x5b, 0x3d, 0xd0, 0xee, 0x8c, 0x1b, 0x94, 0x05, 0xdb, 0xad, 0x22, 0x2b,
+	0x5d, 0xdb, 0xcd, 0x76, 0xea, 0xdc, 0x6e, 0x4d, 0xf3, 0xff, 0xfa, 0xf4, 0xc7, 0xc2, 0x23, 0xd7,
+	0x0b, 0x8f, 0xfc, 0x5a, 0x78, 0xe4, 0xeb, 0xd2, 0xeb, 0x5d, 0x2f, 0xbd, 0xde, 0xcf, 0xa5, 0xd7,
+	0xfb, 0xf0, 0xac, 0x21, 0xea, 0xe4, 0x6a, 0x52, 0xff, 0x23, 0xf9, 0x2c, 0x40, 0x5d, 0x0c, 0xf0,
+	0x5f, 0xe1, 0xe4, 0x4f, 0x00, 0x00, 0x00, 0xff, 0xff, 0xab, 0x9b, 0x77, 0x47, 0xb0, 0x08, 0x00,
 	0x00,
 }
 
@@ -677,6 +814,7 @@ type MsgClient interface {
 	CreateApprovedCollector(ctx context.Context, in *MsgCreateApprovedCollector, opts ...grpc.CallOption) (*MsgCreateApprovedCollectorResponse, error)
 	UpdateApprovedCollector(ctx context.Context, in *MsgUpdateApprovedCollector, opts ...grpc.CallOption) (*MsgUpdateApprovedCollectorResponse, error)
 	DeleteApprovedCollector(ctx context.Context, in *MsgDeleteApprovedCollector, opts ...grpc.CallOption) (*MsgDeleteApprovedCollectorResponse, error)
+	IssueCredits(ctx context.Context, in *MsgIssueCredits, opts ...grpc.CallOption) (*MsgIssueCreditsResponse, error)
 }
 
 type msgClient struct {
@@ -741,6 +879,15 @@ func (c *msgClient) DeleteApprovedCollector(ctx context.Context, in *MsgDeleteAp
 	return out, nil
 }
 
+func (c *msgClient) IssueCredits(ctx context.Context, in *MsgIssueCredits, opts ...grpc.CallOption) (*MsgIssueCreditsResponse, error) {
+	out := new(MsgIssueCreditsResponse)
+	err := c.cc.Invoke(ctx, "/plasticcreditledger.plasticcredits.Msg/IssueCredits", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	CreateIssuer(context.Context, *MsgCreateIssuer) (*MsgCreateIssuerResponse, error)
@@ -749,6 +896,7 @@ type MsgServer interface {
 	CreateApprovedCollector(context.Context, *MsgCreateApprovedCollector) (*MsgCreateApprovedCollectorResponse, error)
 	UpdateApprovedCollector(context.Context, *MsgUpdateApprovedCollector) (*MsgUpdateApprovedCollectorResponse, error)
 	DeleteApprovedCollector(context.Context, *MsgDeleteApprovedCollector) (*MsgDeleteApprovedCollectorResponse, error)
+	IssueCredits(context.Context, *MsgIssueCredits) (*MsgIssueCreditsResponse, error)
 }
 
 // UnimplementedMsgServer can be embedded to have forward compatible implementations.
@@ -772,6 +920,9 @@ func (*UnimplementedMsgServer) UpdateApprovedCollector(ctx context.Context, req 
 }
 func (*UnimplementedMsgServer) DeleteApprovedCollector(ctx context.Context, req *MsgDeleteApprovedCollector) (*MsgDeleteApprovedCollectorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteApprovedCollector not implemented")
+}
+func (*UnimplementedMsgServer) IssueCredits(ctx context.Context, req *MsgIssueCredits) (*MsgIssueCreditsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method IssueCredits not implemented")
 }
 
 func RegisterMsgServer(s grpc1.Server, srv MsgServer) {
@@ -886,6 +1037,24 @@ func _Msg_DeleteApprovedCollector_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Msg_IssueCredits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MsgIssueCredits)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MsgServer).IssueCredits(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/plasticcreditledger.plasticcredits.Msg/IssueCredits",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MsgServer).IssueCredits(ctx, req.(*MsgIssueCredits))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Msg_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "plasticcreditledger.plasticcredits.Msg",
 	HandlerType: (*MsgServer)(nil),
@@ -913,6 +1082,10 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteApprovedCollector",
 			Handler:    _Msg_DeleteApprovedCollector_Handler,
+		},
+		{
+			MethodName: "IssueCredits",
+			Handler:    _Msg_IssueCredits_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -1328,6 +1501,101 @@ func (m *MsgDeleteApprovedCollectorResponse) MarshalToSizedBuffer(dAtA []byte) (
 	return len(dAtA) - i, nil
 }
 
+func (m *MsgIssueCredits) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgIssueCredits) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgIssueCredits) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Lng) > 0 {
+		i -= len(m.Lng)
+		copy(dAtA[i:], m.Lng)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Lng)))
+		i--
+		dAtA[i] = 0x3a
+	}
+	if len(m.Lat) > 0 {
+		i -= len(m.Lat)
+		copy(dAtA[i:], m.Lat)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Lat)))
+		i--
+		dAtA[i] = 0x32
+	}
+	if len(m.Image) > 0 {
+		i -= len(m.Image)
+		copy(dAtA[i:], m.Image)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Image)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.Description) > 0 {
+		i -= len(m.Description)
+		copy(dAtA[i:], m.Description)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Description)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Material) > 0 {
+		i -= len(m.Material)
+		copy(dAtA[i:], m.Material)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Material)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Collector) > 0 {
+		i -= len(m.Collector)
+		copy(dAtA[i:], m.Collector)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Collector)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.Issuer) > 0 {
+		i -= len(m.Issuer)
+		copy(dAtA[i:], m.Issuer)
+		i = encodeVarintTx(dAtA, i, uint64(len(m.Issuer)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *MsgIssueCreditsResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *MsgIssueCreditsResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *MsgIssueCreditsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintTx(dAtA []byte, offset int, v uint64) int {
 	offset -= sovTx(v)
 	base := offset
@@ -1515,6 +1783,52 @@ func (m *MsgDeleteApprovedCollector) Size() (n int) {
 }
 
 func (m *MsgDeleteApprovedCollectorResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	return n
+}
+
+func (m *MsgIssueCredits) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.Issuer)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Collector)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Material)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Description)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Image)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Lat)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	l = len(m.Lng)
+	if l > 0 {
+		n += 1 + l + sovTx(uint64(l))
+	}
+	return n
+}
+
+func (m *MsgIssueCreditsResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -2714,6 +3028,330 @@ func (m *MsgDeleteApprovedCollectorResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: MsgDeleteApprovedCollectorResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgIssueCredits) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgIssueCredits: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgIssueCredits: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Issuer", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Issuer = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Collector", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Collector = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Material", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Material = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Description = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Image", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Image = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Lat", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Lat = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 7:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Lng", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTx
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTx
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTx
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Lng = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTx(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTx
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *MsgIssueCreditsResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTx
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: MsgIssueCreditsResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: MsgIssueCreditsResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

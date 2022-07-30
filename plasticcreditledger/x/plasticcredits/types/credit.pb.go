@@ -4,6 +4,7 @@
 package types
 
 import (
+	encoding_binary "encoding/binary"
 	fmt "fmt"
 	proto "github.com/gogo/protobuf/proto"
 	io "io"
@@ -23,11 +24,15 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type Credit struct {
-	Index       string `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
-	Owner       string `protobuf:"bytes,2,opt,name=owner,proto3" json:"owner,omitempty"`
-	Material    string `protobuf:"bytes,3,opt,name=material,proto3" json:"material,omitempty"`
-	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
-	Image       string `protobuf:"bytes,5,opt,name=image,proto3" json:"image,omitempty"`
+	Index       string  `protobuf:"bytes,1,opt,name=index,proto3" json:"index,omitempty"`
+	Issuer      string  `protobuf:"bytes,2,opt,name=issuer,proto3" json:"issuer,omitempty"`
+	Collector   string  `protobuf:"bytes,3,opt,name=collector,proto3" json:"collector,omitempty"`
+	Owner       string  `protobuf:"bytes,4,opt,name=owner,proto3" json:"owner,omitempty"`
+	Material    string  `protobuf:"bytes,5,opt,name=material,proto3" json:"material,omitempty"`
+	Description string  `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	Image       string  `protobuf:"bytes,7,opt,name=image,proto3" json:"image,omitempty"`
+	Lat         float64 `protobuf:"fixed64,8,opt,name=lat,proto3" json:"lat,omitempty"`
+	Lng         float64 `protobuf:"fixed64,9,opt,name=lng,proto3" json:"lng,omitempty"`
 }
 
 func (m *Credit) Reset()         { *m = Credit{} }
@@ -70,6 +75,20 @@ func (m *Credit) GetIndex() string {
 	return ""
 }
 
+func (m *Credit) GetIssuer() string {
+	if m != nil {
+		return m.Issuer
+	}
+	return ""
+}
+
+func (m *Credit) GetCollector() string {
+	if m != nil {
+		return m.Collector
+	}
+	return ""
+}
+
 func (m *Credit) GetOwner() string {
 	if m != nil {
 		return m.Owner
@@ -98,6 +117,20 @@ func (m *Credit) GetImage() string {
 	return ""
 }
 
+func (m *Credit) GetLat() float64 {
+	if m != nil {
+		return m.Lat
+	}
+	return 0
+}
+
+func (m *Credit) GetLng() float64 {
+	if m != nil {
+		return m.Lng
+	}
+	return 0
+}
+
 func init() {
 	proto.RegisterType((*Credit)(nil), "plasticcreditledger.plasticcredits.Credit")
 }
@@ -105,20 +138,23 @@ func init() {
 func init() { proto.RegisterFile("plasticcredits/credit.proto", fileDescriptor_94c207fbc4fbe8a2) }
 
 var fileDescriptor_94c207fbc4fbe8a2 = []byte{
-	// 198 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x92, 0x2e, 0xc8, 0x49, 0x2c,
-	0x2e, 0xc9, 0x4c, 0x4e, 0x2e, 0x4a, 0x4d, 0xc9, 0x2c, 0x29, 0xd6, 0x87, 0xd0, 0x7a, 0x05, 0x45,
-	0xf9, 0x25, 0xf9, 0x42, 0x4a, 0x28, 0x92, 0x39, 0xa9, 0x29, 0xe9, 0xa9, 0x45, 0x7a, 0xa8, 0x1a,
-	0x94, 0x3a, 0x18, 0xb9, 0xd8, 0x9c, 0xc1, 0x6c, 0x21, 0x11, 0x2e, 0xd6, 0xcc, 0xbc, 0x94, 0xd4,
-	0x0a, 0x09, 0x46, 0x05, 0x46, 0x0d, 0xce, 0x20, 0x08, 0x07, 0x24, 0x9a, 0x5f, 0x9e, 0x97, 0x5a,
-	0x24, 0xc1, 0x04, 0x11, 0x05, 0x73, 0x84, 0xa4, 0xb8, 0x38, 0x72, 0x13, 0x4b, 0x52, 0x8b, 0x32,
-	0x13, 0x73, 0x24, 0x98, 0xc1, 0x12, 0x70, 0xbe, 0x90, 0x02, 0x17, 0x77, 0x4a, 0x6a, 0x71, 0x72,
-	0x51, 0x66, 0x41, 0x49, 0x66, 0x7e, 0x9e, 0x04, 0x0b, 0x58, 0x1a, 0x59, 0x08, 0x6c, 0x53, 0x6e,
-	0x62, 0x7a, 0xaa, 0x04, 0x2b, 0xd4, 0x26, 0x10, 0xc7, 0xc9, 0xe5, 0xc4, 0x23, 0x39, 0xc6, 0x0b,
-	0x8f, 0xe4, 0x18, 0x1f, 0x3c, 0x92, 0x63, 0x9c, 0xf0, 0x58, 0x8e, 0xe1, 0xc2, 0x63, 0x39, 0x86,
-	0x1b, 0x8f, 0xe5, 0x18, 0xa2, 0xb4, 0xb0, 0x78, 0x44, 0xbf, 0x42, 0x1f, 0xcd, 0xef, 0x25, 0x95,
-	0x05, 0xa9, 0xc5, 0x49, 0x6c, 0x60, 0xbf, 0x1b, 0x03, 0x02, 0x00, 0x00, 0xff, 0xff, 0xd5, 0x94,
-	0x1c, 0xb9, 0x1a, 0x01, 0x00, 0x00,
+	// 253 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x90, 0xc1, 0x4a, 0xc4, 0x30,
+	0x10, 0x86, 0x1b, 0xd7, 0xad, 0xdb, 0x78, 0x91, 0x20, 0x32, 0xa8, 0x84, 0xb2, 0xa7, 0xc5, 0xc3,
+	0xf6, 0xe0, 0x1b, 0xa8, 0x4f, 0xb0, 0x47, 0x6f, 0x31, 0x1d, 0x4a, 0x20, 0x9b, 0x94, 0x24, 0xe2,
+	0xfa, 0x16, 0x3e, 0x96, 0xc7, 0x3d, 0x7a, 0x94, 0xf6, 0x45, 0xa4, 0xd3, 0xa2, 0xae, 0x78, 0xca,
+	0x7c, 0xdf, 0x4f, 0x86, 0xe1, 0xe7, 0x57, 0xad, 0x55, 0x31, 0x19, 0xad, 0x03, 0xd6, 0x26, 0xc5,
+	0x6a, 0x7c, 0xd7, 0x6d, 0xf0, 0xc9, 0x8b, 0xe5, 0x41, 0x68, 0xb1, 0x6e, 0x30, 0xac, 0x0f, 0x3f,
+	0x2c, 0x3b, 0xc6, 0xf3, 0x7b, 0x9a, 0xc5, 0x39, 0x9f, 0x1b, 0x57, 0xe3, 0x0e, 0x58, 0xc9, 0x56,
+	0xc5, 0x66, 0x04, 0x71, 0xc1, 0x73, 0x13, 0xe3, 0x33, 0x06, 0x38, 0x22, 0x3d, 0x91, 0xb8, 0xe6,
+	0x85, 0xf6, 0xd6, 0xa2, 0x4e, 0x3e, 0xc0, 0x8c, 0xa2, 0x1f, 0x31, 0xec, 0xf2, 0x2f, 0x0e, 0x03,
+	0x1c, 0x8f, 0xbb, 0x08, 0xc4, 0x25, 0x5f, 0x6c, 0x55, 0xc2, 0x60, 0x94, 0x85, 0x39, 0x05, 0xdf,
+	0x2c, 0x4a, 0x7e, 0x5a, 0x63, 0xd4, 0xc1, 0xb4, 0xc9, 0x78, 0x07, 0x39, 0xc5, 0xbf, 0x15, 0xdd,
+	0xb7, 0x55, 0x0d, 0xc2, 0xc9, 0x74, 0xdf, 0x00, 0xe2, 0x8c, 0xcf, 0xac, 0x4a, 0xb0, 0x28, 0xd9,
+	0x8a, 0x6d, 0x86, 0x91, 0x8c, 0x6b, 0xa0, 0x98, 0x8c, 0x6b, 0xee, 0x1e, 0xde, 0x3b, 0xc9, 0xf6,
+	0x9d, 0x64, 0x9f, 0x9d, 0x64, 0x6f, 0xbd, 0xcc, 0xf6, 0xbd, 0xcc, 0x3e, 0x7a, 0x99, 0x3d, 0xde,
+	0xfc, 0x53, 0x51, 0xb5, 0xab, 0xfe, 0xb4, 0x9a, 0x5e, 0x5b, 0x8c, 0x4f, 0x39, 0xb5, 0x7a, 0xfb,
+	0x15, 0x00, 0x00, 0xff, 0xff, 0xf8, 0x04, 0x97, 0x12, 0x74, 0x01, 0x00, 0x00,
 }
 
 func (m *Credit) Marshal() (dAtA []byte, err error) {
@@ -141,31 +177,57 @@ func (m *Credit) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
+	if m.Lng != 0 {
+		i -= 8
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Lng))))
+		i--
+		dAtA[i] = 0x49
+	}
+	if m.Lat != 0 {
+		i -= 8
+		encoding_binary.LittleEndian.PutUint64(dAtA[i:], uint64(math.Float64bits(float64(m.Lat))))
+		i--
+		dAtA[i] = 0x41
+	}
 	if len(m.Image) > 0 {
 		i -= len(m.Image)
 		copy(dAtA[i:], m.Image)
 		i = encodeVarintCredit(dAtA, i, uint64(len(m.Image)))
 		i--
-		dAtA[i] = 0x2a
+		dAtA[i] = 0x3a
 	}
 	if len(m.Description) > 0 {
 		i -= len(m.Description)
 		copy(dAtA[i:], m.Description)
 		i = encodeVarintCredit(dAtA, i, uint64(len(m.Description)))
 		i--
-		dAtA[i] = 0x22
+		dAtA[i] = 0x32
 	}
 	if len(m.Material) > 0 {
 		i -= len(m.Material)
 		copy(dAtA[i:], m.Material)
 		i = encodeVarintCredit(dAtA, i, uint64(len(m.Material)))
 		i--
-		dAtA[i] = 0x1a
+		dAtA[i] = 0x2a
 	}
 	if len(m.Owner) > 0 {
 		i -= len(m.Owner)
 		copy(dAtA[i:], m.Owner)
 		i = encodeVarintCredit(dAtA, i, uint64(len(m.Owner)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Collector) > 0 {
+		i -= len(m.Collector)
+		copy(dAtA[i:], m.Collector)
+		i = encodeVarintCredit(dAtA, i, uint64(len(m.Collector)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Issuer) > 0 {
+		i -= len(m.Issuer)
+		copy(dAtA[i:], m.Issuer)
+		i = encodeVarintCredit(dAtA, i, uint64(len(m.Issuer)))
 		i--
 		dAtA[i] = 0x12
 	}
@@ -200,6 +262,14 @@ func (m *Credit) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovCredit(uint64(l))
 	}
+	l = len(m.Issuer)
+	if l > 0 {
+		n += 1 + l + sovCredit(uint64(l))
+	}
+	l = len(m.Collector)
+	if l > 0 {
+		n += 1 + l + sovCredit(uint64(l))
+	}
 	l = len(m.Owner)
 	if l > 0 {
 		n += 1 + l + sovCredit(uint64(l))
@@ -215,6 +285,12 @@ func (m *Credit) Size() (n int) {
 	l = len(m.Image)
 	if l > 0 {
 		n += 1 + l + sovCredit(uint64(l))
+	}
+	if m.Lat != 0 {
+		n += 9
+	}
+	if m.Lng != 0 {
+		n += 9
 	}
 	return n
 }
@@ -288,6 +364,70 @@ func (m *Credit) Unmarshal(dAtA []byte) error {
 			iNdEx = postIndex
 		case 2:
 			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Issuer", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCredit
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCredit
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCredit
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Issuer = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Collector", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowCredit
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthCredit
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthCredit
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Collector = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Owner", wireType)
 			}
 			var stringLen uint64
@@ -318,7 +458,7 @@ func (m *Credit) Unmarshal(dAtA []byte) error {
 			}
 			m.Owner = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 3:
+		case 5:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Material", wireType)
 			}
@@ -350,7 +490,7 @@ func (m *Credit) Unmarshal(dAtA []byte) error {
 			}
 			m.Material = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 4:
+		case 6:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Description", wireType)
 			}
@@ -382,7 +522,7 @@ func (m *Credit) Unmarshal(dAtA []byte) error {
 			}
 			m.Description = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 5:
+		case 7:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field Image", wireType)
 			}
@@ -414,6 +554,28 @@ func (m *Credit) Unmarshal(dAtA []byte) error {
 			}
 			m.Image = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
+		case 8:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Lat", wireType)
+			}
+			var v uint64
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
+			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			iNdEx += 8
+			m.Lat = float64(math.Float64frombits(v))
+		case 9:
+			if wireType != 1 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Lng", wireType)
+			}
+			var v uint64
+			if (iNdEx + 8) > l {
+				return io.ErrUnexpectedEOF
+			}
+			v = uint64(encoding_binary.LittleEndian.Uint64(dAtA[iNdEx:]))
+			iNdEx += 8
+			m.Lng = float64(math.Float64frombits(v))
 		default:
 			iNdEx = preIndex
 			skippy, err := skipCredit(dAtA[iNdEx:])

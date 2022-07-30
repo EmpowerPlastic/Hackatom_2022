@@ -15,6 +15,7 @@ service Msg {
   rpc CreateApprovedCollector(MsgCreateApprovedCollector) returns (MsgCreateApprovedCollectorResponse);
   rpc UpdateApprovedCollector(MsgUpdateApprovedCollector) returns (MsgUpdateApprovedCollectorResponse);
   rpc DeleteApprovedCollector(MsgDeleteApprovedCollector) returns (MsgDeleteApprovedCollectorResponse);
+  rpc IssueCredits(MsgIssueCredits) returns (MsgIssueCreditsResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -64,5 +65,18 @@ message MsgDeleteApprovedCollector {
   string issuer = 3;
 }
 message MsgDeleteApprovedCollectorResponse {}
+
+message MsgIssueCredits {
+  string issuer = 1;
+  string collector = 2;
+  string material = 3;
+  string description = 4;
+  string image = 5;
+  double lat = 6;
+  double lng = 7;
+}
+
+message MsgIssueCreditsResponse {
+}
 
 // this line is used by starport scaffolding # proto/tx/message
