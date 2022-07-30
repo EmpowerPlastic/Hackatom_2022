@@ -1,0 +1,17 @@
+[package]
+name = "plastic-bindings"
+version = "0.1.0"
+authors = ["Gjermund Garaba <bjaanes@users.noreply.github.com>"]
+edition = "2018"
+description = "Bindings for CustomMsg for the PlasticCredit blockchain"
+repository = "https://github.com/empowerchain/Hackatom_2022"
+homepage = "https://empowerchain.io"
+license = "Apache-2.0"
+
+[dependencies]
+cosmwasm-std = "1.0.0"
+schemars = "0.8.8"
+serde = { version = "1.0.137", default-features = false, features = ["derive"] }
+
+[dev-dependencies]
+cosmwasm-schema = "1.0.0"

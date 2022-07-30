@@ -1,0 +1,1 @@
+0e18388c31b1936d44f1045d8175aabc5c931e56feb933121c65fbce1222b077  bindingcontract.wasm

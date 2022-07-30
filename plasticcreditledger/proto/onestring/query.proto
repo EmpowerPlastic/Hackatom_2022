@@ -1,0 +1,40 @@
+syntax = "proto3";
+package plasticcreditledger.onestring;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "onestring/params.proto";
+import "onestring/thestring.proto";
+// this line is used by starport scaffolding # 1
+
+option go_package = "plasticcreditledger/x/onestring/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/plasticcreditledger/onestring/params";
+  }
+  // Queries a Thestring by index.
+	rpc Thestring(QueryGetThestringRequest) returns (QueryGetThestringResponse) {
+		option (google.api.http).get = "/plasticcreditledger/onestring/thestring";
+	}
+// this line is used by starport scaffolding # 2
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetThestringRequest {}
+
+message QueryGetThestringResponse {
+	Thestring Thestring = 1 [(gogoproto.nullable) = false];
+}
+// this line is used by starport scaffolding # 3

@@ -1,0 +1,33 @@
+syntax = "proto3";
+package plasticcreditledger.onestring;
+
+import "onestring/thestring.proto";
+// this line is used by starport scaffolding # proto/tx/import
+
+option go_package = "plasticcreditledger/x/onestring/types";
+
+// Msg defines the Msg service.
+service Msg {
+      rpc CreateThestring(MsgCreateThestring) returns (MsgCreateThestringResponse);
+  rpc UpdateThestring(MsgUpdateThestring) returns (MsgUpdateThestringResponse);
+  rpc DeleteThestring(MsgDeleteThestring) returns (MsgDeleteThestringResponse);
+// this line is used by starport scaffolding # proto/tx/rpc
+}
+
+message MsgCreateThestring {
+  string creator = 1;
+  string valueofthestring = 3;
+}
+message MsgCreateThestringResponse {}
+
+message MsgUpdateThestring {
+  string creator = 1;
+  string valueofthestring = 3;
+}
+message MsgUpdateThestringResponse {}
+
+message MsgDeleteThestring {
+  string creator = 1;
+}
+message MsgDeleteThestringResponse {}
+// this line is used by starport scaffolding # proto/tx/message
