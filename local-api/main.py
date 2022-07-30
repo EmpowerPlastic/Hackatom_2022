@@ -95,5 +95,26 @@ def issuePlasticCredit():
     print(data)
     return data
 
+@api.route('/ica/1/<addr>', methods=['GET'])
+def getIca(addr):
+    command = """plasticcreditledgerd q intertx interchainaccounts connection-0 """ + addr + """ --node tcp://0.0.0.0:16657"""
+    data = runTerminal(command)
+    print(data)
+    return data
+
+@api.route('/ica/2/<addr>', methods=['GET'])
+def getIca(addr):
+    command = """plasticcreditledgerd q intertx interchainaccounts connection-0 """ + addr
+    data = runTerminal(command)
+    print(data)
+    return data
+
+@api.route('/contracts', methods=['GET'])
+def getIca():
+    command = """plasticcreditledgerd q wasm list-contract-by-code 1 --node tcp://0.0.0.0:16657"""
+    data = runTerminal(command)
+    print(data)
+    return data
+
 if __name__ == '__main__':
     api.run() 
