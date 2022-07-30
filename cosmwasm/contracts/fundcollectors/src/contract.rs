@@ -1,10 +1,8 @@
 #[cfg(not(feature = "library"))]
 use cosmwasm_std::entry_point;
-use cosmwasm_std::{
-    to_binary, Addr, BankMsg, Binary, Coin, Deps, DepsMut, Env, MessageInfo, Response, StdResult,
-    Uint128,
-};
+use cosmwasm_std::{Addr, BankMsg, Coin, DepsMut, Env, MessageInfo, Response, SubMsg, Uint128};
 use cw2::set_contract_version;
+use plastic_bindings::{PlasticMsg};
 
 use crate::error::ContractError;
 use crate::msg::{ExecuteMsg, InstantiateMsg};
@@ -17,10 +15,10 @@ const CONTRACT_VERSION: &str = env!("CARGO_PKG_VERSION");
 #[cfg_attr(not(feature = "library"), entry_point)]
 pub fn instantiate(
     deps: DepsMut,
-    _env: Env,
+    env: Env,
     _info: MessageInfo,
     msg: InstantiateMsg,
-) -> Result<Response, ContractError> {
+) -> Result<Response<PlasticMsg>, ContractError> {
     set_contract_version(deps.storage, CONTRACT_NAME, CONTRACT_VERSION)?;
 
     let validated_operator = deps.api.addr_validate(&msg.operator)?;
@@ -36,12 +34,20 @@ pub fn instantiate(
         current_funding: Uint128::from(0u128),
     };
     STATE.save(deps.storage, &loan)?;
+
+    let register_account_message = PlasticMsg::RegisterAccount {
+        owner: env.contract.address.to_string(),
+        connection_id: "connection-0".to_string(), // TODO: Maaaaaaybe not hardocde this? :)
+    };
+    let msgs: Vec<SubMsg<PlasticMsg>> = vec![SubMsg::new(register_account_message)];
+
     Ok(Response::new()
         .add_attribute("action", "instantiate")
         .add_attribute("operator", validated_operator)
         .add_attribute("collector", validated_collector)
         .add_attribute("asset_requested", asset_requested)
-        .add_attribute("amount", amount_required.to_string()))
+        .add_attribute("amount", amount_required.to_string())
+        .add_submessages(msgs))
 }
 
 #[cfg_attr(not(feature = "library"), entry_point)]

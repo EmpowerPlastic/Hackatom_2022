@@ -2,7 +2,7 @@ use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
 
 use cosmwasm_std::{
-    to_binary, Addr, CosmosMsg, CustomQuery, Querier, QuerierWrapper, StdResult, WasmMsg, WasmQuery,
+    to_binary, Addr, CosmosMsg, StdResult, WasmMsg,
 };
 
 use crate::msg::{ExecuteMsg};
@@ -24,6 +24,6 @@ impl CwTemplateContract {
             msg,
             funds: vec![],
         }
-        .into())
+            .into())
     }
 }
