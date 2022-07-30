@@ -9,9 +9,6 @@ cors = CORS(api, resource={
     }
 })
 
-restart = "cd; rm -rf .plasticcreditledger/; cd hackaton/Hackatom_2022/plasticcreditledger/; ignite chain serve" 
-store = "plasticcreditledgerd tx wasm store fundcollectors-aarch64.wasm --from alice --chain-id plasticcreditledger --gas auto --gas-adjustment 1.3"
-
 importantData = {}
 
 def runTerminal(command):
@@ -22,7 +19,7 @@ def runTerminal(command):
     return data
 
 def getAccounts():
-    processAccounts = runTerminal("plasticcreditledgerd keys list")
+    processAccounts = runTerminal("plasticcreditledgerd keys list --keyring-backend test --home data/test-1")
     lines = processAccounts.split("\n")
     addresses = []
     for line in lines:
@@ -30,27 +27,26 @@ def getAccounts():
             addresses.append(line[-43:])
     return addresses
 
-@api.route('/store/', methods=['GET'])
-def storeContract():
-    command = "cd; cd hackaton/Hackatom_2022/fundcollectors/artifacts; plasticcreditledgerd tx wasm store fundcollectors-aarch64.wasm --from alice --chain-id plasticcreditledger --gas auto --gas-adjustment 1.3 -b block -y"
-    data = runTerminal(command)
-    return data
-
 @api.route('/instantiate/', methods=['GET'])
 def instContract():
-    command = """plasticcreditledgerd tx wasm instantiate 2 \
-    '{"operator":"wasm13lgh56mvp5te4dkyl6v5fzpyzkvnj6yzzhsmhc","collector":"wasm1q7skgzref9tgxtjn73nfqd67frxhea4mnetjms","amount":123000, "asset":"stake"}' \
-    --no-admin --amount 100000stake  --label "Money for job" --from wasm13lgh56mvp5te4dkyl6v5fzpyzkvnj6yzzhsmhc --chain-id plasticcreditledger --gas auto --gas-adjustment 1.3 -b block -y"""
+    command = """plasticcreditledgerd tx wasm instantiate 1 \
+    '{"operator":"wasm18hl5c9xn5dze2g50uaw0l2mr02ew57zkq4ekwt","collector":"wasm1m9l358xunhhwds0568za49mzhvuxx9uxf9974x","amount":"123000", "asset":"stake"}' \
+    --home data/test-1 --no-admin --amount 100000stake --node tcp://0.0.0.0:16657 --label "Money for job" --from val1 --keyring-backend test --chain-id test-1 --gas auto --gas-adjustment 1.3 -b block -y"""
     data = runTerminal(command)
     print(data)
     return data
 
+@api.route('/pwd/', methods=['GET'])
+def pwd():
+    command = """pwd"""
+    data = runTerminal(command)
+    print(data)
+    return data
 # wasm1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrqr5j2ht
 
-@api.route('/sponsor/', methods=['GET'])
-def sponsorContract():
-    command = """plasticcreditledgerd tx wasm execute wasm1nc5tatafv6eyq7llkr2gv50ff9e22mnf70qgjlv737ktmt4eswrqr5j2ht  \
-    '{"amount":121000, "asset":"stake"}' --amount 121000stake --from wasm13lgh56mvp5te4dkyl6v5fzpyzkvnj6yzzhsmhc --chain-id plasticcreditledger --gas-prices 10000stake --gas auto --gas-adjustment 1.3 -b block -y"""
+@api.route('/sponsor/<contract>', methods=['GET'])
+def sponsorContract(contract):
+    command = "plasticcreditledgerd tx wasm execute " + contract + """ '{"support_funding": { "amount":"121000" }}' --amount 121000stake --from rly1 --home data/test-1 --node tcp://0.0.0.0:16657 --keyring-backend test --chain-id test-1 --gas auto --gas-adjustment 1.3 -b block -y"""
     data = runTerminal(command)
     print(data)
     return data
@@ -70,13 +66,34 @@ def runBank():
     for idx in range(len(addresses)):
         add = addresses[idx]
         newUser = {}
-        command = f"plasticcreditledgerd q bank balances {add}"
+        command = f"plasticcreditledgerd q bank balances {add} --node tcp://0.0.0.0:16657"
         data = runTerminal(command)
         newUser["address"] = add
         value = data.split("\"")
         newUser["balance"] = value[1]
         result[idx] = newUser
     return result
+
+@api.route('/pcrd/issuers', methods=['GET'])
+def runGetIssuers():
+    command = """plasticcreditledgerd q pcrd list-issuer"""
+    data = runTerminal(command)
+    print(data)
+    return data
+
+@api.route('/pcrd/approved', methods=['GET'])
+def runGetApproved():
+    command = """plasticcreditledgerd q pcrd list-approved-collector"""
+    data = runTerminal(command)
+    print(data)
+    return data
+
+@api.route('/pcrd/issue', methods=['GET'])
+def issuePlasticCredit():
+    command = """plasticcreditledgerd tx pcrd issue-credits wasm10h9stc5v6ntgeygf5xf945njqq5h32r5mq3f99 pet descriptionisnice img 1 2 --from val2 --home data/test-2 --node tcp://0.0.0.0:26657 --keyring-backend test --chain-id test-2 --gas auto --gas-adjustment 1.3 -b block -y"""
+    data = runTerminal(command)
+    print(data)
+    return data
 
 if __name__ == '__main__':
     api.run() 

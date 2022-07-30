@@ -10,13 +10,14 @@ import (
 
 func CmdCreateApprovedCollector() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "create-approved-collector [addr] [issuer]",
+		Use:   "create-approved-collector [addr] [name] [issuer]",
 		Short: "Create a new approved-collector",
-		Args:  cobra.ExactArgs(2),
+		Args:  cobra.ExactArgs(3),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
 			// Get indexes
 			indexAddr := args[0]
-			indexIssuer := args[1]
+			indexName := args[1]
+			indexIssuer := args[2]
 
 			// Get value arguments
 
@@ -28,6 +29,7 @@ func CmdCreateApprovedCollector() *cobra.Command {
 			msg := types.NewMsgCreateApprovedCollector(
 				clientCtx.GetFromAddress().String(),
 				indexAddr,
+				indexName,
 				indexIssuer,
 			)
 			if err := msg.ValidateBasic(); err != nil {

@@ -16,12 +16,13 @@ var _ sdk.Msg = &MsgCreateApprovedCollector{}
 func NewMsgCreateApprovedCollector(
 	creator string,
 	addr string,
+	name string,
 	issuer string,
-
 ) *MsgCreateApprovedCollector {
 	return &MsgCreateApprovedCollector{
 		Creator: creator,
 		Addr:    addr,
+		Name:    name,
 		Issuer:  issuer,
 	}
 }

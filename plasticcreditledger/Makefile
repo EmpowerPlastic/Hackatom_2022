@@ -126,6 +126,8 @@ init: kill-dev install
 	@echo "Initializing relayer..." 
 	./network/hermes/restore-keys.sh
 	./network/hermes/create-conn.sh
+	./network/build_deploy_fundcontract.sh
+	./network/init_pcrd.sh
 
 init-golang-rly: kill-dev install
 	@echo "Initializing both blockchains..."
