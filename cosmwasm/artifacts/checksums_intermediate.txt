@@ -1,1 +1,2 @@
 0fdac5e57bc6e9bfb37a44dedb7a26ae7d2b11f59f1eeef8d6dd1de8a5d0ee3b  target/wasm32-unknown-unknown/release/bindingcontract.wasm
+e5a331670694b60d0ef9787531e91308f123b2a67c99ef6ee72a2fca0e2be0ab  target/wasm32-unknown-unknown/release/fundcollectors.wasm
