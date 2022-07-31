@@ -17,7 +17,7 @@ function Sponsor(data) {
 
 
     async function runContent() {
-        axios.get(path + 'sponsor/')
+        axios.get(path + 'sponsor/' + message)
             .then(function (response) {
                 let content = response.data;
                 setContent(content);
@@ -37,7 +37,7 @@ function Sponsor(data) {
                     value={message} />
                 <div className='buttonInput'
 
-                    onClick={runContent()}>
+                    onClick={runContent}>
                     Click here!
                 </div>
                 {content}

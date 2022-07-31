@@ -6,11 +6,11 @@ const path = "http://127.0.0.1:5000/";
 function Instantiate(data) {
 
     const [content, setContent] = useState(
-        "wasm1etxtq3v4chzn7xrah3w6ukkxy7vlc889n5ervgxz425msar6ajzsx48awh"
+        ""
     );
 
     useEffect(() => {
-        axios.get(path + 'bank/')
+        axios.get(path + 'instantiate/')
             .then(function (response) {
                 let content = response.data;
                 setContent(content);

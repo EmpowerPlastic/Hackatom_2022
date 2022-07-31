@@ -5,11 +5,38 @@ create a presale funding mechanism for other chains over IBC and ICA.
 
 We quickly realized that Regen was a bit too far behind on the IBC version and after a quick attempt to upgrade it we decided to create our own chain for this purpose.
 
-To make the challenge a bit more interesting, we decided to use the DAO_UP contract as the basis, meaning we would do Interchain Accounts over CosmWasm.
+To make the challenge a bit more interesting, we decided to use the DAO_UP contract as the basis, **meaning we would do Interchain Accounts over CosmWasm.**
 
-<!-- TODO: ADD PICTURE OF FLOW HERE -->
+![Overview](overview.jpg)
 
-# Chain 1
+## What you'll find in this repo
+
+- A heavily modified version of DAO_UP CosmWasm to act as the basis for the fundraising contract
+- A POC CosmWasm that can create interchain accounts and execute arbitrary messages on interchain account enabled chains 
+- A brand-new POC blockchain with the following functionality
+  - CosmWasm (configuration work)
+  - Interchain accounts (configuration work)
+  - Bindings for the intertx module (this allows CosmWasm contracts to create interchain accounts as well as make arbitrary interchain account transaction calls)
+  -
+
+## The project
+
+The end idea had both technical and innovative elements:
+- A cross-chain fundraising smart contract
+- Using IBC and Interchain Accounts for the fundraising contract to be able to own assets on other chains (NFTs, pre-bought carbon/plastic credits, literally anything else that can be owned by an account)
+  - The current capabilities of the smart contract is limited when it comes to utilizing assets on other chains
+  - But one of the main ideas we had was also the ability for the smart contract to put assets they own on other chains up as leverage
+    - This is not meant as a DeFi-only thing, but as a mechanism to put up both liquid and illiquid assets up as leverage for safe funding of legitimate projects
+
+![Detailed overview](details.jpg)
+
+We are extremely bullish on Interoperability and see Interchain Accounts as the next big thing that will create
+countless new use cases. Since this a passion of ours, we have thought of multiple other interesting things you could do with this:
+- idea 1
+
+# Other details
+
+## Chain 1
 Controller chain (Smart contract chain)
 - chain-id: test-1
 - home: data/test-1
@@ -19,7 +46,7 @@ Controller chain (Smart contract chain)
   - Collector wasm1m9l358xunhhwds0568za49mzhvuxx9uxf9974x (demowallet1)
   - Funder/Sponsor wasm1mjk79fjjgpplak5wq838w0yd982gzkyff27t5s (rly1)
 
-# Chain 2
+## Chain 2
 Host chain (Plastic credit chain)
 - chain-id: test-2
 - home: data/test-2
