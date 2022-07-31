@@ -35,6 +35,14 @@ function Status(data){
             })
     }, []);
 
+    function Gjermund(){
+        return null
+    }
+
+    function Gjermund2(){
+        return null
+    }
+
     return <>
         <h3>The status of the fundraising can be seen at any moment with the function "execute_status_funding"</h3>
         <table>
@@ -63,6 +71,15 @@ function Status(data){
                 </tr>
             </tbody>
         </table>
+
+        <div onClick={Gjermund} className={"button1"}>
+            Check Interchain Account 1!
+        </div>
+
+        <div onClick={Gjermund2} className={"button1"}>
+            Check Interchain Account 2!
+        </div>
+
     </>
 }
 
