@@ -34,6 +34,33 @@ p {
   font-size: 2vh;
 }
 
+.textoGrande{
+  width: 60vw;
+  height: 10vh;
+  font-size: 3vh;
+}
+
+.sponsor{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.buttonInput{
+  background-color: red;
+  height: 5vh;
+  width: 20vw;
+  font-size: 2vh;
+  text-align: center;
+  margin: 3vh 30vw;
+  padding: 2vh;
+  font-weight: 400;
+  font-size: 4vh;
+  
+}
+
 h3{
   font-size: 3vh;
   margin: 5vh 0;
