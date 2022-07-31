@@ -32,7 +32,7 @@ The end idea had both technical and innovative elements:
 
 We are extremely bullish on Interoperability and see Interchain Accounts as the next big thing that will create
 countless new use cases. Since this a passion of ours, we have thought of multiple other interesting things you could do with this:
-- idea 1
+- **A fundraiser for developers.** Community requires of developers, but most of the time employers don't trust on their capacities to face the challenges they'll have to deal with in a new job. This together with the idea that the lack of experience implies ineptitude makes really hard for them to get a better job. In a later phase of our project, the operator could be someone that trust in the abilities of a developer and help him backing them through this project, giving as collateral the equivalent of the salary he expects, encouraging the employers to hire him and give this subject the chance to show his skills with the goal of this new job. This essentially can be expanded to any job position, where the operator can support and give a collateral to the people that they trust their capacities to help them reach a better job.
 
 # Other details
 
