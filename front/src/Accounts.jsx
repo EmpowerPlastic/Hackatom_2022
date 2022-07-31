@@ -9,14 +9,12 @@ function Accounts(data) {
     const [content, setContent] = useState(
         {
             0: {
-                "addr": "wasm1p7uzckyck0r7e7feqzry6yzmtelq0y95erey3qnjjlyw7q2ludas0850dc",
-                "name": "icaissuer",
-                "creator": "wasm1p7uzckyck0r7e7feqzry6yzmtelq0y95erey3qnjjlyw7q2ludas0850dc"
+                "address": "wasm1p7uzckyck0r7e7feqzry6yzmtelq0y95erey3qnjjlyw7q2ludas0850dc",
+                "balance": "123123123",
             },
             1: {
-                "addr": "wasm1qnk2n4nlkpw9xfqntladh74w6ujtulwn5wkh5w",
-                "name": "empower",
-                "creator": "wasm1qnk2n4nlkpw9xfqntladh74w6ujtulwn5wkh5w"
+                "address": "wasm1p7uzckyck0r7e7feqzry6yzmtelq0y95erey3qnjjlyw7q2ludas0850dc",
+                "balance": "432432432423",
             }
         }
     );
@@ -35,13 +33,10 @@ function Accounts(data) {
             <thead>
                 <tr>
                     <th>
-                        Header
+                        Address
                     </th>
                     <th>
-                        Name
-                    </th>
-                    <th>
-                        Creator
+                        Balane
                     </th>
                 </tr>
             </thead>
@@ -49,20 +44,16 @@ function Accounts(data) {
                 {Object.keys(content).map((container, item) => {
                     let account = content[container];
                     console.log(content);
-                    const address = account.addr;
-                    const reducedAddress = address.substring(0, 5) + "..." + address.substring(address.length - 6, address.length - 1);
-                    const creator = account.creator;
-                    const reducedCreator = creator.substring(0, 5) + "..." + creator.substring(creator.length - 6, creator.length - 1);
+                    const address = account.address;
+                    const reducedAddress = address.substring(0, 7) + "..." + address.substring(address.length - 8, address.length - 1);
+                    const balance = account.balance;
                     return (
                         <tr>
                             <td>
                                 {reducedAddress}
                             </td>
                             <td>
-                                {account.name}
-                            </td>
-                            <td>
-                                {reducedCreator}
+                                {balance}
                             </td>
 
                         </tr>
