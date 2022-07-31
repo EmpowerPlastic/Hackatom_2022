@@ -23,7 +23,7 @@ plasticcreditledgerd tx bank send wasm1qnk2n4nlkpw9xfqntladh74w6ujtulwn5wkh5w \
      --keyring-backend test --gas auto --gas-adjustment 1.3 --chain-id test-2
 ```
 
-Now, the part that does not work:
+Now, the part that does work!
 ```
 plasticcreditledgerd tx intertx submit ./simplemsg.json --connection-id connection-0 \
     --home /home/gg/code/Hackatom_2022/plasticcreditledger/data/test-1 \
@@ -40,7 +40,3 @@ plasticcreditledgerd tx intertx submit \
 }' --connection-id connection-0 --home /home/gg/code/Hackatom_2022/plasticcreditledger/data/test-1 \
 --keyring-backend test --from val1 --chain-id test-1 --node tcp://0.0.0.0:16657 \
 --gas auto --gas-adjustment 1.3 -b block
-
-
-icad q staking delegations-to wasmvaloper1qnk2n4nlkpw9xfqntladh74w6ujtulwnpjrt65 --home ./data/test-2 --node tcp://localhost:26657
-

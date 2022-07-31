@@ -36,11 +36,20 @@ function Status(data){
     }, []);
 
     function Gjermund(){
-        return null
+        const addr = prompt("Address")
+        axios.get(path + 'ica/1/' + addr)
+            .then(function (response) {
+                alert(response.data);
+            })
+
     }
 
     function Gjermund2(){
-        return null
+        const addr = prompt("Address")
+        axios.get(path + 'ica/2/' + addr)
+            .then(function (response) {
+                alert(response.data);
+            })
     }
 
     return <>
