@@ -13,6 +13,6 @@ sudo docker run --rm -v "$(pwd)":/code \
 plasticcreditledgerd tx wasm store artifacts/fundcollectors.wasm \
     --home /home/gg/code/Hackatom_2022/plasticcreditledger/data/test-1 --keyring-backend test \
     --from val1 --chain-id test-1 --node tcp://0.0.0.0:16657 \
-    --gas auto --gas-adjustment 1.3 -b block
+    --gas auto --gas-adjustment 1.3 -b block -y
 
 sleep 2

@@ -2,6 +2,8 @@ package keeper
 
 import (
 	"context"
+	intertxkeeper "github.com/cosmos/interchain-accounts/x/inter-tx/keeper"
+	intertxtypes "github.com/cosmos/interchain-accounts/x/inter-tx/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -32,6 +34,16 @@ func (k msgServer) CreateApprovedCollector(goCtx context.Context, msg *types.Msg
 		ctx,
 		approvedCollector,
 	)
+
+	intertxMsgServ := intertxkeeper.NewMsgServerImpl(k.intertxKeeper)
+	_, err := intertxMsgServ.RegisterAccount(goCtx, &intertxtypes.MsgRegisterAccount{
+		Owner:        approvedCollector.Addr,
+		ConnectionId: "connection-0",
+	})
+	if err != nil {
+		return nil, err
+	}
+
 	return &types.MsgCreateApprovedCollectorResponse{}, nil
 }
 

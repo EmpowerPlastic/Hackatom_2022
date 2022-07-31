@@ -555,6 +555,7 @@ func New(
 		app.IBCKeeper.ChannelKeeper,
 		&app.IBCKeeper.PortKeeper,
 		scopedPlasticcreditsKeeper,
+		app.InterTxKeeper,
 	)
 	plasticcreditsModule := plasticcreditsmodule.NewAppModule(appCodec, app.PlasticcreditsKeeper, app.AccountKeeper, app.BankKeeper)
 

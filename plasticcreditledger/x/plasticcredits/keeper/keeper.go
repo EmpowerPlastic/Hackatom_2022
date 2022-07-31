@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"fmt"
+	intertxkeeper "github.com/cosmos/interchain-accounts/x/inter-tx/keeper"
 
 	"github.com/tendermint/tendermint/libs/log"
 
@@ -15,10 +16,11 @@ import (
 type (
 	Keeper struct {
 		*cosmosibckeeper.Keeper
-		cdc        codec.BinaryCodec
-		storeKey   sdk.StoreKey
-		memKey     sdk.StoreKey
-		paramstore paramtypes.Subspace
+		cdc           codec.BinaryCodec
+		storeKey      sdk.StoreKey
+		memKey        sdk.StoreKey
+		paramstore    paramtypes.Subspace
+		intertxKeeper intertxkeeper.Keeper
 	}
 )
 
@@ -30,7 +32,7 @@ func NewKeeper(
 	channelKeeper cosmosibckeeper.ChannelKeeper,
 	portKeeper cosmosibckeeper.PortKeeper,
 	scopedKeeper cosmosibckeeper.ScopedKeeper,
-
+	intertxKeeper intertxkeeper.Keeper,
 ) *Keeper {
 	// set KeyTable if it has not already been set
 	if !ps.HasKeyTable() {
@@ -45,10 +47,11 @@ func NewKeeper(
 			portKeeper,
 			scopedKeeper,
 		),
-		cdc:        cdc,
-		storeKey:   storeKey,
-		memKey:     memKey,
-		paramstore: ps,
+		cdc:           cdc,
+		storeKey:      storeKey,
+		memKey:        memKey,
+		paramstore:    ps,
+		intertxKeeper: intertxKeeper,
 	}
 }
 

@@ -1,0 +1,6 @@
+{
+  "@type": "/plasticcreditledger.plasticcredits.MsgCreateIssuer",
+  "creator": "wasm1p7uzckyck0r7e7feqzry6yzmtelq0y95erey3qnjjlyw7q2ludas0850dc",
+  "addr": "wasm1p7uzckyck0r7e7feqzry6yzmtelq0y95erey3qnjjlyw7q2ludas0850dc",
+  "name": "icaissuer"
+}
